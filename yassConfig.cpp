@@ -1,0 +1,215 @@
+/*
+ * file : yassConfig.cpp
+ * Copyright (c) pfeuh <ze.pfeuh@gmail>
+ * All rights reserved.
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "yassConfig.h"
+
+#define YASS_CONFIG_BIT_WEIGHT_OMNI              0x001
+#define YASS_CONFIG_BIT_WEIGHT_CLOCK_IN          0x002
+#define YASS_CONFIG_BIT_WEIGHT_CLOCK_OUT         0x004
+#define YASS_CONFIG_BIT_WEIGHT_KEY_ECHO          0x008
+#define YASS_CONFIG_BIT_WEIGHT_CLICK             0x010
+#define YASS_CONFIG_BIT_WEIGHT_ARPEGGIATOR       0x020
+#define YASS_CONFIG_BIT_WEIGHT_USE_PROG_NUM      0x080
+#define YASS_CONFIG_BIT_WEIGHT_USE_SYSEX         0x100
+
+#define YASS_CONFIG_INDEX_BITS_HI            0
+#define YASS_CONFIG_INDEX_BITS_LO            1
+#define YASS_CONFIG_INDEX_CHANNEL_IN         2
+#define YASS_CONFIG_INDEX_CHANNEL_OUT        3
+#define YASS_CONFIG_INDEX_PROGRAM_NUMBER     4
+#define YASS_CONFIG_INDEX_CTRL_CHANGE_NUMBER 5
+#define YASS_CONFIG_INDEX_DATA_MODE          6
+#define YASS_CONFIG_INDEX_SPLIT_POINT        7
+
+#define bitsHi              data[YASS_CONFIG_INDEX_BITS_HI]
+#define bitsLo              data[YASS_CONFIG_INDEX_BITS_LO]
+#define channelIn           data[YASS_CONFIG_INDEX_CHANNEL_IN]
+#define channelOut          data[YASS_CONFIG_INDEX_CHANNEL_OUT]
+#define programNumber       data[YASS_CONFIG_INDEX_PROGRAM_NUMBER]
+#define ctrlChangeNumber    data[YASS_CONFIG_INDEX_CTRL_CHANGE_NUMBER]
+#define dataMode            data[YASS_CONFIG_INDEX_DATA_MODE]
+#define splitPoint          data[YASS_CONFIG_INDEX_SPLIT_POINT]
+
+/*******************/
+/* Private methods */
+/*******************/
+
+inline void YASS_CONFIG::setBit(word weight, bool flag)
+{
+    word bits = bitsHi << 8 | bitsLo;
+    bits &= weight ^ 0x1ff;
+    if(flag)
+        bits |= weight;
+    bitsHi = bits >> 8;
+    bitsLo = bits & 0xff;
+}
+
+inline bool YASS_CONFIG::getBit(word weight)
+{
+    word bits = bitsHi << 8 | bitsLo;
+    return (bits & weight) == weight;
+}
+
+/******************/
+/* Public methods */
+/******************/
+
+YASS_CONFIG::YASS_CONFIG()
+{
+}
+
+void YASS_CONFIG::setProgNum(byte prog_num)
+{
+    programNumber = prog_num & 0x7f;
+}
+
+byte YASS_CONFIG::getProgNum()
+{
+    return programNumber & 0x7f;
+}
+
+void YASS_CONFIG::setUseProgNum(bool flag)
+{
+    setBit(YASS_CONFIG_BIT_WEIGHT_USE_PROG_NUM, flag);
+}
+
+bool YASS_CONFIG::getUseProgNum()
+{
+    return getBit(YASS_CONFIG_BIT_WEIGHT_USE_PROG_NUM);
+}
+
+byte YASS_CONFIG::getChannelIn()
+{
+    return channelIn;
+}
+
+void YASS_CONFIG::setChannelIn(byte channel)
+{
+    if((YASS_CONFIG_MIN_CHANNEL <= channel) && (YASS_CONFIG_MAX_CHANNEL >= channel))
+        channelIn = channel;
+}
+
+bool YASS_CONFIG::getOmni()
+{
+    return getBit(YASS_CONFIG_BIT_WEIGHT_OMNI);
+}
+
+void YASS_CONFIG::setOmni(bool flag)
+{
+    setBit(YASS_CONFIG_BIT_WEIGHT_OMNI, flag);
+}
+
+byte YASS_CONFIG::getChannelOut()
+{
+    return channelOut;
+}
+
+void YASS_CONFIG::setChannelOut(byte channel)
+{
+    if((YASS_CONFIG_MIN_CHANNEL <= channel) && (YASS_CONFIG_MAX_CHANNEL >= channel))
+        channelOut = channel;
+}
+
+void YASS_CONFIG::setClockIn(bool flag)
+{
+    setBit(YASS_CONFIG_BIT_WEIGHT_CLOCK_IN, flag);
+}
+
+bool YASS_CONFIG::getClockIn()
+{
+    return getBit(YASS_CONFIG_BIT_WEIGHT_CLOCK_IN);
+}
+
+void YASS_CONFIG::setClockOut(bool flag)
+{
+    setBit(YASS_CONFIG_BIT_WEIGHT_CLOCK_OUT, flag);
+}
+
+bool YASS_CONFIG::getClockOut()
+{
+    return getBit(YASS_CONFIG_BIT_WEIGHT_CLOCK_OUT);
+}
+
+void YASS_CONFIG::setClick(bool flag)
+{
+    setBit(YASS_CONFIG_BIT_WEIGHT_CLICK, flag);
+}
+
+bool YASS_CONFIG::getClick()
+{
+    return getBit(YASS_CONFIG_BIT_WEIGHT_CLICK);
+}
+
+void YASS_CONFIG::setKeyEcho(bool flag)
+{
+    setBit(YASS_CONFIG_BIT_WEIGHT_KEY_ECHO, flag);
+}
+
+bool YASS_CONFIG::getKeyEcho()
+{
+    return getBit(YASS_CONFIG_BIT_WEIGHT_KEY_ECHO);
+}
+
+void YASS_CONFIG::setArpeggiator(bool flag)
+{
+    setBit(YASS_CONFIG_BIT_WEIGHT_ARPEGGIATOR, flag);
+}
+
+bool YASS_CONFIG::getArpeggiator()
+{
+    return getBit(YASS_CONFIG_BIT_WEIGHT_ARPEGGIATOR);
+}
+
+void YASS_CONFIG::setUseSysEx(bool flag)
+{
+    setBit(YASS_CONFIG_BIT_WEIGHT_USE_SYSEX, flag);
+}
+
+bool YASS_CONFIG::getUseSysEx()
+{
+    return getBit(YASS_CONFIG_BIT_WEIGHT_USE_SYSEX);
+}
+
+void YASS_CONFIG::setCtrlChangeNumber(byte value)
+{
+    if(YASS_MAX_CC_NUM >= value)
+        ctrlChangeNumber = value;
+}
+
+byte YASS_CONFIG::getCtrlChangeNumber()
+{
+    return ctrlChangeNumber;
+}
+
+void YASS_CONFIG::setDataMode(byte value)
+{
+    if(YASS_DATA_MODE_MAX >= value)
+        dataMode = value;
+}
+
+byte YASS_CONFIG::getDataMode()
+{
+    return dataMode;
+}
+
+byte* YASS_CONFIG::getDataPointer()
+{
+    return data;
+}
+

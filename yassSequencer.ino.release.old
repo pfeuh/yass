@@ -1,0 +1,465 @@
+/*
+ * file : yass.ino
+ * Copyright (c) pfeuh <ze.pfeuh@gmail>
+ * All rights reserved.
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#define YASS_TEST_HMI_VERSION "1.00"
+
+#define FONT_7_SEG_FULL_SET
+
+#define MONOSTABLE_MSEC_DURATION 100
+#define MIDI_IN_DOT 0
+#define MIDI_OUT_DOT 1
+
+#include <matrixKeyboard.h>
+#include "encoder.h"
+#include <beeper.h>
+#include <scheduler.h>
+#include "serialGpo.h"
+#include "leds.h"
+#include "display7seg.h"
+#include <MIDI.h>
+
+MIDI_CREATE_DEFAULT_INSTANCE();
+SCHEDULER midiInScheduler = SCHEDULER();
+SCHEDULER midiOutScheduler = SCHEDULER();
+
+int colPins[] = {5, 6, 7, 8, 9};
+int rowPins[] = {10, 11, 12};
+#define NB_KBD_COLUMS (sizeof(colPins)/sizeof(int))
+#define NB_KBD_ROWS (sizeof(rowPins)/sizeof(int))
+#define KBD_1 '1'
+#define KBD_2 '2'
+#define KBD_3 '3'
+#define KBD_4 '4'
+#define KBD_5 '5'
+#define KBD_RETURN 'O'
+#define KBD_START 'S'
+#define KBD_PAUSE 'P'
+#define KBD_CONTINUE 'C'
+#define KBD_RECORD 'R'
+#define KBD_GLOBAL 'G'
+#define KBD_SEQUENCE 's'
+#define KBD_REST 'r'
+#define KBD_TIE 'T'
+#define KBD_LAST_STEP 'L'
+char kbdCodes[] =
+    {
+    KBD_1, KBD_2, KBD_3, KBD_4, KBD_5,
+    KBD_REST, KBD_START, KBD_PAUSE, KBD_CONTINUE, KBD_RECORD,
+    KBD_TIE, KBD_LAST_STEP, KBD_RETURN, KBD_SEQUENCE, KBD_GLOBAL
+    };
+MATRIX_KEYBOARD keyb = MATRIX_KEYBOARD(colPins, NB_KBD_COLUMS, rowPins, NB_KBD_ROWS, kbdCodes);
+
+#define ENC_A A1
+#define ENC_B A0
+ENCODER encoder = ENCODER(ENC_A, ENC_B);
+
+#define BEEP_MSEC_DURATION 40
+#define BEEPER_PIN A2
+BEEPER beeper = BEEPER(BEEPER_PIN, BEEP_MSEC_DURATION);
+
+byte serialValue;
+    
+word oldEncoderTestValue;
+word encoderTestValue;
+unsigned long tempValue;
+    
+#define SERIAL_GPO_DATA_PIN 2 
+#define SERIAL_GPO_CLOCK_PIN 3 
+#define SERIAL_GPO_LATCH_PIN 4 
+SERIAL_GPO shifter = SERIAL_GPO(SERIAL_GPO_DATA_PIN, SERIAL_GPO_CLOCK_PIN, SERIAL_GPO_LATCH_PIN);
+
+byte oldGpoData[] = {0, 0, 0, 0, 0};
+byte gpoData[]    = {0, 0, 0, 0, 0};
+#define NB_GPO_DATA (sizeof(gpoData) / sizeof(byte))
+#define individualLed_ptr (&gpoData[0])
+#define digit_number_ptr (&gpoData[1])
+#define stepLed_ptr (&gpoData[2])
+#define segments_ptr (&gpoData[4])
+
+unsigned long ledMilestone;
+byte k2000index = 0xff;
+#define LED_MSEC_DURATION 200
+
+#define LED_1 5
+#define LED_2 4
+#define LED_3 3
+#define LED_4 2
+#define LED_5 1
+#define LED_START 7
+#define LED_RECORD 6
+#define LED_GLOBAL 8
+#define LED_SEQUENCE 9
+#define LED_REST 0
+#define LED_TIE 11
+#define LED_LAST_STEP 10
+
+#define LED_STEP_0  0
+#define LED_STEP_1  1
+#define LED_STEP_2  2
+#define LED_STEP_3  3
+#define LED_STEP_4  4
+#define LED_STEP_5  5
+#define LED_STEP_6  6
+#define LED_STEP_7  7
+#define LED_STEP_8  8
+#define LED_STEP_9  9
+#define LED_STEP_10 10
+#define LED_STEP_11 11
+#define LED_STEP_12 12
+#define LED_STEP_13 13
+#define LED_STEP_14 14
+#define LED_STEP_15 15
+
+LEDS leds = LEDS(individualLed_ptr, stepLed_ptr);
+
+const char splashScreen[] PROGMEM = "yass - yet another step sequencer    " ;
+const char* splash_ptr = splashScreen;
+unsigned long splashMilestone;
+#define SPLASH_MSEC_DURATION 250
+bool runningSplash = true;
+
+unsigned long displayMilestone;
+#define DISPLAY_MSEC_DURATION 8
+byte digitIndex = 3;
+#define NB_DIGITS 4
+byte displayBuf[NB_DIGITS];
+#define DISPLAY_BASE 16
+DISPLAY_7_SEG display = DISPLAY_7_SEG(0, 1, NB_DIGITS, displayBuf);
+
+bool midiRunning = false;
+
+#define MIDI_NOTEON 0x90
+#define MIDI_MAX_VELOCITY 127
+#define MIDI_CHANNEL 0
+#define NOTE_DURATION 200
+#define BLINK_DURATION 500
+
+byte sequence[] = {64, 68, 71, 76, 71, 68};
+#define SEQ_NB_NOTES (sizeof(sequence) / sizeof(byte))
+byte seqIndex;
+char command = ' ';
+unsigned long midiOutMilestone;
+
+void stopMidiInLed()
+{
+    display.writeDot(MIDI_IN_DOT, 0);
+}
+
+void stopMidiOutLed()
+{
+    display.writeDot(MIDI_OUT_DOT, 0);
+}
+
+void handleNoteOn(byte channel, byte note, byte velocity)
+{
+    if(channel == MIDI_CHANNEL)
+    {
+        display.writeDot(MIDI_IN_DOT, 1);
+        midiInScheduler.bindMono(MONOSTABLE_MSEC_DURATION, &stopMidiInLed);
+        display.clear();
+        display.write('o');
+        display.write('n');
+        display.write(note >> 4);
+        display.write(note & 0x0f);
+    }
+}
+
+void handleNoteOff(byte channel, byte note, byte velocity)
+{
+    if(channel == MIDI_CHANNEL)
+    {
+        display.writeDot(MIDI_IN_DOT, 1);
+        midiInScheduler.bindMono(MONOSTABLE_MSEC_DURATION, &stopMidiInLed);
+        display.clear();
+        display.write('o');
+        display.write('f');
+        display.write(note >> 4);
+        display.write(note & 0x0f);
+    }
+}
+
+void noteOn(byte channel, byte note)
+{
+    Serial.write(MIDI_NOTEON + channel);
+    Serial.write(note);
+    Serial.write(MIDI_MAX_VELOCITY);
+}
+
+void noteOff(byte channel, byte note)
+{
+    Serial.write(MIDI_NOTEON + channel);
+    Serial.write(note);
+    Serial.write(0);
+}
+
+void debug(word value)
+{
+    display.printWord(value, 16);
+}
+
+void incEncoder()
+{
+    encoderTestValue++;
+    debug(encoderTestValue);
+    Serial.println(encoderTestValue, DEC);
+}
+    
+void decEncoder()
+{
+    encoderTestValue--;
+    debug(encoderTestValue);
+    Serial.println(encoderTestValue, DEC);
+}
+
+void splashSequencer()
+{
+    if(splashMilestone < millis())
+    {
+        splashMilestone += SPLASH_MSEC_DURATION;
+        byte car = pgm_read_byte(splash_ptr++);
+        if(car)
+            display.write(car);
+        else
+            runningSplash = false;
+    }
+}
+
+void setNextDigitNumber()
+{
+    digitIndex = (digitIndex + 1) & 3;
+    *digit_number_ptr = ((*digit_number_ptr) & 0x0f) | (0x10 << digitIndex);
+    *segments_ptr = displayBuf[digitIndex];
+}
+
+void hmiOutputSequencer()
+{
+    bool found = false;
+    for(byte x = 0;x < NB_GPO_DATA; x++)
+    {
+        if(oldGpoData[x] != gpoData[x])
+        {
+            found = true;
+            break;
+        }
+    }
+    // send data only on change(s) found
+    if(found)
+    {
+        for(byte x = NB_GPO_DATA - 1;x != 255; x--)
+        {
+            shifter.write(gpoData[x]);
+            oldGpoData[x] = gpoData[x];
+        }    
+        shifter.validate();
+    }
+}
+
+void consoleSequencer()
+{
+    if(Serial.available())
+    {
+        byte c = Serial.read();
+        switch(c)
+        {
+            case '\n':
+                break;                
+            default:
+                display.printGlyphe(c, 0);
+                Serial.write(c);
+                break;
+        }
+    }
+}
+
+void playSequence()
+{
+    if(millis() >= midiOutMilestone)
+    {
+        noteOff(MIDI_CHANNEL, sequence[seqIndex]);
+        seqIndex = (seqIndex + 1) % SEQ_NB_NOTES;
+        noteOn(MIDI_CHANNEL, sequence[seqIndex]);
+        midiOutMilestone += NOTE_DURATION;
+    }
+}
+
+void setup()
+{
+    Serial.begin(9600);
+    Serial.println(F("test of Yass HMI v." YASS_TEST_HMI_VERSION));
+    Serial.println(F("compilation timestamp "  __DATE__ " " __TIME__));
+    
+    beeper.begin();
+    keyb.begin();
+    encoder.begin();
+    encoder.bind(incEncoder, decEncoder);
+    shifter.begin();
+    ledMilestone = millis();
+    leds.begin();
+
+    Serial.flush();
+    display.begin();
+    splashMilestone = millis();
+    
+    midiInScheduler.begin();
+    midiOutScheduler.begin();
+}
+
+void loop()
+{
+    keyb.sequencer();
+    encoder.sequencer();
+
+    consoleSequencer();
+    
+    if(midiRunning)
+    {
+        if(Serial.available())
+        {
+            //~ char car = Serial.read();
+            //~ if(car & 0x80)
+                //~ display.printHexByte(car, 0);
+            //~ else
+                //~ display.printHexByte(car, 2);
+            //~ display.write(display.getGlyphe((car >> 4)& 0x0f));
+            //~ display.write(display.getGlyphe(car & 0x0f));
+        }
+        if(keyb.available())
+        {
+            beeper.beep();
+            if(keyb.read() == KBD_LAST_STEP)
+            {
+                leds.individualLedToggle(LED_LAST_STEP);
+                noteOff(MIDI_CHANNEL, sequence[seqIndex]);
+                Serial.flush();
+                Serial.begin(9600);
+                Serial.println(F("Midi stopped!"));
+                midiRunning = false;
+            }
+        }
+    }
+    else
+    {
+        if(Serial.available())
+        {
+            char car = Serial.read();
+            if(car & 0x80)
+                display.printHexByte(car, 0);
+            else
+                display.printHexByte(car, 2);
+            //~ display.write(display.getGlyphe((car >> 4)& 0x0f));
+            //~ display.write(display.getGlyphe(car & 0x0f));
+        }
+        if(keyb.available())
+        {
+            beeper.beep();
+            char car = keyb.read();
+            switch(car)
+            {
+                case KBD_1:
+                    leds.individualLedToggle(LED_1);
+                    break;
+                case KBD_2:
+                    leds.individualLedToggle(LED_2);
+                    break;
+                case KBD_3:
+                    leds.individualLedToggle(LED_3);
+                    break;
+                case KBD_4:
+                    leds.individualLedToggle(LED_4);
+                    break;
+                case KBD_5:
+                    leds.individualLedToggle(LED_5);
+                    break;
+                case KBD_RETURN:
+                    encoderTestValue = 0;
+                    display.printWord(encoderTestValue, DISPLAY_BASE);
+                break;
+                case KBD_START:
+                    leds.individualLedToggle(LED_START);
+                    break;
+                case KBD_PAUSE:
+                    break;
+                case KBD_CONTINUE:
+                    break;
+                case KBD_RECORD:
+                    leds.individualLedToggle(LED_RECORD);
+                    break;
+                case KBD_GLOBAL:
+                    leds.individualLedToggle(LED_GLOBAL);
+                    break;
+                case KBD_SEQUENCE:
+                    leds.individualLedToggle(LED_SEQUENCE);
+                    break;
+                case KBD_REST:
+                    leds.individualLedToggle(LED_REST);
+                    display.clear();
+                    Serial.println(F("Display cleared"));
+                    break;
+                case KBD_TIE:
+                    leds.individualLedToggle(LED_TIE);
+                    display.scroll();
+                    Serial.println(F("Display scrolled"));
+                    break;
+                case KBD_LAST_STEP:
+                    leds.individualLedToggle(LED_LAST_STEP);
+                    display.clear();
+                    Serial.println(F("Midi running!"));
+                    Serial.flush();
+                    MIDI.setHandleNoteOn(handleNoteOn);
+                    MIDI.setHandleNoteOff(handleNoteOff);
+                    MIDI.begin();
+                    seqIndex = SEQ_NB_NOTES -1;
+                    midiOutMilestone = millis();
+                    midiRunning = true;
+                    break;            
+                default:
+                    break;
+            }
+        }
+    }
+
+    if(oldEncoderTestValue != encoderTestValue)
+    {
+        oldEncoderTestValue = encoderTestValue;
+    }
+    
+    if(displayMilestone <= millis())
+    {
+        displayMilestone += DISPLAY_MSEC_DURATION;
+        setNextDigitNumber();
+    }
+    
+    if(ledMilestone <= millis())
+    {
+        ledMilestone += LED_MSEC_DURATION;
+        digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN) ^ 1);
+        display.writeDot(digitalRead(LED_BUILTIN), 3);
+        k2000index = (k2000index + 1) & 0x0f;
+        leds.stepLedWrite(k2000index, 1);
+    }
+
+    if(runningSplash)
+        splashSequencer();
+    
+    if(midiRunning)
+        playSequence();
+    
+    beeper.sequencer();
+    hmiOutputSequencer();
+}
