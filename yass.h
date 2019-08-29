@@ -181,6 +181,9 @@ YASS_DISPLAY display = YASS_DISPLAY(NB_DIGITS, displayBuf);
 #define digit_number_ptr (&gpoData[1])
 #define segments_ptr (&gpoData[GPO_SEGMENTS_INDEX])
 
+// bpm calculator for external clock
+YASS_COMPUTE_BEAT beatCalc = YASS_COMPUTE_BEAT();
+
 // eeprom driver
 YASS_EEPROM storage = YASS_EEPROM();
 
@@ -199,16 +202,17 @@ byte swapSeqIndex = 0;
 
 const byte sequenceLedLut[] PROGMEM = {LED_1, LED_2, LED_3, LED_4, LED_5};
 
-#define LUT_INDEX_NOTI 0
-#define LUT_INDEX_OMNI 1
-#define LUT_INDEX_NONE 2
-#define LUT_INDEX_LOAD 3
-#define LUT_INDEX_STOR 4
-#define LUT_INDEX_COPY 5
-#define LUT_INDEX_PAST 6
-#define LUT_INDEX_DUMP 7
+#define LUT_INDEX_NOTI   0
+#define LUT_INDEX_OMNI   1
+#define LUT_INDEX_NONE   2
+#define LUT_INDEX_LOAD   3
+#define LUT_INDEX_STOR   4
+#define LUT_INDEX_COPY   5
+#define LUT_INDEX_PAST   6
+#define LUT_INDEX_DUMP   7
+#define LUT_INDEX_NO_BPM 8
 const char genericLut[]  PROGMEM = 
-    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump";
+    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump" "----";
 const char sqArpLut[]     PROGMEM = 
     "sequ" "arpe";
 const char boolLut[]     PROGMEM = 

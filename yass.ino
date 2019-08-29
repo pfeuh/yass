@@ -46,6 +46,8 @@
 #include "yassSysEx.h"
 /* storage driver */
 #include "yassEeprom.h"
+/* miscellaneous */
+#include "yassComputeBeat.h"
 
 //~ // debug tool if needed
 //~ #define YASS_DEBUG
@@ -208,6 +210,47 @@ void receiveControlChange(byte channel, byte number, byte value)
     }
 }
 
+void receiveClock()
+{
+    if(globConf.getClockIn())
+        if(player.isRunning())
+        {
+            beatCalc.addTick();
+            tickTask();
+        }
+}
+
+void receiveStart()
+{
+    if(globConf.getClockIn())
+        if(!player.isRunning())
+        {
+            commandStart();
+            beatCalc.start();
+        }
+}
+
+void receiveStop()
+{
+    if(globConf.getClockIn())
+        if(player.isRunning())
+        {
+            beatCalc.stop();
+            commandStop();
+        }
+}
+
+void receiveContinue()
+{
+    if(globConf.getClockIn())
+        if(!player.isRunning())
+        {
+            commandContinue();
+            beatCalc.start();
+        }
+
+}
+
 /***********************/
 /* encoder's callbacks */
 /***********************/
@@ -254,10 +297,13 @@ void editRecord(bool direction)
 
 void editTempo(bool direction)
 {
-    if(direction == YASS_ENCODER_DIRECTION_UP)
-        ticks.setTempo(ticks.getTempo() + 1);
-    else
-        ticks.setTempo(ticks.getTempo() - 1);
+    if(!globConf.getClockIn())
+    {
+        if(direction == YASS_ENCODER_DIRECTION_UP)
+            ticks.setTempo(ticks.getTempo() + 1);
+        else
+            ticks.setTempo(ticks.getTempo() - 1);
+    }
 }
 
 void editMidiInChannel(bool direction)
@@ -777,8 +823,11 @@ void commandNext()
     }
     else if(configurator.getState() == YASS_CONF_FSM_STATE_TEMPO)
     {
-        ticks.setTempo(DEFAULT_BPM);
-        keyBeep();
+        if(!globConf.getClockIn())
+        {
+            ticks.setTempo(DEFAULT_BPM);
+            keyBeep();
+        }
     }
     else if(player.isRecording())
     {
@@ -832,13 +881,16 @@ void keybTask()
                 commandNext();
                 break;
             case KBD_START:
-                commandStart();
+                if(!globConf.getClockIn())
+                    commandStart();
                 break;
             case KBD_PAUSE:
-                commandStop();
+                if(!globConf.getClockIn())
+                    commandStop();
                 break;
             case KBD_CONTINUE:
-                commandContinue();
+                if(!globConf.getClockIn())
+                    commandContinue();
                 break;
             case KBD_RECORD:
                 commandRecord();
@@ -907,27 +959,6 @@ void playerNoteOff(byte note)
 {
     MIDI.sendNoteOff(note, 0, globConf.getChannelOut());
     display.writeDot(0, SEQ_OUT_DOT);
-}
-
-void startCallback()
-{
-    if(!globConf.getClockIn())
-    {
-    }
-}
-
-void stopCallback()
-{
-    if(!globConf.getClockIn())
-    {
-    }
-}
-
-void continueCallback()
-{
-    if(!globConf.getClockIn())
-    {
-    }
 }
 
 void sendClock(byte tick_num)
@@ -1078,8 +1109,18 @@ void updateDisplay()
         }
         
     else
-        display.printWord(ticks.getTempo(), DEFAULT_BASE);        
+    {
+        if(!globConf.getClockIn())
+            display.printWord(ticks.getTempo(), DEFAULT_BASE);        
+        else
+        {
+            if(player.isRunning())
+                display.printWord(beatCalc.getTempo(), DEFAULT_BASE);
+            else
+                display.printLut(genericLut, LUT_INDEX_NO_BPM, NB_DIGITS);
+        }
         
+    }
 }
 
 void UpdateLeds()
@@ -1136,6 +1177,12 @@ void UpdateLeds()
         leds.ledOn(LED_TIE);
     if (note == MIDI_REST)
         leds.ledOn(LED_REST);
+}
+
+void preTickTask()
+{
+    if(!globConf.getClockIn())
+        tickTask();
 }
 
 void tickTask()
@@ -1201,15 +1248,16 @@ void setup()
     MIDI.setHandleNoteOn(receiveNoteOn);
     MIDI.setHandleNoteOff(receiveNoteOff);
     MIDI.setHandleControlChange(receiveControlChange);
-    MIDI.setHandleStart(startCallback);
-    MIDI.setHandleStop(stopCallback);
-    MIDI.setHandleContinue(continueCallback);
+    MIDI.setHandleClock(receiveClock);
+    MIDI.setHandleStart(receiveStart);
+    MIDI.setHandleStop(receiveStop);
+    MIDI.setHandleContinue(receiveContinue);
     
     dotInMonostable.begin();
     dotInMonostable.bind(DOT_MONO_STABLE_DELAY_MSEC, dotInMonostableCallback);
     
     ticks.begin();
-    ticks.setCallback(tickTask);
+    ticks.setCallback(preTickTask);
     ticks.setTempo(DEFAULT_BPM);
     ticks.start();
     
@@ -1254,6 +1302,7 @@ void loop()
     
     UpdateLeds();
     updateDisplay();
+    beatCalc.sequencer();
     
     gpoTask();
 }
