@@ -76,22 +76,22 @@ void YASS_SEQUENCE::initialize()
 
 byte YASS_SEQUENCE::getNote(byte index)
 {
-    return seqData[index + YASS_SEQUENCE_INDEX_NOTES];
+    return seqData[index + YASS_SEQUENCE_INDEX_NOTES] & 0x7f;
 }
 
 void YASS_SEQUENCE::setNote(byte index, byte note)
 {
-    seqData[index + YASS_SEQUENCE_INDEX_NOTES] = note;
+    seqData[index + YASS_SEQUENCE_INDEX_NOTES] = note & 0x7f;
 }
 
 byte YASS_SEQUENCE::getData(byte index)
 {
-    return seqData[index + YASS_SEQUENCE_INDEX_DATA];
+    return seqData[index + YASS_SEQUENCE_INDEX_DATA] & 0x7f;
 }
 
 void YASS_SEQUENCE::setData(byte index, byte _data)
 {
-    seqData[index + YASS_SEQUENCE_INDEX_DATA] = _data;
+    seqData[index + YASS_SEQUENCE_INDEX_DATA] = _data & 0x7f;
 }
 
 void YASS_SEQUENCE::setGateMode(byte mode)

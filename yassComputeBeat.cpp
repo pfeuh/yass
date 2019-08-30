@@ -44,18 +44,6 @@ void YASS_COMPUTE_BEAT::stop()
     running = true;
 }
 
-//~ void YASS_COMPUTE_BEAT::sequencer()
-//~ {
-    //~ if(running)
-        //~ if(millis() >= milestone)
-        //~ {
-            //~ milestone += YASS_COMPUTE_BEAT_CYCLE_MSEC_DURATION;
-            //~ // let's compute tempo
-            //~ tempo = (ticksCounter * 60 + 12) / 24;
-            //~ ticksCounter = 0;
-        //~ }
-//~ }
-
 void YASS_COMPUTE_BEAT::sequencer()
 {
     if(running)
@@ -63,7 +51,7 @@ void YASS_COMPUTE_BEAT::sequencer()
         {
             milestone += YASS_COMPUTE_BEAT_CYCLE_MSEC_DURATION;
             // let's compute tempo
-            tempo = (ticksCounter * 30 + 2) / 24;
+            tempo = (ticksCounter * 30) / 24;
             ticksCounter = 0;
         }
 }

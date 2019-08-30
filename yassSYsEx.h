@@ -23,15 +23,50 @@
 #include <Arduino.h>
 #include <MIDI.h>
 
-#define YASS_SYSEX_VERSION "1.00"
+// to get the objects to dump
+#include "yassSequencer.h"
+#include "yassConfig.h"
 
-class YASS_SYSEX
+#define YASS_SYS_EX_VERSION "1.00"
+
+#define YASS_SYS_EX_BUFFER_SIZE 64
+
+#define YASS_SYS_EX_GLOB_DUMP_REQUEST 1
+#define YASS_SYS_EX_SEQ_DUMP_REQUEST  2
+#define YASS_SYS_EX_GLOB_DUMP         65
+#define YASS_SYS_EX_SEQ_DUMP          66
+#define YASS_SYS_EX_ERROR             127
+
+#define YASS_SYS_EX_ERR_UNKNOWN         1
+#define YASS_SYS_EX_ERR_NOT_IMPLEMENTED 2
+#define YASS_SYS_EX_ERR_BAD_PARAMETER   3
+
+
+class YASS_SYS_EX
 {
     public:
-        YASS_SYSEX();
-        bool sysexReceived();
+        YASS_SYS_EX();
+        void begin(YASS_CONFIG* config_ptr, YASS_SEQUENCE* seqs_ptr);
+        bool isMessageForUs();
+        void executeSysEx(byte * array_ptr, word array_size);
+        void setSenderCallback(void (*callback)(byte* addr, word size));
+        void sendSequence(byte seq_num);
+        void sendError(byte err_num);
 
     private:
+        YASS_CONFIG* configPtr;
+        YASS_SEQUENCE* seqsPtr;
+        byte buffer[YASS_SYS_EX_BUFFER_SIZE];
+        word bufferIndex;
+        byte* inputPtr;
+        word inputSize;
+        void (*senderCallback)(byte* addr, word size);
+    
+        void push(byte value);
+        byte pop();
+        void openSysExMessage();
+        void closeAndSendSysExMessage();
+
 };
 
 #endif

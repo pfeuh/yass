@@ -187,6 +187,9 @@ YASS_COMPUTE_BEAT beatCalc = YASS_COMPUTE_BEAT();
 // eeprom driver
 YASS_EEPROM storage = YASS_EEPROM();
 
+// midi dump driver
+YASS_SYS_EX sysEx = YASS_SYS_EX();
+
 /*************************/
 /* Some global variables */
 /*************************/
@@ -199,6 +202,7 @@ bool editDataFlag;
 byte romSequenceIndex =YASS_ROM_SEQUENCE_FIRST;
 byte copySeqIndex = 0;
 byte swapSeqIndex = 0;
+//~ bool serialDebug = false;
 
 const byte sequenceLedLut[] PROGMEM = {LED_1, LED_2, LED_3, LED_4, LED_5};
 

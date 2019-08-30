@@ -126,6 +126,7 @@ bool functionWaitsValidation()
         case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
         case YASS_CONF_FSM_SEQ_LOAD:
         case YASS_CONF_FSM_SEQ_SAVE:
+        case YASS_CONF_FSM_SEQ_DUMP:
             ret_val = true;
             break;
         default:
@@ -147,13 +148,14 @@ void exitEdit()
 /* MIDI input callbacks */
 /************************/
 
-void receiveExclusive(byte * array, unsigned size)
+void receiveExclusive(byte * array_ptr, word array_size)
 {
     if(globConf.getUseSysEx())
     {
         startDotIn();
-        array++; // just to fake the compiler
-        size++; // just to fake the compiler
+        sysEx.executeSysEx(array_ptr, array_size);
+        //~ array++; // just to fake the compiler
+        //~ size++; // just to fake the compiler
     }
 }
 
@@ -250,7 +252,6 @@ void receiveContinue()
         }
 
 }
-
 /***********************/
 /* encoder's callbacks */
 /***********************/
@@ -619,6 +620,9 @@ void setEditParam(byte state)
         case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
             configurator.setState(YASS_CONF_FSM_SEQ_LOAD_FACTORY, &editLoadFactory);
             break;
+        case YASS_CONF_FSM_SEQ_DUMP:
+            configurator.setState(YASS_CONF_FSM_SEQ_DUMP, &dummyEdit);
+            break;
         case YASS_CONF_FSM_SEQ_LOAD:
             configurator.setState(YASS_CONF_FSM_SEQ_LOAD, &dummyEdit);
             break;
@@ -646,7 +650,7 @@ void setNextSeqEditParam()
     if(seqEditIndex >= YASS_CONF_FSM_LAST_SEQ)
         seqEditIndex = YASS_CONF_FSM_FIRST_SEQ;
     else if(seqEditIndex == YASS_CONF_FSM_FIX_VEL)
-        seqEditIndex = YASS_CONF_FSM_COPY;
+        seqEditIndex = YASS_CONF_FSM_SEQ_DUMP;
     else
         seqEditIndex += 1;
     setEditParam(seqEditIndex);
@@ -713,6 +717,9 @@ void commandRecord()
                 break;
             case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
                 YASS_ROM_SEQUENCES_load(romSequenceIndex, player.getCurrentSequence());
+                break;
+            case YASS_CONF_FSM_SEQ_DUMP:
+                sysEx.sendSequence(player.getCurrentSequenceIndex());
                 break;
             default:
                 break;
@@ -857,64 +864,6 @@ void commandRest()
         player.getCurrentSequence()->setNote(player.getRecordIndex(), MIDI_REST);
 }
 
-void keybTask()
-{
-    if(keyb.available())
-        switch(keyb.read())
-        {
-            case KBD_1:
-                commandSeq1();
-                break;
-            case KBD_2:
-                commandSeq2();
-                break;
-            case KBD_3:
-                commandSeq3();
-                break;
-            case KBD_4:
-                commandSeq4();
-                break;
-            case KBD_5:
-                commandSeq5();
-                break;
-            case KBD_NEXT:
-                commandNext();
-                break;
-            case KBD_START:
-                if(!globConf.getClockIn())
-                    commandStart();
-                break;
-            case KBD_PAUSE:
-                if(!globConf.getClockIn())
-                    commandStop();
-                break;
-            case KBD_CONTINUE:
-                if(!globConf.getClockIn())
-                    commandContinue();
-                break;
-            case KBD_RECORD:
-                commandRecord();
-                break;
-            case KBD_GLOBAL:
-                commandGlobalEdit();
-                break;
-            case KBD_SEQUENCE:
-                commandSequenceEdit();
-                break;
-            case KBD_REST:
-                commandRest();
-                break;
-            case KBD_TIE:
-                commandTie();
-                break;
-            case KBD_MULTI_USAGE:
-                commandMultiUsage();
-                break;
-            default:
-                break;
-        }
-}
-
 /***********************/
 /* end of HMI commands */
 /***********************/
@@ -997,9 +946,72 @@ void sendContinue()
         MIDI.sendRealTime(midi::Continue);
 }
 
+void sendExclusive(byte* addr, word size)
+{
+    MIDI.sendSysEx(size, addr);
+}
+
 /**************/
 /* some tasks */
 /**************/
+
+void keybTask()
+{
+    if(keyb.available())
+        switch(keyb.read())
+        {
+            case KBD_1:
+                commandSeq1();
+                break;
+            case KBD_2:
+                commandSeq2();
+                break;
+            case KBD_3:
+                commandSeq3();
+                break;
+            case KBD_4:
+                commandSeq4();
+                break;
+            case KBD_5:
+                commandSeq5();
+                break;
+            case KBD_NEXT:
+                commandNext();
+                break;
+            case KBD_START:
+                if(!globConf.getClockIn())
+                    commandStart();
+                break;
+            case KBD_PAUSE:
+                if(!globConf.getClockIn())
+                    commandStop();
+                break;
+            case KBD_CONTINUE:
+                if(!globConf.getClockIn())
+                    commandContinue();
+                break;
+            case KBD_RECORD:
+                commandRecord();
+                break;
+            case KBD_GLOBAL:
+                commandGlobalEdit();
+                break;
+            case KBD_SEQUENCE:
+                commandSequenceEdit();
+                break;
+            case KBD_REST:
+                commandRest();
+                break;
+            case KBD_TIE:
+                commandTie();
+                break;
+            case KBD_MULTI_USAGE:
+                commandMultiUsage();
+                break;
+            default:
+                break;
+        }
+}
 
 void updateDisplay()
 {
@@ -1279,6 +1291,9 @@ void setup()
 
     storage.begin(&globConf, seqs, &ticks);
     storage.loadAll();
+    
+    sysEx.begin(&globConf, seqs);
+    sysEx.setSenderCallback(sendExclusive);
     
     //~ commandStop();
     //~ commandSeq1();
