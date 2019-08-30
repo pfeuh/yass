@@ -35,12 +35,13 @@
 #define YASS_SYS_EX_SEQ_DUMP_REQUEST  2
 #define YASS_SYS_EX_GLOB_DUMP         65
 #define YASS_SYS_EX_SEQ_DUMP          66
+
+#define YASS_SYS_EX_ACKNOWLEDGE       126
 #define YASS_SYS_EX_ERROR             127
 
 #define YASS_SYS_EX_ERR_UNKNOWN         1
 #define YASS_SYS_EX_ERR_NOT_IMPLEMENTED 2
 #define YASS_SYS_EX_ERR_BAD_PARAMETER   3
-
 
 class YASS_SYS_EX
 {
@@ -51,7 +52,9 @@ class YASS_SYS_EX
         void executeSysEx(byte * array_ptr, word array_size);
         void setSenderCallback(void (*callback)(byte* addr, word size));
         void sendSequence(byte seq_num);
+        void sendAcknowledge();
         void sendError(byte err_num);
+        void parseSequence(byte seq_num);
 
     private:
         YASS_CONFIG* configPtr;

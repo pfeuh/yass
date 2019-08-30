@@ -29,11 +29,11 @@
 #define MANUFACTURER_BYTE_2 'a'
 #define MANUFACTURER_BYTE_3 's'
 
-#define YASS_DEBUG
-#ifdef YASS_DEBUG
-#include <arduinoDebug.h>
-ARDUINO_DEBUG debug = ARDUINO_DEBUG();
-#endif
+//~ #define YASS_DEBUG
+//~ #ifdef YASS_DEBUG
+//~ #include <arduinoDebug.h>
+//~ ARDUINO_DEBUG debug = ARDUINO_DEBUG();
+//~ #endif
 
 /*******************/
 /* Private methods */
@@ -96,18 +96,17 @@ void YASS_SYS_EX::executeSysEx(byte * array_ptr, word array_size)
     if(isMessageForUs())
     {
         byte command = pop();
-        //~ debug.begin();
-        //~ console.print(F("command is "));
-        //~ console.println(command);
-        //~ console.print(F("\n\n"));
-        
         switch(command)
         {
             case YASS_SYS_EX_GLOB_DUMP_REQUEST:
+            case YASS_SYS_EX_GLOB_DUMP:
                 sendError(YASS_SYS_EX_ERR_NOT_IMPLEMENTED);
                 break;
             case YASS_SYS_EX_SEQ_DUMP_REQUEST:
                 sendSequence(pop());
+                break;
+            case YASS_SYS_EX_SEQ_DUMP:
+                parseSequence(pop());
                 break;
             default:
                 sendError(YASS_SYS_EX_ERR_UNKNOWN);
@@ -143,6 +142,19 @@ void YASS_SYS_EX::sendSequence(byte seq_num)
     }
 }
 
+void YASS_SYS_EX::parseSequence(byte seq_num)
+{
+    if(seq_num < NB_SEQS)
+    {
+        byte* data_ptr = seqsPtr[seq_num].getDataPointer();
+        for(byte x = 0; x < YASS_SEQUENCE_DATA_SIZE; x++)
+            *data_ptr++ = pop();
+        sendAcknowledge();
+    }
+    else
+        sendError(YASS_SYS_EX_ERR_BAD_PARAMETER);
+}
+
 void YASS_SYS_EX::sendError(byte err_num)
 {
     if(senderCallback)
@@ -156,3 +168,14 @@ void YASS_SYS_EX::sendError(byte err_num)
     }
 }
 
+void YASS_SYS_EX::sendAcknowledge()
+{
+    if(senderCallback)
+    {
+        openSysExMessage();
+        
+        push(YASS_SYS_EX_ACKNOWLEDGE);  
+        
+        closeAndSendSysExMessage();
+    }
+}
