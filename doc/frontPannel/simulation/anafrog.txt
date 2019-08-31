@@ -1,0 +1,29 @@
+Hello,
+
+Je viens de revoir un peu plus en profondeur l'interface homme-machine (ou la face avant si vous préférez). Je ne suis pas encore prêt à me mettre à l'eurorack mais elle tiendrait dedans, 3U x 4U. La voici:
+
+[url=https://app.box.com/s/j1zmgb9vxc8jcp8fywwnryxkiwho3nad]YASS face avant / IHM[/url]
+
+on peut régler au niveau GLOBAL:
+midi in (1à16 et omni)
+midi out (1à16)
+clock (interne ou midi in)
+clock ou (on-off)
+active sensing (on-off)
+velocity routing (velocity cc0, cc1...)
+click (off-record-play-both)
+key echo (on - off)
+envoyer le dump de toutes les séquences
+
+on peut régler au niveau de la SEQUENCE:
+résolution (noire, croche, swing, triolet double croche)
+durée de note (piquée, normale, liée)
+type (boucle ou one-shot)
+envoyer le dump de la séquence courante
+
+Au niveau de la note en pas par pas:
+jouer note + vélocité
+remplacer la note par un silence
+lier la note à la précédente (pas besoin de la rejouer, c'est la même, sauf si on veut une autre vélocité)
+
+En mode PLAY, le changement de séquence et sa transposition se font au début de chaque itération s'il y a changement. Si on joue une note ou que l'on sélectionne une autre séquence,  le changement se fera au début de la prochaine itération.

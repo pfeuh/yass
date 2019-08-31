@@ -1,0 +1,27 @@
+Hello,
+
+I have done some jobs with svgwrite to create files for laser cut and engraving. I have encoutered somme probems, I would like to discuss about them with you. Perhaps it's only a misunderstanding of mine as there is not so much information about svgwrite.
+
+Objects-Paths problem
+
+I've generated some code in a brand new svg file, but I have to load it in inkscape, select all and use the menu item change object(s) to path(s). Is there a way to do it directly with svgwrite?
+
+Scale problem
+
+When I open a generated file file in inkscape, I have to scale them with a 3.77 ratio. Is there a way to do it with svgwrite?
+
+I think you are at 99% of a really useful program. I've noticed that only a really few people use it, it's a shame. Perhaps just some modifications and documentation can fix this?
+
+Best regards,
+
+Pfeuh (Pierre Faller, from France)
+
+
+
+
+
+
+
+
+
+

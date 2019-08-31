@@ -1,0 +1,18 @@
+
+A 32 step number multiplexed Leds ->  5 gpio
+B  6 command     multiplexed Leds ->  3 gpio
+C  4 sequence    multiplexed Leds ->  2 gpio
+D 16 buttons matrix 4x4           ->  8 gpio
+E  1 encoder                      ->  3 gpio
+F  3 display 7 segments           -> 10 gpio
+--------------------------------------------
+  total                              31 gpio
+
+74LS138 A:4 B:1 C:1               ->  6  
+push-button                       -> 16
+led red                           -> 33
+led green                         ->  4
+led yellow                        ->  2
+led orange                        ->  3
+display 7 segments                ->  3
+encoder                           ->  1
