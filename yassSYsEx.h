@@ -52,6 +52,7 @@ class YASS_SYS_EX
         void executeSysEx(byte * array_ptr, word array_size);
         void setSenderCallback(void (*callback)(byte* addr, word size));
         void sendSequence(byte seq_num);
+        void sendGlobal();
         void sendAcknowledge();
         void sendError(byte err_num);
         void parseSequence(byte seq_num);
@@ -64,6 +65,7 @@ class YASS_SYS_EX
         byte* inputPtr;
         word inputSize;
         void (*senderCallback)(byte* addr, word size);
+        byte state;
     
         void push(byte value);
         byte pop();

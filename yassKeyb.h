@@ -33,6 +33,7 @@ class YASS_KEYB
         YASS_KEYB(int* column_pins, byte nb_columns, int* row_pins, byte nb_rows, char* codes);
         void begin();
         void setPushHandler(YASS_KEYB_type_callback callback);
+        word getPicture();
         byte available();
         byte read();
         void sequencer();

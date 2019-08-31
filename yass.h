@@ -20,63 +20,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define MONOSTABLE_MSEC_DURATION 100
-
-#define KBD_1 '1'
-#define KBD_2 '2'
-#define KBD_3 '3'
-#define KBD_4 '4'
-#define KBD_5 '5'
-#define KBD_NEXT 'A'
-#define KBD_START 'B'
-#define KBD_PAUSE 'C'
-#define KBD_CONTINUE 'D'
-#define KBD_RECORD 'E'
-#define KBD_GLOBAL 'F'
-#define KBD_SEQUENCE 'G'
-#define KBD_REST 'H'
-#define KBD_TIE 'I'
-#define KBD_MULTI_USAGE 'J'
+//~ #define MONOSTABLE_MSEC_DURATION 100
 
 #define ENC_A A1
 #define ENC_B A0
-
-#define BEEP_MSEC_DURATION 40
-#define BEEPER_PIN A2
-
-#define LED_1 5
-#define LED_2 4
-#define LED_3 3
-#define LED_4 2
-#define LED_5 1
-#define LED_START 7
-#define LED_RECORD 6
-#define LED_GLOBAL 8
-#define LED_SEQUENCE 9
-#define LED_REST 0
-#define LED_TIE 11
-#define LED_MULTI_USAGE 10
-
-#define LED_STEP_0  0
-#define LED_STEP_1  1
-#define LED_STEP_2  2
-#define LED_STEP_3  3
-#define LED_STEP_4  4
-#define LED_STEP_5  5
-#define LED_STEP_6  6
-#define LED_STEP_7  7
-#define LED_STEP_8  8
-#define LED_STEP_9  9
-#define LED_STEP_10 10
-#define LED_STEP_11 11
-#define LED_STEP_12 12
-#define LED_STEP_13 13
-#define LED_STEP_14 14
-#define LED_STEP_15 15
-
-#define YASS_GPO_DATA_PIN 2 
-#define YASS_GPO_CLOCK_PIN 3 
-#define YASS_GPO_LATCH_PIN 4 
 
 #define CC_ALL_NOTES_OFF 120
 #define FIRST_MIDI_CHANNEL 1
@@ -91,11 +38,6 @@
 #define LAST_MIDI_NOTE MIDI_TIE
 #define LAST_CTRL_CHG 127
 #define LAST_FIXED_VELOCITY 127
-
-#define MIDI_IN_DOT 0
-#define MIDI_OUT_DOT 1
-#define SEQ_OUT_DOT 2
-#define CLICK_DOT 3
 
 #define STAVE_SIZE 12
 #define DEFAULT_BPM 120
@@ -117,9 +59,39 @@ YASS_MONOSTABLE dotInMonostable = YASS_MONOSTABLE();
 #define DOT_MONO_STABLE_DELAY_MSEC 50
 
 // data editor's finite state machine
-YASS_CONF_FSM configurator = YASS_CONF_FSM();
+YASS_CONF_FSM editor = YASS_CONF_FSM();
 
 // Keyboard
+#define KBD_1 '1'
+#define KBD_2 '2'
+#define KBD_3 '3'
+#define KBD_4 '4'
+#define KBD_5 '5'
+#define KBD_NEXT 'A'
+#define KBD_START 'B'
+#define KBD_PAUSE 'C'
+#define KBD_CONTINUE 'D'
+#define KBD_RECORD 'E'
+#define KBD_GLOBAL 'F'
+#define KBD_SEQUENCE 'G'
+#define KBD_REST 'H'
+#define KBD_TIE 'I'
+#define KBD_MULTI_USAGE 'J'
+#define KBD_1_PICTURE_VALUE             0x0001
+#define KBD_2_PICTURE_VALUE             0x0002
+#define KBD_3_PICTURE_VALUE             0x0004
+#define KBD_4_PICTURE_VALUE             0x0008
+#define KBD_5_PICTURE_VALUE             0x0010
+#define KBD_REST_PICTURE_VALUE          0x0020
+#define KBD_START_PICTURE_VALUE         0x0040
+#define KBD_PAUSE_PICTURE_VALUE         0x0080
+#define KBD_CONTINUE_PICTURE_VALUE      0x0100
+#define KBD_RECORD_PICTURE_VALUE        0x0200
+#define KBD_TIE_PICTURE_VALUE           0x0400
+#define KBD_MULTI_USAGE_PICTURE_VALUE   0x0800
+#define KBD_NEXT_PICTURE_VALUE          0x1000
+#define KBD_SEQUENCE_PICTURE_VALUE      0x2000
+#define KBD_GLOBAL_PICTURE_VALUE        0x4000
 int colPins[] = {5, 6, 7, 8, 9};
 int rowPins[] = {10, 11, 12};
 #define NB_KBD_COLUMS (sizeof(colPins)/sizeof(int))
@@ -133,15 +105,48 @@ char kbdCodes[] =
 YASS_KEYB keyb = YASS_KEYB(colPins, NB_KBD_COLUMS, rowPins, NB_KBD_ROWS, kbdCodes);
 
 // beeper
+#define BEEP_MSEC_DURATION 40
+#define BEEPER_PIN A2
 YASS_BEEPER beeper = YASS_BEEPER(BEEPER_PIN, BEEP_MSEC_DURATION);
 
 // Gpio shifter (leds & 7 segments display)
+#define YASS_GPO_DATA_PIN 2 
+#define YASS_GPO_CLOCK_PIN 3 
+#define YASS_GPO_LATCH_PIN 4 
 YASS_GPO shifter = YASS_GPO(YASS_GPO_DATA_PIN, YASS_GPO_CLOCK_PIN, YASS_GPO_LATCH_PIN);
 byte oldGpoData[] = {0, 0, 0, 0, 0};
 byte gpoData[]    = {0, 0, 0, 0, 0};
 #define NB_GPO_DATA (sizeof(gpoData) / sizeof(byte))
 
 // Leds driver
+#define LED_1 5
+#define LED_2 4
+#define LED_3 3
+#define LED_4 2
+#define LED_5 1
+#define LED_START 7
+#define LED_RECORD 6
+#define LED_GLOBAL 8
+#define LED_SEQUENCE 9
+#define LED_REST 0
+#define LED_TIE 11
+#define LED_MULTI_USAGE 10
+#define LED_STEP_0  0
+#define LED_STEP_1  1
+#define LED_STEP_2  2
+#define LED_STEP_3  3
+#define LED_STEP_4  4
+#define LED_STEP_5  5
+#define LED_STEP_6  6
+#define LED_STEP_7  7
+#define LED_STEP_8  8
+#define LED_STEP_9  9
+#define LED_STEP_10 10
+#define LED_STEP_11 11
+#define LED_STEP_12 12
+#define LED_STEP_13 13
+#define LED_STEP_14 14
+#define LED_STEP_15 15
 #define individualLed_ptr (&gpoData[0])
 #define stepLed_ptr (&gpoData[2])
 YASS_LEDS leds = YASS_LEDS(individualLed_ptr, stepLed_ptr);
@@ -170,6 +175,10 @@ YASS_TICKS ticks = YASS_TICKS();
 // display 4 digits 7 segments
 #define DISPLAY_COMMON_ANODE_SEGMENT_LOGIC 0
 #define DISPLAY_COMMON_ANODE_DIGIT_LOGIC 1
+#define MIDI_IN_DOT 0
+#define MIDI_OUT_DOT 1
+#define SEQ_OUT_DOT 2
+#define CLICK_DOT 3
 unsigned long displayMilestone;
 #define DISPLAY_MSEC_DURATION 8
 byte digitIndex = 3;
@@ -180,6 +189,7 @@ YASS_DISPLAY display = YASS_DISPLAY(NB_DIGITS, displayBuf);
 #define GPO_SEGMENTS_INDEX 4
 #define digit_number_ptr (&gpoData[1])
 #define segments_ptr (&gpoData[GPO_SEGMENTS_INDEX])
+#define DISPLAY_FACTORY_SPLASH_DURATION 2000
 
 // bpm calculator for external clock
 YASS_COMPUTE_BEAT beatCalc = YASS_COMPUTE_BEAT();
@@ -215,8 +225,9 @@ const byte sequenceLedLut[] PROGMEM = {LED_1, LED_2, LED_3, LED_4, LED_5};
 #define LUT_INDEX_PAST   6
 #define LUT_INDEX_DUMP   7
 #define LUT_INDEX_NO_BPM 8
+#define LUT_INDEX_FACT   9
 const char genericLut[]  PROGMEM = 
-    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump" "----";
+    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump" "----" "fact";
 const char sqArpLut[]     PROGMEM = 
     "sequ" "arpe";
 const char boolLut[]     PROGMEM = 

@@ -29,6 +29,14 @@
 #define MANUFACTURER_BYTE_2 'a'
 #define MANUFACTURER_BYTE_3 's'
 
+#define STATE_READY   1
+#define STATE_GLOBAL  2
+#define STATE_SEQ_1   3
+#define STATE_SEQ_2   4
+#define STATE_SEQ_3   5
+#define STATE_SEQ_4   6
+#define STATE_SEQ_5   7
+
 //~ #define YASS_DEBUG
 //~ #ifdef YASS_DEBUG
 //~ #include <arduinoDebug.h>
@@ -77,6 +85,7 @@ void YASS_SYS_EX::begin(YASS_CONFIG* config_ptr, YASS_SEQUENCE* seqs_ptr)
         configPtr = config_ptr;
         seqsPtr = seqs_ptr;
         senderCallback = NULL;
+        state = STATE_READY;
 }
 
 bool YASS_SYS_EX::isMessageForUs()
@@ -99,6 +108,8 @@ void YASS_SYS_EX::executeSysEx(byte * array_ptr, word array_size)
         switch(command)
         {
             case YASS_SYS_EX_GLOB_DUMP_REQUEST:
+                sendGlobal();
+                break;
             case YASS_SYS_EX_GLOB_DUMP:
                 sendError(YASS_SYS_EX_ERR_NOT_IMPLEMENTED);
                 break;
@@ -139,6 +150,22 @@ void YASS_SYS_EX::sendSequence(byte seq_num)
         }
         else
             sendError(YASS_SYS_EX_ERR_BAD_PARAMETER);
+    }
+}
+
+void YASS_SYS_EX::sendGlobal()
+{
+    if(senderCallback)
+    {
+            openSysExMessage();
+            
+            push(YASS_SYS_EX_GLOB_DUMP);  
+            
+            byte* data_ptr = configPtr->getDataPointer();
+            for(byte x = 0; x < YASS_SEQUENCE_DATA_SIZE; x++)
+                push(*data_ptr++);
+            
+            closeAndSendSysExMessage();
     }
 }
 

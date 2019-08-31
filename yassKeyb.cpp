@@ -68,6 +68,20 @@ void YASS_KEYB::begin()
     }
 }
 
+word YASS_KEYB::getPicture()
+{
+    word picture = 0x0000;
+    for(byte y=0; y < nbRows; y++)
+    {
+        digitalWrite(rowPins[y], 0);        
+        for(byte x=0; x < nbColumns; x++)
+            picture = (picture >> 1) | (digitalRead(columnPins[x]) << 15);
+        digitalWrite(rowPins[y], 1);
+    }
+    picture >>= 1;
+    return picture ^ 0x7fff;
+}
+
 void YASS_KEYB::setPushHandler(YASS_KEYB_type_callback callback)
 {
     pushHandler = callback;

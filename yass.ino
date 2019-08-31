@@ -49,12 +49,12 @@
 /* miscellaneous */
 #include "yassComputeBeat.h"
 
-//~ // debug tool if needed
+// debug tool if needed
 //~ #define YASS_DEBUG
-//~ #ifdef YASS_DEBUG
-//~ #include <arduinoDebug.h>
-//~ ARDUINO_DEBUG debug = ARDUINO_DEBUG();
-//~ #endif
+#ifdef YASS_DEBUG
+#include <arduinoDebug.h>
+ARDUINO_DEBUG debug = ARDUINO_DEBUG();
+#endif
 
 /***********************************/
 /* all global data is defined here */
@@ -81,6 +81,17 @@ void swap(byte* source, byte* target, word nb_bytes)
 /* Factorisation of some code parts */
 /************************************/
 
+void freezeDisplay(word msec_value)
+{
+    unsigned long int milestone = millis() + msec_value;
+    while(milestone >= millis())
+    {
+        updateDisplay();
+        gpoTask();
+        delay(DISPLAY_MSEC_DURATION);
+    }
+}
+
 byte getPlayRecordState()
 {
     return player.isRunning() + player.isRecording() * 2;
@@ -105,18 +116,18 @@ void keyBeep()
 
 void setEditNotImplemented()
 {
-    configurator.setState(YASS_CONF_FSM_STATE_TEMPO, &dummyEdit);
+    editor.setState(YASS_CONF_FSM_STATE_TEMPO, &dummyEdit);
 }
 
 void setEditTempo()
 {
-    configurator.setState(YASS_CONF_FSM_STATE_TEMPO, &editTempo);
+    editor.setState(YASS_CONF_FSM_STATE_TEMPO, &editTempo);
 }
 
 bool functionWaitsValidation()
 {
     bool ret_val;
-    switch(configurator.getState())
+    switch(editor.getState())
     {
         case YASS_CONF_FSM_GLOB_DUMP:
         case YASS_CONF_FSM_GLOB_LOAD:
@@ -154,8 +165,6 @@ void receiveExclusive(byte * array_ptr, word array_size)
     {
         startDotIn();
         sysEx.executeSysEx(array_ptr, array_size);
-        //~ array++; // just to fake the compiler
-        //~ size++; // just to fake the compiler
     }
 }
 
@@ -558,76 +567,76 @@ void setEditParam(byte state)
     switch(state)
     {
         case YASS_CONF_FSM_MIDI_IN_CHANNEL:
-            configurator.setState(YASS_CONF_FSM_MIDI_IN_CHANNEL, &editMidiInChannel);
+            editor.setState(YASS_CONF_FSM_MIDI_IN_CHANNEL, &editMidiInChannel);
             break;
         case YASS_CONF_FSM_MIDI_OUT_CHANNEL:
-            configurator.setState(YASS_CONF_FSM_MIDI_OUT_CHANNEL, &editMidiOutChannel);
+            editor.setState(YASS_CONF_FSM_MIDI_OUT_CHANNEL, &editMidiOutChannel);
             break;
         case YASS_CONF_FSM_CLOCK_IN:
-            configurator.setState(YASS_CONF_FSM_CLOCK_IN, &editClockIn);
+            editor.setState(YASS_CONF_FSM_CLOCK_IN, &editClockIn);
             break;
         case YASS_CONF_FSM_CLOCK_OUT:
-            configurator.setState(YASS_CONF_FSM_CLOCK_OUT, &editClockOut);
+            editor.setState(YASS_CONF_FSM_CLOCK_OUT, &editClockOut);
             break;
         case YASS_CONF_FSM_KEY_ECHO:
-            configurator.setState(YASS_CONF_FSM_KEY_ECHO, &editKeyEcho);
+            editor.setState(YASS_CONF_FSM_KEY_ECHO, &editKeyEcho);
             break;
         case YASS_CONF_FSM_CLICK:
-            configurator.setState(YASS_CONF_FSM_CLICK, &editClick);
+            editor.setState(YASS_CONF_FSM_CLICK, &editClick);
             break;
         case YASS_CONF_FSM_PROGRAM_NUMBER:
-            configurator.setState(YASS_CONF_FSM_PROGRAM_NUMBER, &editProgNum);
+            editor.setState(YASS_CONF_FSM_PROGRAM_NUMBER, &editProgNum);
             break;
         case YASS_CONF_FSM_ARPEGGIATOR:
-            configurator.setState(YASS_CONF_FSM_PROGRAM_NUMBER, &editArpeggiator);
+            editor.setState(YASS_CONF_FSM_PROGRAM_NUMBER, &editArpeggiator);
             break;
         case YASS_CONF_FSM_GLOB_DUMP:
-            configurator.setState(YASS_CONF_FSM_GLOB_DUMP, &dummyEdit);
+            editor.setState(YASS_CONF_FSM_GLOB_DUMP, &dummyEdit);
             break;
         case YASS_CONF_FSM_GLOB_LOAD:
-            configurator.setState(YASS_CONF_FSM_GLOB_LOAD, &dummyEdit);
+            editor.setState(YASS_CONF_FSM_GLOB_LOAD, &dummyEdit);
             break;
         case YASS_CONF_FSM_GLOB_SAVE:
-            configurator.setState(YASS_CONF_FSM_GLOB_SAVE, &dummyEdit);
+            editor.setState(YASS_CONF_FSM_GLOB_SAVE, &dummyEdit);
             break;
         case YASS_CONF_FSM_USE_SYSEX:
-            configurator.setState(YASS_CONF_FSM_USE_SYSEX, &editSysEx);
+            editor.setState(YASS_CONF_FSM_USE_SYSEX, &editSysEx);
             break;
         case YASS_CONF_FSM_GROOVE:
-            configurator.setState(YASS_CONF_FSM_GROOVE, &editGroove);
+            editor.setState(YASS_CONF_FSM_GROOVE, &editGroove);
             break;
         case YASS_CONF_FSM_GATE_MODE:
-            configurator.setState(YASS_CONF_FSM_GATE_MODE, &editGateMode);
+            editor.setState(YASS_CONF_FSM_GATE_MODE, &editGateMode);
             break;
         case YASS_CONF_FSM_LAST_STEP:
-            configurator.setState(YASS_CONF_FSM_LAST_STEP, &editLastStep);
+            editor.setState(YASS_CONF_FSM_LAST_STEP, &editLastStep);
             break;
         case YASS_CONF_FSM_DATA_MODE:
-            configurator.setState(YASS_CONF_FSM_LAST_STEP, &editDataMode);
+            editor.setState(YASS_CONF_FSM_LAST_STEP, &editDataMode);
             break;
         case YASS_CONF_FSM_CTRL_CHG:
-            configurator.setState(YASS_CONF_FSM_CTRL_CHG, &editCtrlChg);
+            editor.setState(YASS_CONF_FSM_CTRL_CHG, &editCtrlChg);
             break;
         case YASS_CONF_FSM_FIX_VEL:
-            configurator.setState(YASS_CONF_FSM_FIX_VEL, &editFixedVelocity);
+            editor.setState(YASS_CONF_FSM_FIX_VEL, &editFixedVelocity);
             break;
         case YASS_CONF_FSM_COPY:
-            configurator.setState(YASS_CONF_FSM_COPY, &editCopySeq);
+            editor.setState(YASS_CONF_FSM_COPY, &editCopySeq);
             break;
         case YASS_CONF_FSM_SWAP:
-            configurator.setState(YASS_CONF_FSM_SWAP, &editSwapSeq);
+            editor.setState(YASS_CONF_FSM_SWAP, &editSwapSeq);
             break;
         case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
-            configurator.setState(YASS_CONF_FSM_SEQ_LOAD_FACTORY, &editLoadFactory);
+            editor.setState(YASS_CONF_FSM_SEQ_LOAD_FACTORY, &editLoadFactory);
             break;
         case YASS_CONF_FSM_SEQ_DUMP:
-            configurator.setState(YASS_CONF_FSM_SEQ_DUMP, &dummyEdit);
+            editor.setState(YASS_CONF_FSM_SEQ_DUMP, &dummyEdit);
             break;
         case YASS_CONF_FSM_SEQ_LOAD:
-            configurator.setState(YASS_CONF_FSM_SEQ_LOAD, &dummyEdit);
+            editor.setState(YASS_CONF_FSM_SEQ_LOAD, &dummyEdit);
             break;
         case YASS_CONF_FSM_SEQ_SAVE:
-            configurator.setState(YASS_CONF_FSM_SEQ_SAVE, &dummyEdit);
+            editor.setState(YASS_CONF_FSM_SEQ_SAVE, &dummyEdit);
             break;
         default:
             break;
@@ -694,9 +703,11 @@ void commandRecord()
 {
     if(functionWaitsValidation())
     {
-        switch(configurator.getState())
+        switch(editor.getState())
         {
-            //~ case YASS_CONF_FSM_GLOB_DUMP:
+            case YASS_CONF_FSM_GLOB_DUMP:
+                sysEx.sendGlobal();
+                break;
             case YASS_CONF_FSM_GLOB_LOAD:
                 storage.loadAll();
                 break;
@@ -736,7 +747,7 @@ void commandRecord()
         else
         {
             player.recordSequencer();
-            configurator.setState(YASS_CONF_FSM_STATE_RECORD_EDIT, &editRecord);
+            editor.setState(YASS_CONF_FSM_STATE_RECORD_EDIT, &editRecord);
         }
         keyBeep();
     }
@@ -828,7 +839,7 @@ void commandNext()
         setNextSeqEditParam();
         keyBeep();
     }
-    else if(configurator.getState() == YASS_CONF_FSM_STATE_TEMPO)
+    else if(editor.getState() == YASS_CONF_FSM_STATE_TEMPO)
     {
         if(!globConf.getClockIn())
         {
@@ -1248,7 +1259,7 @@ void setup()
     beeper.begin();
     keyb.begin();
     
-    configurator.begin(ENC_A, ENC_B);
+    editor.begin(ENC_A, ENC_B);
     setEditTempo();
     
     shifter.begin();
@@ -1289,8 +1300,22 @@ void setup()
     //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_OXYGENE_4, &seqs[3]);
     //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_TUBULAR_BELLS, &seqs[4]);
 
+    #ifdef YASS_DEBUG
+    debug.begin();
+    word keys = keyb.getPicture();
+    console.println(keys, HEX);
+    #endif
+
     storage.begin(&globConf, seqs, &ticks);
-    storage.loadAll();
+    if(!(KBD_1_PICTURE_VALUE & keyb.getPicture()))
+        // overwritting factory settings
+        storage.loadAll();
+    else
+    {
+        // informing we're on factory settings
+        display.printLut(genericLut, LUT_INDEX_FACT, NB_DIGITS);
+        freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
+    }
     
     sysEx.begin(&globConf, seqs);
     sysEx.setSenderCallback(sendExclusive);
@@ -1311,7 +1336,7 @@ void loop()
     keyb.sequencer();
     keybTask();
     
-    configurator.sequencer();
+    editor.sequencer();
     
     beeper.sequencer();
     
