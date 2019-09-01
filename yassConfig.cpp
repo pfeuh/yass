@@ -72,6 +72,21 @@ inline bool YASS_CONFIG::getBit(word weight)
 
 YASS_CONFIG::YASS_CONFIG()
 {
+    setChannelIn(YASS_CONFIG_DEFAULT_CHANNEL_IN);
+    setChannelOut(YASS_CONFIG_DEFAULT_CHANNEL_OUT);
+    setOmni(YASS_CONFIG_DEFAULT_OMNI);
+    setClockIn(YASS_CONFIG_DEFAULT_CLOCK_IN);
+    setClockOut(YASS_CONFIG_DEFAULT_CLOCK_OUT);
+    setClick(YASS_CONFIG_DEFAULT_CLICK);
+    setArpeggiator(YASS_CONFIG_DEFAULT_ARPEGGIATOR);
+    setKeyEcho(YASS_CONFIG_DEFAULT_KEY_ECHO);
+    setProgNum(YASS_CONFIG_DEFAULT_PROG_NUM);
+    setUseProgNum(YASS_CONFIG_DEFAULT_USE_PROGNUM);
+}
+
+void YASS_CONFIG::begin()
+{
+    
 }
 
 void YASS_CONFIG::setProgNum(byte prog_num)
@@ -186,27 +201,27 @@ bool YASS_CONFIG::getUseSysEx()
     return getBit(YASS_CONFIG_BIT_WEIGHT_USE_SYSEX);
 }
 
-void YASS_CONFIG::setCtrlChangeNumber(byte value)
-{
-    if(YASS_MAX_CC_NUM >= value)
-        ctrlChangeNumber = value;
-}
+//~ void YASS_CONFIG::setCtrlChangeNumber(byte value)
+//~ {
+    //~ if(YASS_MAX_CC_NUM >= value)
+        //~ ctrlChangeNumber = value;
+//~ }
 
-byte YASS_CONFIG::getCtrlChangeNumber()
-{
-    return ctrlChangeNumber;
-}
+//~ byte YASS_CONFIG::getCtrlChangeNumber()
+//~ {
+    //~ return ctrlChangeNumber;
+//~ }
 
-void YASS_CONFIG::setDataMode(byte value)
-{
-    if(YASS_DATA_MODE_MAX >= value)
-        dataMode = value;
-}
+//~ void YASS_CONFIG::setDataMode(byte value)
+//~ {
+    //~ if(YASS_DATA_MODE_MAX >= value)
+        //~ dataMode = value;
+//~ }
 
-byte YASS_CONFIG::getDataMode()
-{
-    return dataMode;
-}
+//~ byte YASS_CONFIG::getDataMode()
+//~ {
+    //~ return dataMode;
+//~ }
 
 byte* YASS_CONFIG::getDataPointer()
 {

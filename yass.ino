@@ -83,10 +83,10 @@ void swap(byte* source, byte* target, word nb_bytes)
 
 void freezeDisplay(word msec_value)
 {
+    // useful for some boot splash screens
     unsigned long int milestone = millis() + msec_value;
     while(milestone >= millis())
     {
-        updateDisplay();
         gpoTask();
         delay(DISPLAY_MSEC_DURATION);
     }
@@ -1293,7 +1293,7 @@ void setup()
     player.setContinueSequencerCallback(sendContinue);
 
     //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_BILLIE_JEAN, &seqs[0]);
-    //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_PAN_TEST, &seqs[0]);
+    //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_CLAVE, &seqs[0]);
     
     //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_MIDNIGHT_EXPRESS, &seqs[1]);
     //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_BLADE_RUNNER, &seqs[2]);

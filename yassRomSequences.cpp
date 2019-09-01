@@ -37,7 +37,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x07,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Midnight Express ***--- */
     /* notes     */ 0x32, 0x32, 0x32, 0x32, 0x30, 0x32, 0x35, 0x32, 0x2b, 0x2d, 0x2d, 0x2d, 0x2b, 0x2d, 0x30, 0x34, 
@@ -47,7 +47,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x0f,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Blade runner ***--- */
     /* notes     */ 0x32, 0x32, 0x34, 0x35, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, REST, 
@@ -57,7 +57,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x03,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Dady Cool ***--- */
     /* notes     */ 0x32, 0x32, 0x2d, 0x32, 0x31, 0x31, 0x2c, 0x31, 0x30, 0x30, 0x2b, 0x30, 0x31, 0x31, 0x2c, 0x31, 
@@ -67,7 +67,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x0f,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Marcia Bailar ***--- */
     /* notes     */ 0x32, REST, REST, 0x36, 0x37, REST, REST, 0x33, 0x34, REST, REST, 0x38, 0x39, 0x38, 0x39, 0x34, 
@@ -77,17 +77,17 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x0f,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Take Five ***--- */
     /* notes     */ 0x32, REST, REST, 0x32, REST, REST, 0x2d, REST, 0x2d, REST, REST, REST, REST, REST, REST, REST, 
     /* data      */ 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 
     /* groove    */ YASS_SEQUENCE_CROCHE,
-    /* gate mode */ YASS_SEQUENCE_GATE_LONG,
+    /* gate mode */ YASS_SEQUENCE_GATE_NORMAL,
     /* last note */ 0x09,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Latin Bolero ***--- */
     /* notes     */ 0x32, TIE , TIE , TIE , 0x39, REST, 0x2d, REST, REST, REST, REST, REST, REST, REST, REST, REST, 
@@ -97,7 +97,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x07,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Boogie woogie ***--- */
     /* notes     */ 0x32, 0x32, 0x36, 0x36, 0x39, 0x39, 0x3b, 0x3b, 0x3e, 0x3e, 0x3b, 0x3b, 0x39, 0x39, 0x36, 0x36, 
@@ -107,7 +107,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x0f,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Tubular bells ***--- */
     /* notes     */ 0x32, 0x32, 0x32, 0x80, 0x37, 0x39, 0x3e, 0x80, 0x3e, 0x3c, 0x39, 0x37, 0x3b, 0x3c, 0x35, 0x34, 
@@ -117,7 +117,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x0f,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Minor arpeggio ***--- */
     /* notes     */ 0x32, 0x35, 0x39, 0x3e, 0x39, 0x35, 0x32, 0x2d, 0x29, 0x26, REST, REST, REST, REST, REST, REST, 
@@ -127,7 +127,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x0b,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Major arpeggio ***--- */
     /* notes     */ 0x32, 0x36, 0x39, 0x3e, 0x39, 0x36, 0x32, 0x2d, 0x2a, 0x26, REST, REST, REST, REST, REST, REST, 
@@ -137,7 +137,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x0b,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Diminued arpeggio ***--- */
     /* notes     */ 0x32, 0x35, 0x38, 0x3b, 0x3e, 0x41, 0x3e, 0x3b, 0x38, 0x35, 0x32, REST, REST, REST, REST, REST, 
@@ -147,7 +147,7 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x0b,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
 
     /* ---*** Oxygene4 ***--- */
     /* notes     */ 0x32, 0x2d, 0x30, 0x32, TIE , 0x2d, 0x30, 0x2d, REST, REST, REST, REST, REST, REST, REST, REST, 
@@ -157,17 +157,17 @@ const byte PROGMEM yassRomSeqs[] =
     /* last note */ 0x07,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
     /* cc num    */ 0x7f,
-    /* fix. vel. */ 0x7f,
+    /* fix. vel. */ 0x64,
     
-    /* ---*** pan test ***--- */
+    /* ---*** clave ***--- */
     /* notes     */ 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 
-    /* data      */ 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x7f, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 
+    /* data      */ 0x7f, 0x64, 0x64, 0x7f, 0x64, 0x64, 0x7f, 0x64, 0x7f, 0x7f, 0x7f, 0x7f, 0x64, 0x7f, 0x64, 0x7f, 
     /* groove    */ YASS_SEQUENCE_DOUBLE_CROCHE,
     /* gate mode */ YASS_SEQUENCE_DATA_MODE_CTRL_CHG,
     /* last note */ 0x0f,
     /* data mode */ YASS_SEQUENCE_DATA_MODE_VELOCITY,
-    /* cc num    */ CC_PAN,
-    /* fix. vel. */ 0x7f,
+    /* cc num    */ 0x00,
+    /* fix. vel. */ 0x64,
 };
 
 #define YASS_ROM_SEQUENCES_NB_SEQS ((sizeof(yassRomSeqs)) / YASS_SEQUENCE_DATA_SIZE)

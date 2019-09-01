@@ -27,19 +27,27 @@
 #define YASS_CONFIG_MIN_CHANNEL 1
 #define YASS_CONFIG_MAX_CHANNEL 16
 
-#define YASS_MAX_CC_NUM 127
-
-#define YASS_DATA_MODE_VELOCITY 0
-#define YASS_DATA_MODE_CC 1
-#define YASS_DATA_MODE_NONE 2
-#define YASS_DATA_MODE_MAX YASS_DATA_MODE_NONE
+#define YASS_MAX_CC_NUM    127
+#define YASS_DATA_MODE_MAX 127
 
 #define YASS_CONFIG_DATA_SIZE 8
+
+#define YASS_CONFIG_DEFAULT_CHANNEL_IN  1
+#define YASS_CONFIG_DEFAULT_CHANNEL_OUT 1
+#define YASS_CONFIG_DEFAULT_OMNI        true
+#define YASS_CONFIG_DEFAULT_CLOCK_IN    false
+#define YASS_CONFIG_DEFAULT_CLOCK_OUT   false
+#define YASS_CONFIG_DEFAULT_CLICK       false
+#define YASS_CONFIG_DEFAULT_ARPEGGIATOR false
+#define YASS_CONFIG_DEFAULT_KEY_ECHO    false
+#define YASS_CONFIG_DEFAULT_PROG_NUM    0
+#define YASS_CONFIG_DEFAULT_USE_PROGNUM false
 
 class YASS_CONFIG
 {
     public:
         YASS_CONFIG();
+        void begin();
         byte getChannelIn();
         void setChannelIn(byte channel);
         byte getChannelOut();
@@ -60,12 +68,12 @@ class YASS_CONFIG
         byte getProgNum();
         void setUseProgNum(bool flag);
         bool getUseProgNum();
-        void setCtrlChangeNumber(byte value);
-        byte getCtrlChangeNumber();
+        //~ void setCtrlChangeNumber(byte value);
+        //~ byte getCtrlChangeNumber();
         bool getUseSysEx();
         void setUseSysEx(bool flag);
-        void setDataMode(byte value);
-        byte getDataMode();
+        //~ void setDataMode(byte value);
+        //~ byte getDataMode();
         byte* getDataPointer();
 
     private:
