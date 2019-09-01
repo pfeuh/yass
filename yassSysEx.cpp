@@ -111,7 +111,7 @@ void YASS_SYS_EX::executeSysEx(byte * array_ptr, word array_size)
                 sendGlobal();
                 break;
             case YASS_SYS_EX_GLOB_DUMP:
-                sendError(YASS_SYS_EX_ERR_NOT_IMPLEMENTED);
+                parseGlobal();
                 break;
             case YASS_SYS_EX_SEQ_DUMP_REQUEST:
                 sendSequence(pop());
@@ -162,7 +162,7 @@ void YASS_SYS_EX::sendGlobal()
             push(YASS_SYS_EX_GLOB_DUMP);  
             
             byte* data_ptr = configPtr->getDataPointer();
-            for(byte x = 0; x < YASS_SEQUENCE_DATA_SIZE; x++)
+            for(byte x = 0; x < YASS_CONFIG_DATA_SIZE; x++)
                 push(*data_ptr++);
             
             closeAndSendSysExMessage();
@@ -180,6 +180,14 @@ void YASS_SYS_EX::parseSequence(byte seq_num)
     }
     else
         sendError(YASS_SYS_EX_ERR_BAD_PARAMETER);
+}
+
+void YASS_SYS_EX::parseGlobal()
+{
+    byte* data_ptr = configPtr->getDataPointer();
+    for(byte x = 0; x < YASS_CONFIG_DATA_SIZE; x++)
+        *data_ptr++ = pop();
+    sendAcknowledge();
 }
 
 void YASS_SYS_EX::sendError(byte err_num)

@@ -648,7 +648,7 @@ void setNextGlobalEditParam()
     if(globEditIndex >= YASS_CONF_FSM_LAST_GLOBAL)
         globEditIndex = YASS_CONF_FSM_FIRST_GLOBAL;
     else if(globEditIndex == YASS_CONF_FSM_USE_SYSEX)
-        globEditIndex = YASS_CONF_FSM_GLOB_DUMP;
+        globEditIndex = YASS_CONF_FSM_ALL_DUMP;
     else
         globEditIndex += 1;
     setEditParam(globEditIndex);
@@ -659,7 +659,7 @@ void setNextSeqEditParam()
     if(seqEditIndex >= YASS_CONF_FSM_LAST_SEQ)
         seqEditIndex = YASS_CONF_FSM_FIRST_SEQ;
     else if(seqEditIndex == YASS_CONF_FSM_FIX_VEL)
-        seqEditIndex = YASS_CONF_FSM_SEQ_DUMP;
+        seqEditIndex = YASS_CONF_FSM_SWAP;
     else
         seqEditIndex += 1;
     setEditParam(seqEditIndex);

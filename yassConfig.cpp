@@ -25,7 +25,8 @@
 #define YASS_CONFIG_BIT_WEIGHT_KEY_ECHO          0x008
 #define YASS_CONFIG_BIT_WEIGHT_CLICK             0x010
 #define YASS_CONFIG_BIT_WEIGHT_ARPEGGIATOR       0x020
-#define YASS_CONFIG_BIT_WEIGHT_USE_PROG_NUM      0x080
+#define YASS_CONFIG_BIT_WEIGHT_USE_PROG_NUM      0x040
+// bit 7 should not exist, not compatible with 7 bits midi data format
 #define YASS_CONFIG_BIT_WEIGHT_USE_SYSEX         0x100
 
 #define YASS_CONFIG_INDEX_BITS_HI            0
@@ -33,18 +34,18 @@
 #define YASS_CONFIG_INDEX_CHANNEL_IN         2
 #define YASS_CONFIG_INDEX_CHANNEL_OUT        3
 #define YASS_CONFIG_INDEX_PROGRAM_NUMBER     4
-#define YASS_CONFIG_INDEX_CTRL_CHANGE_NUMBER 5
-#define YASS_CONFIG_INDEX_DATA_MODE          6
-#define YASS_CONFIG_INDEX_SPLIT_POINT        7
+//~ #define YASS_CONFIG_INDEX_CTRL_CHANGE_NUMBER 5
+//~ #define YASS_CONFIG_INDEX_DATA_MODE          6
+//~ #define YASS_CONFIG_INDEX_SPLIT_POINT        7
 
 #define bitsHi              data[YASS_CONFIG_INDEX_BITS_HI]
 #define bitsLo              data[YASS_CONFIG_INDEX_BITS_LO]
 #define channelIn           data[YASS_CONFIG_INDEX_CHANNEL_IN]
 #define channelOut          data[YASS_CONFIG_INDEX_CHANNEL_OUT]
 #define programNumber       data[YASS_CONFIG_INDEX_PROGRAM_NUMBER]
-#define ctrlChangeNumber    data[YASS_CONFIG_INDEX_CTRL_CHANGE_NUMBER]
-#define dataMode            data[YASS_CONFIG_INDEX_DATA_MODE]
-#define splitPoint          data[YASS_CONFIG_INDEX_SPLIT_POINT]
+//~ #define ctrlChangeNumber    data[YASS_CONFIG_INDEX_CTRL_CHANGE_NUMBER]
+//~ #define dataMode            data[YASS_CONFIG_INDEX_DATA_MODE]
+//~ #define splitPoint          data[YASS_CONFIG_INDEX_SPLIT_POINT]
 
 /*******************/
 /* Private methods */

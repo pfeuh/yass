@@ -56,6 +56,7 @@ class YASS_SYS_EX
         void sendAcknowledge();
         void sendError(byte err_num);
         void parseSequence(byte seq_num);
+        void parseGlobal();
 
     private:
         YASS_CONFIG* configPtr;
