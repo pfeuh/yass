@@ -18,6 +18,8 @@ NO_TEXT = True
 NO_SCREW_HOLES = True
 MAKE_6_PANELS = False
 MAKE_BOARD_FIXATION = False
+FIXATION_BIG = False
+ROUNDED_RECTANGLE = True
 
 def addButton(sketch, x, y, text):
     if BUTTON_STYLE == BUTTON_STYLE_ROUNDED_RECTANGLE:
@@ -51,7 +53,11 @@ def addScrewHoles(sketch, w, h, nb_cols, nb_rows):
 
 def doTopPannel(sketch):
     # let's compute front pannel border
-    sketch.addRectangle(0, 0, TOP_WIDTH, TOP_HEIGHT, 0.0, True)
+    if ROUNDED_RECTANGLE:
+        radius = 0.15
+    else:
+        radius = 0.0
+    sketch.addRectangle(0, 0, TOP_WIDTH, TOP_HEIGHT, radius, True)
     addScrewHoles(sketch, TOP_WIDTH, TOP_HEIGHT, 4, 4)
         
     # some advertisement
@@ -132,10 +138,14 @@ def doTopPannel(sketch):
     
     # let's add 4 holes to fix board
     if MAKE_BOARD_FIXATION:
-        sketch.addCircle(-3.05, 0.80, 0.11, True)
-        sketch.addCircle(-3.05, -1.10, .11, True)
-        sketch.addCircle(3.15, 1.0, 0.11, True)
-        sketch.addCircle(3.15, -1.2, .11, True)
+        if FIXATION_BIG:
+            radius = 0.11
+        else:
+            radius = LED_RADIUS
+        sketch.addCircle(-3.05, 0.80, radius, True)
+        sketch.addCircle(-3.05, -1.10, radius, True)
+        sketch.addCircle(3.15, 1.0, radius, True)
+        sketch.addCircle(3.15, -1.2, radius, True)
 
 def doBackPannel(sketch):
     # let's compute back pannel
@@ -212,12 +222,14 @@ if __name__ == "__main__":
     MAKE_6_PANELS = False
     MAKE_BOARD_FIXATION = True
 
+    IMG_PATH = "img"
+
     for lasercut.DRAFT in (True, False):
         draftText = ""
         if lasercut.DRAFT:
             draftText = "_draft"
 
-        filename = "%s%s.svg"%(draftText, FNAME)
+        filename = "%s/%s%s.svg"%(IMG_PATH, draftText, FNAME)
         
         sketch = lasercut.SKETCH(filename, "in")
         
