@@ -23,13 +23,13 @@
 #include <Arduino.h>
 #include "yassConfig.h"
 #include "yassSequence.h"
-#include "yassTicks.h"
 
-#define YASS_EEPROM_VERSION "1.00"
+// v 1.01 deletion of tempo in saved parameters 2019-09-03
+
+#define YASS_EEPROM_VERSION "1.01"
 
 #define YASS_EEPROM_BASE_GLOBAL 0
-#define YASS_EEPROM_BASE_TEMPO (YASS_EEPROM_BASE_GLOBAL + YASS_CONFIG_DATA_SIZE)
-#define YASS_EEPROM_BASE_SEQ1 (YASS_EEPROM_BASE_TEMPO + sizeof(word))
+#define YASS_EEPROM_BASE_SEQ1 (YASS_EEPROM_BASE_GLOBAL + YASS_CONFIG_DATA_SIZE)
 #define YASS_EEPROM_BASE_SEQ2 (YASS_EEPROM_BASE_SEQ1 + YASS_SEQUENCE_DATA_SIZE)
 #define YASS_EEPROM_BASE_SEQ3 (YASS_EEPROM_BASE_SEQ2 + YASS_SEQUENCE_DATA_SIZE)
 #define YASS_EEPROM_BASE_SEQ4 (YASS_EEPROM_BASE_SEQ3 + YASS_SEQUENCE_DATA_SIZE)
@@ -41,7 +41,7 @@ class YASS_EEPROM
 {
     public:
         YASS_EEPROM();
-        void begin(YASS_CONFIG* config_ptr, YASS_SEQUENCE* seqs_ptr, YASS_TICKS* ticks_ptr);
+        void begin(YASS_CONFIG* config_ptr, YASS_SEQUENCE* seqs_ptr);
         void saveSequence(byte seq_num);
         void loadSequence(byte seq_num);
         void saveAll();
@@ -51,7 +51,6 @@ class YASS_EEPROM
         byte* buffer;
         YASS_CONFIG* configPtr;
         YASS_SEQUENCE* seqsPtr;
-        YASS_TICKS* ticksPtr;
 
         void read(word base, byte* target, word nb_bytes);
         void write(byte* source, word base, word nb_bytes);

@@ -57,19 +57,13 @@ class YASS_MAINTENANCE
     public:
         YASS_MAINTENANCE();
         void begin(
-            YASS_MONOSTABLE*,
             YASS_CONF_FSM*,
             YASS_KEYB*,
             YASS_BEEPER*,
-            YASS_GPO*,
             YASS_CONFIG*,
             YASS_SEQUENCER*,
-            YASS_TICKS*,
             YASS_DISPLAY*,
             YASS_LEDS*,
-            YASS_COMPUTE_BEAT*,
-            YASS_EEPROM*,
-            YASS_SYS_EX*,
             ARDUINO_DEBUG*);
         void sequencer();
 
@@ -80,19 +74,12 @@ class YASS_MAINTENANCE
         unsigned long int milestone;
         int userValue;
     
-        YASS_MONOSTABLE* dotInMonostable;
-        YASS_CONF_FSM* editor;
         YASS_KEYB* keyb;
         YASS_BEEPER* beeper;
-        YASS_GPO* shifter;
         YASS_CONFIG* globConf;
         YASS_SEQUENCER* player;
-        YASS_TICKS* ticks;
         YASS_DISPLAY* display;
         YASS_LEDS* leds;
-        YASS_COMPUTE_BEAT* beatCalc;
-        YASS_EEPROM* storage;
-        YASS_SYS_EX* sysEx;
         ARDUINO_DEBUG* debug;
     
         void displayVersions();

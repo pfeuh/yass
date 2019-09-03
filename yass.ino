@@ -22,6 +22,8 @@
 /* MIDI port is on Serial - NANO board */
 /***************************************/
 
+#define INCLUDE_MAINTENANCE
+
 /* ok to use a huge quantity of constants */
 #include <avr/pgmspace.h>
 /* a finite state machine for editing each parameter */
@@ -46,9 +48,11 @@
 #include "yassEeprom.h"
 /* miscellaneous */
 #include "yassComputeBeat.h"
+
+#ifdef INCLUDE_MAINTENANCE
 #include <arduinoDebug.h>
 #include "yassMaintenance.h"
-
+#endif
 /***********************************/
 /* all global data is defined here */
 /***********************************/
@@ -1294,7 +1298,7 @@ void setup()
     player.setStopSequencerCallback(sendStop);
     player.setContinueSequencerCallback(sendContinue);
 
-    storage.begin(&globConf, seqs, &ticks);
+    storage.begin(&globConf, seqs);
     
     // special start mode?
     switch(keyb.getPicture())
@@ -1324,28 +1328,33 @@ void setup()
             display.printLut(genericLut, LUT_INDEX_FCT2, NB_DIGITS);
             freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
             break;
+        case KBD_3_PICTURE_VALUE + KBD_5_PICTURE_VALUE:
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_MINOR_ARPEGGIO, &seqs[0]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_MAJOR_ARPEGGIO, &seqs[1]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_DIM_ARPEGGIO, &seqs[2]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_PENTA_ARPEGGIO, &seqs[3]);        
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_AUG_ARPEGGIO, &seqs[4]);
+            // informing we're on ROM3
+            display.printLut(genericLut, LUT_INDEX_FCT3, NB_DIGITS);
+            freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
+            break;
+        #ifdef INCLUDE_MAINTENANCE
         case KBD_SEQUENCE_PICTURE_VALUE + KBD_GLOBAL_PICTURE_VALUE:
             serialDebug = true;
             maintenance.begin(
-                &dotInMonostable,
                 &editor,
                 &keyb,
                 &beeper,
-                &shifter,
                 &globConf,
                 &player,
-                &ticks,
                 &display,
                 &leds,
-                &beatCalc,
-                &storage,
-                &sysEx,
                 &debug);
-            //~ maintenance.displayInfo();
             // informing we're on debug mode
             display.printLut(genericLut, LUT_INDEX_DEBUG, NB_DIGITS);
             freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
             break;
+        #endif
         case KBD_NO_KEY:
         default:
             // overwritting factory settings
@@ -1361,8 +1370,10 @@ void setup()
 
 void loop()
 {
+#ifdef INCLUDE_MAINTENANCE
     if(!serialDebug)
     {
+#endif
         MIDI.read();
         dotInMonostable.sequencer();
         
@@ -1382,15 +1393,15 @@ void loop()
         sysEx.sequencer();
         
         gpoTask();
+#ifdef INCLUDE_MAINTENANCE
     }
     else
     {
         maintenance.sequencer();
         editor.getEncoder()->sequencer();
         beeper.sequencer();
-        //~ UpdateLeds();
-        //~ updateDisplay();
         keyb.sequencer();
         gpoTask();
     }
+#endif
 }

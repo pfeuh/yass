@@ -156,12 +156,13 @@ YASS_EEPROM storage = YASS_EEPROM();
 // midi dump driver
 YASS_SYS_EX sysEx = YASS_SYS_EX();
 
+#ifdef INCLUDE_MAINTENANCE
 // some function to display RAM, ROM, EEPROM and
 // to display on a 9600bd terminal despite midi driver
 ARDUINO_DEBUG debug = ARDUINO_DEBUG();
-
-// special maintenance object not supposer toi be used by users
+// special maintenance object - not supposed to be used by users
 YASS_MAINTENANCE maintenance = YASS_MAINTENANCE();
+#endif
 
 /*************************/
 /* Some global variables */
@@ -192,8 +193,9 @@ const byte sequenceLedLut[] PROGMEM = {LED_1, LED_2, LED_3, LED_4, LED_5};
 #define LUT_INDEX_FCT1   10
 #define LUT_INDEX_FCT2   11
 #define LUT_INDEX_DEBUG  12
+#define LUT_INDEX_FCT3   13
 const char genericLut[]  PROGMEM = 
-    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump" "----" "fct0" "fct1" "fct2" "dbug";
+    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump" "----" "init" "ron1" "ron2" "dbug" "ron3";
 const char sqArpLut[]     PROGMEM = 
     "sequ" "arpe";
 const char boolLut[]     PROGMEM = 

@@ -57,11 +57,10 @@ YASS_EEPROM::YASS_EEPROM()
 {
 }
 
-void YASS_EEPROM::begin(YASS_CONFIG* config_ptr, YASS_SEQUENCE* seqs_ptr, YASS_TICKS* ticks_ptr)
+void YASS_EEPROM::begin(YASS_CONFIG* config_ptr, YASS_SEQUENCE* seqs_ptr)
 {
         configPtr = config_ptr;
         seqsPtr = seqs_ptr;
-        ticksPtr = ticks_ptr;
 }
 
 void YASS_EEPROM::saveSequence(byte seq_num)
@@ -76,10 +75,8 @@ void YASS_EEPROM::loadSequence(byte seq_num)
 
 void YASS_EEPROM::saveAll()
 {
+    // global configuration
     write(configPtr->getDataPointer(), YASS_EEPROM_BASE_GLOBAL, YASS_CONFIG_DATA_SIZE);
-    
-    // tempo
-    write(ticksPtr->getDataPointer(), YASS_EEPROM_BASE_TEMPO, sizeof(word));
     
     // sequences
     for(byte seq_num = 0; seq_num < NB_SEQS; seq_num++)
@@ -90,11 +87,6 @@ void YASS_EEPROM::loadAll()
 {
     // global configuration
     read(YASS_EEPROM_BASE_GLOBAL, configPtr->getDataPointer(), YASS_CONFIG_DATA_SIZE);
-    
-    // tempo ...
-    read(YASS_EEPROM_BASE_TEMPO, ticksPtr->getDataPointer(), sizeof(word));
-    // ... needs to be recomputed, this is triggered by setTempo()
-    ticksPtr->setTempo(ticksPtr->getTempo());
     
     // sequences
     for(byte seq_num = 0; seq_num < NB_SEQS; seq_num++)

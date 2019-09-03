@@ -341,39 +341,26 @@ YASS_MAINTENANCE::YASS_MAINTENANCE()
 }
 
 void YASS_MAINTENANCE::begin(
-        YASS_MONOSTABLE* dot_in_monostable,
         YASS_CONF_FSM* _editor,
         YASS_KEYB* _keyb,
         YASS_BEEPER* _beeper,
-        YASS_GPO* shifter,
         YASS_CONFIG* glob_conf,
         YASS_SEQUENCER* _player,
-        YASS_TICKS* _ticks,
         YASS_DISPLAY* _display,
         YASS_LEDS* _leds,
-        YASS_COMPUTE_BEAT* beat_calc,
-        YASS_EEPROM* _storage,
-        YASS_SYS_EX* sys_ex,
         ARDUINO_DEBUG* _debug)
 {
-    dotInMonostable = dot_in_monostable;
-    editor = _editor;
     keyb = _keyb;
     beeper = _beeper;
-    shifter = shifter;
     globConf = glob_conf;
     player = _player;
-    ticks = _ticks;
     display = _display;
     leds = _leds,
-    beatCalc = beat_calc;
-    storage = _storage;
-    sysEx = sys_ex;
     debug = _debug;
     
     console.flush();
     console.begin(9600);
-    editor->getEncoder()->bind(YASS_MAINTENANCE_updateData);
+    _editor->getEncoder()->bind(YASS_MAINTENANCE_updateData);
     resetOutputs();
     console.println(F("---*** YASS MAINTENANCE ***---\n"));
     prompt();
