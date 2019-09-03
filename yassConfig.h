@@ -68,12 +68,8 @@ class YASS_CONFIG
         byte getProgNum();
         void setUseProgNum(bool flag);
         bool getUseProgNum();
-        //~ void setCtrlChangeNumber(byte value);
-        //~ byte getCtrlChangeNumber();
         bool getUseSysEx();
         void setUseSysEx(bool flag);
-        //~ void setDataMode(byte value);
-        //~ byte getDataMode();
         byte* getDataPointer();
 
     private:

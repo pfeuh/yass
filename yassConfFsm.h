@@ -37,17 +37,17 @@
 
 #define YASS_CONF_FSM_MIDI_IN_CHANNEL YASS_CONF_FSM_FIRST_GLOBAL
 #define YASS_CONF_FSM_MIDI_OUT_CHANNEL 17
-#define YASS_CONF_FSM_PROGRAM_NUMBER 18
-#define YASS_CONF_FSM_ARPEGGIATOR 19
-#define YASS_CONF_FSM_CLOCK_IN 20
-#define YASS_CONF_FSM_CLOCK_OUT 21
-#define YASS_CONF_FSM_KEY_ECHO 22
-#define YASS_CONF_FSM_CLICK 23
-#define YASS_CONF_FSM_USE_SYSEX 24
+#define YASS_CONF_FSM_PROGRAM_NUMBER   18
+#define YASS_CONF_FSM_ARPEGGIATOR      19
+#define YASS_CONF_FSM_CLOCK_IN         20
+#define YASS_CONF_FSM_CLOCK_OUT        21
+#define YASS_CONF_FSM_KEY_ECHO         22
+#define YASS_CONF_FSM_CLICK            23
+#define YASS_CONF_FSM_USE_SYSEX        24
 
-#define YASS_CONF_FSM_ALL_DUMP 26
-#define YASS_CONF_FSM_ALL_LOAD 27
-#define YASS_CONF_FSM_ALL_SAVE 28
+#define YASS_CONF_FSM_ALL_DUMP  26
+#define YASS_CONF_FSM_ALL_LOAD  27
+#define YASS_CONF_FSM_ALL_SAVE  28
 #define YASS_CONF_FSM_GLOB_DUMP 29
 #define YASS_CONF_FSM_GLOB_LOAD 30
 #define YASS_CONF_FSM_GLOB_SAVE 31
@@ -61,16 +61,15 @@
 #define YASS_CONF_FSM_GATE_MODE 33
 #define YASS_CONF_FSM_LAST_STEP 34
 #define YASS_CONF_FSM_DATA_MODE 35
-#define YASS_CONF_FSM_CTRL_CHG 36
-#define YASS_CONF_FSM_FIX_VEL  37
+#define YASS_CONF_FSM_CTRL_CHG  36
+#define YASS_CONF_FSM_FIX_VEL   37
 
-
-#define YASS_CONF_FSM_SWAP 42
-#define YASS_CONF_FSM_COPY 43
+#define YASS_CONF_FSM_SWAP             42
+#define YASS_CONF_FSM_COPY             43
 #define YASS_CONF_FSM_SEQ_LOAD_FACTORY 44
-#define YASS_CONF_FSM_SEQ_DUMP 45
-#define YASS_CONF_FSM_SEQ_LOAD 46
-#define YASS_CONF_FSM_SEQ_SAVE 47
+#define YASS_CONF_FSM_SEQ_DUMP         45
+#define YASS_CONF_FSM_SEQ_LOAD         46
+#define YASS_CONF_FSM_SEQ_SAVE         47
 
 #define YASS_CONF_FSM_LAST_SEQ YASS_CONF_FSM_SEQ_SAVE
 
@@ -82,6 +81,7 @@ class YASS_CONF_FSM
         void setState(byte state_num, void(*change_data_hook)(bool direction));
         byte getState();
         void sequencer();
+        YASS_ENCODER* getEncoder();
 
     private:
         byte state;

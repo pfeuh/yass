@@ -39,6 +39,8 @@ class YASS_DISPLAY
         void clear();
         void scroll();
         void write(char car);
+        byte* getDigitsPtr();
+        byte getNbDigits();
 
     private:
         byte nbDigits;

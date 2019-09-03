@@ -20,6 +20,7 @@ if __name__ == "__main__":
     seq1 = textToBytesList("F0 79 61 73 42 00 32 35 39 3e 39 39 3B 3B 3E 3E 3B 3B 39 39 36 36 7F 7F 7F 7F 7F 7F 7F 7F 7F 7F 7F 7F 7F 7F 7F 7F 03 01 0F 00 7F 7F F7")
     globalDump = textToBytesList("F0 79 61 73 41 00 01 02 01 00 F7")
     globalRequest = [0xF0, 0x79, 0x61, 0x73, 0x01, 0xF7]
+    allRequest = [0xF0, 0x79, 0x61, 0x73, 0x03, 0xF7]
     
     #~ midiOut.write_sys_ex(0, seq5Request)
     #~ print ("command seq5 sended!")
@@ -29,12 +30,15 @@ if __name__ == "__main__":
     #~ print ("command globRequest sended!")
     #~ midiOut.write_sys_ex(0, seq5Dump)
     #~ print ("command seq5Dump sended!")
-    midiOut.write_sys_ex(0, globalRequest)
-    print ("command globalRequest sended!")
+    #~ midiOut.write_sys_ex(0, globalRequest)
+    #~ print ("command globalRequest sended!")
+    midiOut.write_sys_ex(0, allRequest)
+    print ("command allRequest sended!")
     time.sleep(1.0)
 
-    milestone = time.time() + 3.0
+    milestone = time.time() + 15.0
     while milestone >= time.time():
+    #~ while 1:
         if midiIn.poll():
             temp_data = midiIn.read(1)
             temp_msg = midiMessage.MIDI_MESSAGE(temp_data[0][0], temp_data[0][1])

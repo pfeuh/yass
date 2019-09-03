@@ -20,8 +20,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//~ #define MONOSTABLE_MSEC_DURATION 100
-
 #define ENC_A A1
 #define ENC_B A0
 
@@ -62,21 +60,7 @@ YASS_MONOSTABLE dotInMonostable = YASS_MONOSTABLE();
 YASS_CONF_FSM editor = YASS_CONF_FSM();
 
 // Keyboard
-#define KBD_1 '1'
-#define KBD_2 '2'
-#define KBD_3 '3'
-#define KBD_4 '4'
-#define KBD_5 '5'
-#define KBD_NEXT 'A'
-#define KBD_START 'B'
-#define KBD_PAUSE 'C'
-#define KBD_CONTINUE 'D'
-#define KBD_RECORD 'E'
-#define KBD_GLOBAL 'F'
-#define KBD_SEQUENCE 'G'
-#define KBD_REST 'H'
-#define KBD_TIE 'I'
-#define KBD_MULTI_USAGE 'J'
+#define KBD_NO_KEY                      0x0000
 #define KBD_1_PICTURE_VALUE             0x0001
 #define KBD_2_PICTURE_VALUE             0x0002
 #define KBD_3_PICTURE_VALUE             0x0004
@@ -119,34 +103,6 @@ byte gpoData[]    = {0, 0, 0, 0, 0};
 #define NB_GPO_DATA (sizeof(gpoData) / sizeof(byte))
 
 // Leds driver
-#define LED_1 5
-#define LED_2 4
-#define LED_3 3
-#define LED_4 2
-#define LED_5 1
-#define LED_START 7
-#define LED_RECORD 6
-#define LED_GLOBAL 8
-#define LED_SEQUENCE 9
-#define LED_REST 0
-#define LED_TIE 11
-#define LED_MULTI_USAGE 10
-#define LED_STEP_0  0
-#define LED_STEP_1  1
-#define LED_STEP_2  2
-#define LED_STEP_3  3
-#define LED_STEP_4  4
-#define LED_STEP_5  5
-#define LED_STEP_6  6
-#define LED_STEP_7  7
-#define LED_STEP_8  8
-#define LED_STEP_9  9
-#define LED_STEP_10 10
-#define LED_STEP_11 11
-#define LED_STEP_12 12
-#define LED_STEP_13 13
-#define LED_STEP_14 14
-#define LED_STEP_15 15
 #define individualLed_ptr (&gpoData[0])
 #define stepLed_ptr (&gpoData[2])
 YASS_LEDS leds = YASS_LEDS(individualLed_ptr, stepLed_ptr);
@@ -164,7 +120,7 @@ YASS_SEQUENCE seqs[] =
     YASS_SEQUENCE(),
     YASS_SEQUENCE()
 };
-#define NB_SEQS (sizeof(seqs) / sizeof(YASS_SEQUENCE))
+//~ #define NB_SEQS (sizeof(seqs) / sizeof(YASS_SEQUENCE))
 
 // sequencer
 YASS_SEQUENCER player = YASS_SEQUENCER();
@@ -200,6 +156,13 @@ YASS_EEPROM storage = YASS_EEPROM();
 // midi dump driver
 YASS_SYS_EX sysEx = YASS_SYS_EX();
 
+// some function to display RAM, ROM, EEPROM and
+// to display on a 9600bd terminal despite midi driver
+ARDUINO_DEBUG debug = ARDUINO_DEBUG();
+
+// special maintenance object not supposer toi be used by users
+YASS_MAINTENANCE maintenance = YASS_MAINTENANCE();
+
 /*************************/
 /* Some global variables */
 /*************************/
@@ -212,7 +175,7 @@ bool editDataFlag;
 byte romSequenceIndex =YASS_ROM_SEQUENCE_FIRST;
 byte copySeqIndex = 0;
 byte swapSeqIndex = 0;
-//~ bool serialDebug = false;
+bool serialDebug = false;
 
 const byte sequenceLedLut[] PROGMEM = {LED_1, LED_2, LED_3, LED_4, LED_5};
 
@@ -225,9 +188,12 @@ const byte sequenceLedLut[] PROGMEM = {LED_1, LED_2, LED_3, LED_4, LED_5};
 #define LUT_INDEX_PAST   6
 #define LUT_INDEX_DUMP   7
 #define LUT_INDEX_NO_BPM 8
-#define LUT_INDEX_FACT   9
+#define LUT_INDEX_FCT0   9
+#define LUT_INDEX_FCT1   10
+#define LUT_INDEX_FCT2   11
+#define LUT_INDEX_DEBUG  12
 const char genericLut[]  PROGMEM = 
-    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump" "----" "fact";
+    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump" "----" "fct0" "fct1" "fct2" "dbug";
 const char sqArpLut[]     PROGMEM = 
     "sequ" "arpe";
 const char boolLut[]     PROGMEM = 

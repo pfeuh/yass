@@ -52,3 +52,7 @@ void YASS_CONF_FSM::sequencer()
     encoder.sequencer();
 }
 
+YASS_ENCODER* YASS_CONF_FSM::getEncoder()
+{
+    return &encoder;
+}

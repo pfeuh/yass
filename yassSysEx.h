@@ -31,10 +31,14 @@
 
 #define YASS_SYS_EX_BUFFER_SIZE 64
 
+#define YASS_SYS_EX_DUMP_STEP_MSEC_DURATION 500
+
 #define YASS_SYS_EX_GLOB_DUMP_REQUEST 1
 #define YASS_SYS_EX_SEQ_DUMP_REQUEST  2
+#define YASS_SYS_EX_ALL_DUMP_REQUEST  3
 #define YASS_SYS_EX_GLOB_DUMP         65
 #define YASS_SYS_EX_SEQ_DUMP          66
+#define YASS_SYS_EX_ALL_DUMP          67
 
 #define YASS_SYS_EX_ACKNOWLEDGE       126
 #define YASS_SYS_EX_ERROR             127
@@ -53,10 +57,12 @@ class YASS_SYS_EX
         void setSenderCallback(void (*callback)(byte* addr, word size));
         void sendSequence(byte seq_num);
         void sendGlobal();
+        void sendAll();
         void sendAcknowledge();
         void sendError(byte err_num);
         void parseSequence(byte seq_num);
         void parseGlobal();
+        void sequencer();
 
     private:
         YASS_CONFIG* configPtr;
@@ -67,6 +73,7 @@ class YASS_SYS_EX
         word inputSize;
         void (*senderCallback)(byte* addr, word size);
         byte state;
+        unsigned long int milestone;
     
         void push(byte value);
         byte pop();

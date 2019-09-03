@@ -37,12 +37,6 @@
 #define STATE_SEQ_4   6
 #define STATE_SEQ_5   7
 
-//~ #define YASS_DEBUG
-//~ #ifdef YASS_DEBUG
-//~ #include <arduinoDebug.h>
-//~ ARDUINO_DEBUG debug = ARDUINO_DEBUG();
-//~ #endif
-
 /*******************/
 /* Private methods */
 /*******************/
@@ -107,6 +101,9 @@ void YASS_SYS_EX::executeSysEx(byte * array_ptr, word array_size)
         byte command = pop();
         switch(command)
         {
+            case YASS_SYS_EX_ALL_DUMP_REQUEST:
+                sendAll();
+                break;
             case YASS_SYS_EX_GLOB_DUMP_REQUEST:
                 sendGlobal();
                 break;
@@ -169,6 +166,12 @@ void YASS_SYS_EX::sendGlobal()
     }
 }
 
+void YASS_SYS_EX::sendAll()
+{
+    milestone = millis();
+    state = STATE_GLOBAL;
+}
+
 void YASS_SYS_EX::parseSequence(byte seq_num)
 {
     if(seq_num < NB_SEQS)
@@ -213,4 +216,42 @@ void YASS_SYS_EX::sendAcknowledge()
         
         closeAndSendSysExMessage();
     }
+}
+
+void YASS_SYS_EX::sequencer()
+{
+    if(state != STATE_READY)
+        if(millis() >= milestone)
+        {
+            milestone += YASS_SYS_EX_DUMP_STEP_MSEC_DURATION;
+            switch(state)
+            {
+                case STATE_GLOBAL:
+                    sendGlobal();
+                    state = STATE_SEQ_1;
+                    break;
+                case STATE_SEQ_1:
+                    sendSequence(0);
+                    state = STATE_SEQ_2;
+                    break;
+                case STATE_SEQ_2:
+                    sendSequence(1);
+                    state = STATE_SEQ_3;
+                    break;
+                case STATE_SEQ_3:
+                    sendSequence(2);
+                    state = STATE_SEQ_4;
+                    break;
+                case STATE_SEQ_4:
+                    sendSequence(3);
+                    state = STATE_SEQ_5;
+                    break;
+                case STATE_SEQ_5:
+                    sendSequence(4);
+                    state = STATE_READY;
+                    break;
+                default:
+                    break;
+            }
+        }
 }

@@ -279,3 +279,14 @@ void YASS_DISPLAY::write(char car)
     else
         printGlyphe((byte)car, cursor++);
 }
+
+byte* YASS_DISPLAY::getDigitsPtr()
+{
+    return digits;
+}
+
+byte YASS_DISPLAY::getNbDigits()
+{
+    return nbDigits;
+}
+

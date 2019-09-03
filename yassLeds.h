@@ -30,6 +30,35 @@
 #define YASS_LEDS_NB_STEP_LEDS 16
 #define YASS_LEDS_NB_INDIVIDUAL_LEDS 12
 
+#define LED_1 5
+#define LED_2 4
+#define LED_3 3
+#define LED_4 2
+#define LED_5 1
+#define LED_START 7
+#define LED_RECORD 6
+#define LED_GLOBAL 8
+#define LED_SEQUENCE 9
+#define LED_REST 0
+#define LED_TIE 11
+#define LED_MULTI_USAGE 10
+#define LED_STEP_0  0
+#define LED_STEP_1  1
+#define LED_STEP_2  2
+#define LED_STEP_3  3
+#define LED_STEP_4  4
+#define LED_STEP_5  5
+#define LED_STEP_6  6
+#define LED_STEP_7  7
+#define LED_STEP_8  8
+#define LED_STEP_9  9
+#define LED_STEP_10 10
+#define LED_STEP_11 11
+#define LED_STEP_12 12
+#define LED_STEP_13 13
+#define LED_STEP_14 14
+#define LED_STEP_15 15
+
 class YASS_LEDS
 {
     public:

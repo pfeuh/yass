@@ -25,6 +25,22 @@
 
 #define YASS_KEYB_VERSION "1.00"
 
+#define KBD_1 '1'
+#define KBD_2 '2'
+#define KBD_3 '3'
+#define KBD_4 '4'
+#define KBD_5 '5'
+#define KBD_NEXT 'A'
+#define KBD_START 'B'
+#define KBD_PAUSE 'C'
+#define KBD_CONTINUE 'D'
+#define KBD_RECORD 'E'
+#define KBD_GLOBAL 'F'
+#define KBD_SEQUENCE 'G'
+#define KBD_REST 'H'
+#define KBD_TIE 'I'
+#define KBD_MULTI_USAGE 'J'
+
 typedef void (*YASS_KEYB_type_callback)(byte bt_num);
 
 class YASS_KEYB

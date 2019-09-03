@@ -22,8 +22,6 @@
 /* MIDI port is on Serial - NANO board */
 /***************************************/
 
-#define YASS_VERSION 0x100
-
 /* ok to use a huge quantity of constants */
 #include <avr/pgmspace.h>
 /* a finite state machine for editing each parameter */
@@ -48,13 +46,8 @@
 #include "yassEeprom.h"
 /* miscellaneous */
 #include "yassComputeBeat.h"
-
-// debug tool if needed
-//~ #define YASS_DEBUG
-#ifdef YASS_DEBUG
 #include <arduinoDebug.h>
-ARDUINO_DEBUG debug = ARDUINO_DEBUG();
-#endif
+#include "yassMaintenance.h"
 
 /***********************************/
 /* all global data is defined here */
@@ -129,6 +122,7 @@ bool functionWaitsValidation()
     bool ret_val;
     switch(editor.getState())
     {
+        case YASS_CONF_FSM_ALL_DUMP:
         case YASS_CONF_FSM_GLOB_DUMP:
         case YASS_CONF_FSM_GLOB_LOAD:
         case YASS_CONF_FSM_GLOB_SAVE:
@@ -638,6 +632,10 @@ void setEditParam(byte state)
         case YASS_CONF_FSM_SEQ_SAVE:
             editor.setState(YASS_CONF_FSM_SEQ_SAVE, &dummyEdit);
             break;
+        case YASS_CONF_FSM_ALL_DUMP:
+            editor.setState(YASS_CONF_FSM_ALL_DUMP, &dummyEdit);
+            break;
+
         default:
             break;
     }
@@ -705,13 +703,16 @@ void commandRecord()
     {
         switch(editor.getState())
         {
+            case YASS_CONF_FSM_ALL_DUMP:
+                sysEx.sendAll();
+                break;
             case YASS_CONF_FSM_GLOB_DUMP:
                 sysEx.sendGlobal();
                 break;
-            case YASS_CONF_FSM_GLOB_LOAD:
+            case YASS_CONF_FSM_ALL_LOAD:
                 storage.loadAll();
                 break;
-            case YASS_CONF_FSM_GLOB_SAVE:
+            case YASS_CONF_FSM_ALL_SAVE:
                 storage.saveAll();
                 break;
             case YASS_CONF_FSM_SEQ_LOAD:
@@ -1074,6 +1075,7 @@ void updateDisplay()
                     display.printLut(genericLut, LUT_INDEX_NONE, NB_DIGITS);
                 break;
             case YASS_CONF_FSM_GLOB_DUMP:
+            case YASS_CONF_FSM_ALL_DUMP:
                 display.printLut(genericLut, LUT_INDEX_DUMP, NB_DIGITS);
                 break;
             case YASS_CONF_FSM_GLOB_LOAD:
@@ -1292,57 +1294,103 @@ void setup()
     player.setStopSequencerCallback(sendStop);
     player.setContinueSequencerCallback(sendContinue);
 
-    //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_BILLIE_JEAN, &seqs[0]);
-    //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_CLAVE, &seqs[0]);
-    
-    //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_MIDNIGHT_EXPRESS, &seqs[1]);
-    //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_BLADE_RUNNER, &seqs[2]);
-    //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_OXYGENE_4, &seqs[3]);
-    //~ YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_TUBULAR_BELLS, &seqs[4]);
-
-    #ifdef YASS_DEBUG
-    debug.begin();
-    word keys = keyb.getPicture();
-    console.println(keys, HEX);
-    #endif
-
     storage.begin(&globConf, seqs, &ticks);
-    if(!(KBD_1_PICTURE_VALUE & keyb.getPicture()))
-        // overwritting factory settings
-        storage.loadAll();
-    else
+    
+    // special start mode?
+    switch(keyb.getPicture())
     {
-        // informing we're on factory settings
-        display.printLut(genericLut, LUT_INDEX_FACT, NB_DIGITS);
-        freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
+        case KBD_4_PICTURE_VALUE + KBD_5_PICTURE_VALUE:
+            // informing we're on factory settings
+            display.printLut(genericLut, LUT_INDEX_FCT0, NB_DIGITS);
+            freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
+            break;
+        case KBD_1_PICTURE_VALUE + KBD_5_PICTURE_VALUE:
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_BILLIE_JEAN, &seqs[0]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_MIDNIGHT_EXPRESS, &seqs[1]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_BLADE_RUNNER, &seqs[2]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_OXYGENE_4, &seqs[3]);        
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_TUBULAR_BELLS, &seqs[4]);
+            // informing we're on ROM1
+            display.printLut(genericLut, LUT_INDEX_FCT1, NB_DIGITS);
+            freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
+            break;
+        case KBD_2_PICTURE_VALUE + KBD_5_PICTURE_VALUE:
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_WOOGIE_BOOGIE, &seqs[0]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_MARCIA_BAILAR, &seqs[1]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_LATIN_BOLERO, &seqs[2]);
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_CLAVE, &seqs[3]);        
+            YASS_ROM_SEQUENCES_load(YASS_ROM_SEQUENCE_TAKE_FIVE, &seqs[4]);
+            // informing we're on ROM2
+            display.printLut(genericLut, LUT_INDEX_FCT2, NB_DIGITS);
+            freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
+            break;
+        case KBD_SEQUENCE_PICTURE_VALUE + KBD_GLOBAL_PICTURE_VALUE:
+            serialDebug = true;
+            maintenance.begin(
+                &dotInMonostable,
+                &editor,
+                &keyb,
+                &beeper,
+                &shifter,
+                &globConf,
+                &player,
+                &ticks,
+                &display,
+                &leds,
+                &beatCalc,
+                &storage,
+                &sysEx,
+                &debug);
+            //~ maintenance.displayInfo();
+            // informing we're on debug mode
+            display.printLut(genericLut, LUT_INDEX_DEBUG, NB_DIGITS);
+            freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
+            break;
+        case KBD_NO_KEY:
+        default:
+            // overwritting factory settings
+            storage.loadAll();
+            break;
     }
     
     sysEx.begin(&globConf, seqs);
     sysEx.setSenderCallback(sendExclusive);
     
-    //~ commandStop();
-    //~ commandSeq1();
-
     display.begin();
 }
 
 void loop()
 {
-    MIDI.read();
-    dotInMonostable.sequencer();
-    
-    ticks.sequencer(); // if a tick occurs, player.tickTask runs one time
+    if(!serialDebug)
+    {
+        MIDI.read();
+        dotInMonostable.sequencer();
+        
+        ticks.sequencer(); // if a tick occurs, player.tickTask runs one time
 
-    keyb.sequencer();
-    keybTask();
-    
-    editor.sequencer();
-    
-    beeper.sequencer();
-    
-    UpdateLeds();
-    updateDisplay();
-    beatCalc.sequencer();
-    
-    gpoTask();
+        keyb.sequencer();
+        keybTask();
+        
+        editor.sequencer();
+        
+        beeper.sequencer();
+        
+        UpdateLeds();
+        updateDisplay();
+        beatCalc.sequencer();
+        
+        sysEx.sequencer();
+        
+        gpoTask();
+    }
+    else
+    {
+        maintenance.sequencer();
+        editor.getEncoder()->sequencer();
+        beeper.sequencer();
+        //~ UpdateLeds();
+        //~ updateDisplay();
+        keyb.sequencer();
+        gpoTask();
+    }
 }
