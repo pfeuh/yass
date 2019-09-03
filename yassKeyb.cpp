@@ -52,7 +52,7 @@ YASS_KEYB::YASS_KEYB(int* column_pins, byte nb_columns, int* row_pins, byte nb_r
     rowPins = row_pins;
     nbRows = nb_rows;
     codes = _codes;
-    pushHandler = 0;
+    pushHandler = NULL;
 }
 
 void YASS_KEYB::begin()
@@ -66,6 +66,7 @@ void YASS_KEYB::begin()
         pinMode(rowPins[x], OUTPUT);
         digitalWrite(rowPins[x], 1);        
     }
+    milestone = millis();
 }
 
 word YASS_KEYB::getPicture()
@@ -113,12 +114,17 @@ void YASS_KEYB::sequencer()
             {
                 if(old_state)
                 {
-                    if(pushHandler)
-                        pushHandler(getCode(x, y));
-                    else
+                    if(millis() >= milestone)
                     {
-                        _available = 1;
-                        buffer = getCode(x, y);
+                        if(pushHandler)
+                            pushHandler(getCode(x, y));
+                        else
+                        {
+                            _available = 1;
+                            buffer = getCode(x, y);
+                            
+                        }
+                        milestone += YASS_KEYB_DEBOUNCING_MSEC_DURATION;
                     }
                 }
             }

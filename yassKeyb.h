@@ -20,10 +20,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// v 1.10 Adds a 200msec debouncer
 
 #include <Arduino.h>
 
-#define YASS_KEYB_VERSION "1.00"
+#define YASS_KEYB_VERSION "1.10"
+
+#define YASS_KEYB_DEBOUNCING_MSEC_DURATION 200
 
 #define KBD_1 '1'
 #define KBD_2 '2'
@@ -67,6 +70,7 @@ class YASS_KEYB
         YASS_KEYB_type_callback pushHandler;
         byte _available;
         byte buffer;
+        unsigned long int milestone;
 };
 
 #endif
