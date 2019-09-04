@@ -663,7 +663,7 @@ void YASS_SEQUENCER::continueSequencer()
         continueSequencerCallback();
 }
 
-void YASS_SEQUENCER::recordSequencer()
+void YASS_SEQUENCER::startRecordSequencer()
 {
     recordFlag = true;
     recordIsStarted = false;
@@ -782,6 +782,12 @@ void YASS_SEQUENCER::editRecordedData(byte velocity)
 void YASS_SEQUENCER::gotoNextRecordStep()
 {
     recordIndex = (recordIndex + 1) % YASS_SEQUENCE_NB_NOTES;
+    recordIsStarted = false;
+}
+
+void YASS_SEQUENCER::gotoPreviousRecordStep()
+{
+    recordIndex = (recordIndex - 1) % YASS_SEQUENCE_NB_NOTES;
     recordIsStarted = false;
 }
 

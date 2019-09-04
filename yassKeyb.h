@@ -36,7 +36,7 @@
 #define KBD_NEXT 'A'
 #define KBD_START 'B'
 #define KBD_PAUSE 'C'
-#define KBD_CONTINUE 'D'
+#define KBD_PREVIOUS 'D'
 #define KBD_RECORD 'E'
 #define KBD_GLOBAL 'F'
 #define KBD_SEQUENCE 'G'

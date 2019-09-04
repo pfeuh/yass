@@ -47,7 +47,7 @@ class YASS_SEQUENCER
         void startSequencer();
         void stopSequencer();
         void continueSequencer();
-        void recordSequencer();
+        void startRecordSequencer();
         void stopRecordSequencer();
         bool isRunning();
         bool isStopped();
@@ -70,6 +70,7 @@ class YASS_SEQUENCER
         void stopCurrentNote();
         void addRecordedNote(byte note, byte velocity);
         void gotoNextRecordStep();
+        void gotoPreviousRecordStep();
         void editRecordedData(byte velocity);
         byte getRecordIndex();
 

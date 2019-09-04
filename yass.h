@@ -69,7 +69,7 @@ YASS_CONF_FSM editor = YASS_CONF_FSM();
 #define KBD_REST_PICTURE_VALUE          0x0020
 #define KBD_START_PICTURE_VALUE         0x0040
 #define KBD_PAUSE_PICTURE_VALUE         0x0080
-#define KBD_CONTINUE_PICTURE_VALUE      0x0100
+#define KBD_PREVIOUS_PICTURE_VALUE      0x0100
 #define KBD_RECORD_PICTURE_VALUE        0x0200
 #define KBD_TIE_PICTURE_VALUE           0x0400
 #define KBD_MULTI_USAGE_PICTURE_VALUE   0x0800
@@ -83,7 +83,7 @@ int rowPins[] = {10, 11, 12};
 char kbdCodes[] =
     {
     KBD_1, KBD_2, KBD_3, KBD_4, KBD_5,
-    KBD_REST, KBD_START, KBD_PAUSE, KBD_CONTINUE, KBD_RECORD,
+    KBD_REST, KBD_START, KBD_PAUSE, KBD_PREVIOUS, KBD_RECORD,
     KBD_TIE, KBD_MULTI_USAGE, KBD_NEXT, KBD_SEQUENCE, KBD_GLOBAL
     };
 YASS_KEYB keyb = YASS_KEYB(colPins, NB_KBD_COLUMS, rowPins, NB_KBD_ROWS, kbdCodes);
@@ -168,6 +168,9 @@ YASS_MAINTENANCE maintenance = YASS_MAINTENANCE();
 /* Some global variables */
 /*************************/
 
+enum _yassState {stopped=1, paused=2, running=3};
+enum _yassState yassState;
+
 bool globEditFlag;
 byte globEditIndex = YASS_CONF_FSM_FIRST_GLOBAL;
 bool seqEditFlag;
@@ -176,7 +179,10 @@ bool editDataFlag;
 byte romSequenceIndex =YASS_ROM_SEQUENCE_FIRST;
 byte copySeqIndex = 0;
 byte swapSeqIndex = 0;
+
+#ifdef INCLUDE_MAINTENANCE
 bool serialDebug = false;
+#endif
 
 const byte sequenceLedLut[] PROGMEM = {LED_1, LED_2, LED_3, LED_4, LED_5};
 

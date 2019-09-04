@@ -70,7 +70,7 @@ const char YASS_MAINTENANCE_kbd_5[] PROGMEM = "SEQ5";
 const char YASS_MAINTENANCE_kbd_next[] PROGMEM = "NEXT";
 const char YASS_MAINTENANCE_kbd_start[] PROGMEM = "PLAY";
 const char YASS_MAINTENANCE_kbd_pause[] PROGMEM = "STOP";
-const char YASS_MAINTENANCE_kbd_continue[] PROGMEM = "CONT.";
+const char YASS_MAINTENANCE_kbd_previous[] PROGMEM = "PREV.";
 const char YASS_MAINTENANCE_kbd_record[] PROGMEM = "REC.";
 const char YASS_MAINTENANCE_kbd_global[] PROGMEM = "GLOB.";
 const char YASS_MAINTENANCE_kbd_sequence[] PROGMEM = "SEQ.";
@@ -281,8 +281,8 @@ void YASS_MAINTENANCE::stateKeyboard()
             case KBD_PAUSE:
                 keyMessage(YASS_MAINTENANCE_kbd_pause);
                 break;
-            case KBD_CONTINUE:
-                keyMessage(YASS_MAINTENANCE_kbd_continue);
+            case KBD_PREVIOUS:
+                keyMessage(YASS_MAINTENANCE_kbd_previous);
                 break;
             case KBD_RECORD:
                 keyMessage(YASS_MAINTENANCE_kbd_record);

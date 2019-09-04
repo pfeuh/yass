@@ -153,6 +153,34 @@ void exitEdit()
         commandSequenceEdit();
 }
 
+void execContinue()
+{
+    player.continueSequencer();
+    yassState = running;
+    keyBeep();
+}
+
+void execPause()
+{
+    player.stopSequencer();
+    yassState = paused;
+    keyBeep();
+}
+
+void execStart()
+{
+    player.startSequencer();
+    yassState = running;
+    keyBeep();
+}
+
+void execStop()
+{
+    player.stopSequencer();
+    yassState = stopped;
+    keyBeep();
+}
+
 /************************/
 /* MIDI input callbacks */
 /************************/
@@ -232,32 +260,31 @@ void receiveClock()
 void receiveStart()
 {
     if(globConf.getClockIn())
-        if(!player.isRunning())
-        {
-            commandStart();
-            beatCalc.start();
-        }
+    {
+        execStart();
+        beatCalc.start();
+    }
 }
 
 void receiveStop()
 {
     if(globConf.getClockIn())
-        if(player.isRunning())
-        {
-            beatCalc.stop();
-            commandStop();
-        }
+    {
+        //~ if(yassState != stopped)
+            //~ execStop();
+        //~ else
+            execPause();
+        beatCalc.stop();
+    }
 }
 
 void receiveContinue()
 {
     if(globConf.getClockIn())
-        if(!player.isRunning())
-        {
-            commandContinue();
-            beatCalc.start();
-        }
-
+    {
+        execContinue();
+        beatCalc.start();
+    }
 }
 /***********************/
 /* encoder's callbacks */
@@ -656,6 +683,17 @@ void setNextGlobalEditParam()
     setEditParam(globEditIndex);
 }
 
+void setPreviousGlobalEditParam()
+{
+    if(!globEditIndex)
+        globEditIndex = YASS_CONF_FSM_LAST_GLOBAL;
+    else if(globEditIndex == YASS_CONF_FSM_ALL_DUMP)
+        globEditIndex = YASS_CONF_FSM_USE_SYSEX;
+    else
+        globEditIndex -= 1;
+    setEditParam(globEditIndex);
+}
+
 void setNextSeqEditParam()
 {
     if(seqEditIndex >= YASS_CONF_FSM_LAST_SEQ)
@@ -667,94 +705,105 @@ void setNextSeqEditParam()
     setEditParam(seqEditIndex);
 }
 
+void setPreviousSeqEditParam()
+{
+    if(!seqEditIndex)
+        seqEditIndex = YASS_CONF_FSM_LAST_SEQ;
+    else if(seqEditIndex == YASS_CONF_FSM_SWAP)
+        seqEditIndex = YASS_CONF_FSM_FIX_VEL;
+    else
+        seqEditIndex -= 1;
+    setEditParam(seqEditIndex);
+}
+
 /****************/
 /* HMI commands */
 /****************/
 
 void commandStart()
 {
-    if(player.isStopped())
+    switch(yassState)
     {
-        changeProgramm();
-        player.startSequencer();
-        keyBeep();
+        case stopped:
+            changeProgramm();
+            execStart();
+            break;
+        case paused:
+            execContinue();
+            break;
+        case running:
+            execPause();
+            break;
     }
 }
 
 void commandStop()
 {
-    if(!player.isStopped())
-    {
-        player.stopSequencer();
-        if(!player.isRecording())
-            setEditTempo();
-        keyBeep();
-    }
-}
-
-void commandContinue()
-{
-    if(player.isStopped())
-    {
-        player.continueSequencer();
-        keyBeep();
-    }
+    execStop();
+    if(!player.isRecording())
+        setEditTempo();
 }
 
 void commandRecord()
 {
-    if(functionWaitsValidation())
+    if(player.isRecording())
     {
-        switch(editor.getState())
-        {
-            case YASS_CONF_FSM_ALL_DUMP:
-                sysEx.sendAll();
-                break;
-            case YASS_CONF_FSM_GLOB_DUMP:
-                sysEx.sendGlobal();
-                break;
-            case YASS_CONF_FSM_ALL_LOAD:
-                storage.loadAll();
-                break;
-            case YASS_CONF_FSM_ALL_SAVE:
-                storage.saveAll();
-                break;
-            case YASS_CONF_FSM_SEQ_LOAD:
-                storage.loadSequence(player.getCurrentSequenceIndex());
-                break;
-            case YASS_CONF_FSM_SEQ_SAVE:
-                storage.saveSequence(player.getCurrentSequenceIndex());
-                break;
-            case YASS_CONF_FSM_COPY:
-                memcpy(player.getSequence(copySeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
-                break;
-            case YASS_CONF_FSM_SWAP:
-                swap(player.getSequence(swapSeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
-                break;
-            case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
-                YASS_ROM_SEQUENCES_load(romSequenceIndex, player.getCurrentSequence());
-                break;
-            case YASS_CONF_FSM_SEQ_DUMP:
-                sysEx.sendSequence(player.getCurrentSequenceIndex());
-                break;
-            default:
-                break;
-        }
-        exitEdit();
-    }        
-    else if(!(globEditFlag |globEditFlag))
+        player.stopRecordSequencer();
+        setEditTempo();
+        keyBeep();
+    }
+    else
     {
-        if(player.isRecording())
+        if(functionWaitsValidation())
         {
-            player.stopRecordSequencer();
+            switch(editor.getState())
+            {
+                case YASS_CONF_FSM_ALL_DUMP:
+                    sysEx.sendAll();
+                    break;
+                case YASS_CONF_FSM_GLOB_DUMP:
+                    sysEx.sendGlobal();
+                    break;
+                case YASS_CONF_FSM_ALL_LOAD:
+                    storage.loadAll();
+                    break;
+                case YASS_CONF_FSM_ALL_SAVE:
+                    storage.saveAll();
+                    break;
+                case YASS_CONF_FSM_SEQ_LOAD:
+                    storage.loadSequence(player.getCurrentSequenceIndex());
+                    break;
+                case YASS_CONF_FSM_SEQ_SAVE:
+                    storage.saveSequence(player.getCurrentSequenceIndex());
+                    break;
+                case YASS_CONF_FSM_COPY:
+                    memcpy(player.getSequence(copySeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
+                    break;
+                case YASS_CONF_FSM_SWAP:
+                    swap(player.getSequence(swapSeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
+                    break;
+                case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
+                    YASS_ROM_SEQUENCES_load(romSequenceIndex, player.getCurrentSequence());
+                    break;
+                case YASS_CONF_FSM_SEQ_DUMP:
+                    sysEx.sendSequence(player.getCurrentSequenceIndex());
+                    break;
+                default:
+                    break;
+            }
+            exitEdit();
             setEditTempo();
+            keyBeep();
         }
         else
         {
-            player.recordSequencer();
-            editor.setState(YASS_CONF_FSM_STATE_RECORD_EDIT, &editRecord);
+            if(!(globEditFlag | seqEditFlag))
+            {
+                player.startRecordSequencer();
+                editor.setState(YASS_CONF_FSM_STATE_RECORD_EDIT, &editRecord);
+                keyBeep();
+            }
         }
-        keyBeep();
     }
 }
 
@@ -808,8 +857,10 @@ void commandSequenceEdit()
             // exiting sequence edition mode
             setEditTempo();
         }
-        keyBeep();
     }
+    else
+        seqEditFlag = false;
+    keyBeep();
 }
 
 void commandGlobalEdit()
@@ -828,8 +879,10 @@ void commandGlobalEdit()
             // exiting global edition mode
             setEditTempo();
         }
-        keyBeep();
     }
+    else
+        seqEditFlag = false;
+    keyBeep();
 }
 
 void commandNext()
@@ -855,6 +908,25 @@ void commandNext()
     else if(player.isRecording())
     {
         player.gotoNextRecordStep();
+        keyBeep();
+    }
+}
+
+void commandPrevious()
+{
+    if(globEditFlag)
+    {
+        setPreviousGlobalEditParam();
+        keyBeep();
+    }
+    else if(seqEditFlag)
+    {
+        setPreviousSeqEditParam();
+        keyBeep();
+    }
+    else if(player.isRecording())
+    {
+        player.gotoPreviousRecordStep();
         keyBeep();
     }
 }
@@ -1002,9 +1074,8 @@ void keybTask()
                 if(!globConf.getClockIn())
                     commandStop();
                 break;
-            case KBD_CONTINUE:
-                if(!globConf.getClockIn())
-                    commandContinue();
+            case KBD_PREVIOUS:
+                commandPrevious();
                 break;
             case KBD_RECORD:
                 commandRecord();
@@ -1192,12 +1263,23 @@ void UpdateLeds()
     if(globEditFlag)
         leds.ledOn(LED_GLOBAL);
     
-    // transport leds
-    if(player.isRunning())
-        leds.ledOn(LED_START);
+    // transport leds   
+    switch(yassState)
+    {
+        case stopped:
+            break;
+        case paused:
+            if(millis() & 0x100)
+                leds.ledOn(LED_START);
+            break;
+        case running:
+            leds.ledOn(LED_START);
+            break;
+    }
+    
     if(player.isRecording())
         leds.ledOn(LED_RECORD);
-    if(functionWaitsValidation())
+    else if(functionWaitsValidation())
         if(!(millis() & 0x80))
             leds.ledOn(LED_RECORD);
     
@@ -1297,6 +1379,7 @@ void setup()
     player.setStartSequencerCallback(sendStart);
     player.setStopSequencerCallback(sendStop);
     player.setContinueSequencerCallback(sendContinue);
+    yassState = stopped;
 
     storage.begin(&globConf, seqs);
     
@@ -1405,3 +1488,4 @@ void loop()
     }
 #endif
 }
+
