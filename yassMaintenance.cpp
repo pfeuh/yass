@@ -17,16 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <EEPROM.h>
 #include "yassMaintenance.h"
 
-#define YASS_MAINTENANCE_STATE_READY     1
-#define YASS_MAINTENANCE_STATE_STEP_LEDS 2
-#define YASS_MAINTENANCE_STATE_INDV_LEDS 3
-#define YASS_MAINTENANCE_STATE_DISPLAY   4
-#define YASS_MAINTENANCE_STATE_KEYBOARD  5
-#define YASS_MAINTENANCE_STATE_BEEPER    6
-#define YASS_MAINTENANCE_STATE_ENCODER   7
-#define YASS_MAINTENANCE_STATE_EEPROM    8
+#define YASS_MAINTENANCE_STATE_READY       1
+#define YASS_MAINTENANCE_STATE_STEP_LEDS   2
+#define YASS_MAINTENANCE_STATE_INDV_LEDS   3
+#define YASS_MAINTENANCE_STATE_DISPLAY     4
+#define YASS_MAINTENANCE_STATE_KEYBOARD    5
+#define YASS_MAINTENANCE_STATE_BEEPER      6
+#define YASS_MAINTENANCE_STATE_ENCODER     7
+#define YASS_MAINTENANCE_STATE_EEPROM      8
+#define YASS_MAINTENANCE_STATE_INPUT_ADDR  9
+#define YASS_MAINTENANCE_STATE_INPUT_VALUE 10
 
 #define ledNum gpv1
 #define ledDirection gpv2
@@ -141,8 +144,9 @@ void YASS_MAINTENANCE::prompt()
     console.println(F("4 test keyboard"));
     console.println(F("5 test beeper"));
     console.println(F("6 test encoder"));
-    console.println(F("7 dump eeprom"));
-    console.println(F("s stop test"));
+    console.println(F("r read eeprom"));
+    console.println(F("w write eeprom"));
+    console.println(F("s stop any test"));
     console.println(F("v display versions"));
 }
 
@@ -318,9 +322,11 @@ void YASS_MAINTENANCE::stateEncoder()
 
 void YASS_MAINTENANCE::stateEeprom()
 {
+    // displaying eepromed configuration
     console.println(F("Global configuration"));
     debug->dumpEeprom(YASS_EEPROM_BASE_GLOBAL, YASS_CONFIG_DATA_SIZE);
     
+    // displaying eepromed sequences
     word ptr = YASS_EEPROM_BASE_SEQ1;
     for(byte x = 0; x < NB_SEQS; x++)
     {
@@ -330,6 +336,29 @@ void YASS_MAINTENANCE::stateEeprom()
         ptr += YASS_SEQUENCE_DATA_SIZE;
     }
     state = YASS_MAINTENANCE_STATE_READY;
+    
+    // checking and reporting bad midi data
+    byte value;
+    word count = 0;
+    console.write('\n');
+    
+    for(word addr = YASS_EEPROM_BASE_GLOBAL; addr < YASS_EEPROM_BASE_FREE; addr++)
+    {
+        value = ARDUINO_DEBUG_getEepromByte(addr);
+        if(value & 0x80)
+        {
+            count++;
+            debug->printWord(addr);
+            console.write(' ');
+            debug->printByte(value);
+            console.write('\n');
+        }
+    }
+    if(count)
+    {
+        console.print(value);
+        console.println(F(" unexpected 8 bits value(s) found!"));
+    }
 }
 
 /******************/
@@ -369,52 +398,119 @@ void YASS_MAINTENANCE::begin(
 
 void YASS_MAINTENANCE::sequencer()
 {
-    if(console.available())
+    if((state == YASS_MAINTENANCE_STATE_INPUT_ADDR) || (state == YASS_MAINTENANCE_STATE_INPUT_VALUE))
     {
-        switch (console.read())
+        if(console.available())
         {
-            case '?':
-                setState(YASS_MAINTENANCE_STATE_READY);
-                prompt();
-                break;
-            case '1':
-                setState(YASS_MAINTENANCE_STATE_STEP_LEDS);
-                console.println(F("\nTesting step leds."));
-                break;
-            case '2':
-                setState(YASS_MAINTENANCE_STATE_INDV_LEDS);
-                console.println(F("\nTesting individual leds."));
-                break;
-            case '3':
-                setState(YASS_MAINTENANCE_STATE_DISPLAY);
-                segmentWeight = 1;
-                console.println(F("\nTesting display's segments."));
-                break;
-            case '4':
-                setState(YASS_MAINTENANCE_STATE_KEYBOARD);
-                console.println(F("\nTesting keyboard. Hit keys"));
-                break;
-            case '5':
-                setState(YASS_MAINTENANCE_STATE_BEEPER);
-                console.println(F("\nTesting beeper."));
-                break;
-            case '6':
-                setState(YASS_MAINTENANCE_STATE_ENCODER);
-                console.println(F("\nTesting encoder. Change value manually."));
-                break;
-            case '7':
-                setState(YASS_MAINTENANCE_STATE_EEPROM);
-                console.println(F("\nDumping eeprom."));
-                break;
-            case 'v':
-                displayVersions();
-                break;
-            case 's':
-                console.println(F("\nTest stopped."));
-                setState(YASS_MAINTENANCE_STATE_READY);
-                break;
-            default:
-                break;
+            char car = console.read();
+            switch (car)
+            {
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    userValue = (userValue << 4) + car - '0';
+                    break;
+                case 'a':
+                case 'b':
+                case 'c':
+                case 'd':
+                case 'e':
+                case 'f':
+                    userValue = (userValue << 4) + car - 'a' + 10;
+                    break;
+                case '\n':
+                    if(state == YASS_MAINTENANCE_STATE_INPUT_ADDR)
+                    {
+                        eepromAddr = userValue;
+                        debug->printWord(eepromAddr);
+                        userValue = 0;
+                        setState(YASS_MAINTENANCE_STATE_INPUT_VALUE);
+                    }
+                    else if(state == YASS_MAINTENANCE_STATE_INPUT_VALUE)
+                    {
+                        eepromValue = userValue;
+                        EEPROM.update(eepromAddr, eepromValue);
+                        console.print(F(" <- "));
+                        debug->printByte(EEPROM.read(eepromAddr));
+                        console.write('\n');
+                        userValue = 0;
+                        setState(YASS_MAINTENANCE_STATE_READY);
+                    }
+                    break;
+                case 's':
+                    console.println(F("aborted by user!"));
+                    setState(YASS_MAINTENANCE_STATE_READY);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    else
+    {
+        if(console.available())
+        {
+            switch (console.read())
+            {
+                case '?':
+                    setState(YASS_MAINTENANCE_STATE_READY);
+                    prompt();
+                    break;
+                case '1':
+                    setState(YASS_MAINTENANCE_STATE_STEP_LEDS);
+                    console.println(F("\nTesting step leds."));
+                    break;
+                case '2':
+                    setState(YASS_MAINTENANCE_STATE_INDV_LEDS);
+                    console.println(F("\nTesting individual leds."));
+                    break;
+                case '3':
+                    setState(YASS_MAINTENANCE_STATE_DISPLAY);
+                    segmentWeight = 1;
+                    console.println(F("\nTesting display's segments."));
+                    break;
+                case '4':
+                    setState(YASS_MAINTENANCE_STATE_KEYBOARD);
+                    console.println(F("\nTesting keyboard. Hit keys"));
+                    break;
+                case '5':
+                    setState(YASS_MAINTENANCE_STATE_BEEPER);
+                    console.println(F("\nTesting beeper."));
+                    break;
+                case '6':
+                    setState(YASS_MAINTENANCE_STATE_ENCODER);
+                    console.println(F("\nTesting encoder. Change value manually."));
+                    break;
+                case 'r':
+                    setState(YASS_MAINTENANCE_STATE_EEPROM);
+                    console.println(F("\nDumping eeprom."));
+                    break;
+                case 'v':
+                    displayVersions();
+                    break;
+                case 'w':
+                    // ugly turnaround to remove the '\n' from "w\n" input
+                    delay(2);
+                    console.read();
+                
+                    userValue = 0;
+                    console.println(F("Input eeprom hex address, then hex value or 's' to stop"));
+                    setState(YASS_MAINTENANCE_STATE_INPUT_ADDR);
+                    break;
+                case 's':
+                    console.println(F("\nTest stopped."));
+                    setState(YASS_MAINTENANCE_STATE_READY);
+                    break;
+                default:
+                    break;
+            }
         }
     }
     switch (state)

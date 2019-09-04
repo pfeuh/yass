@@ -47,7 +47,9 @@
 #include "yassComputeBeat.h"
 #include <arduinoDebug.h>
 
-#define YASS_VERSION "1.00"
+// v1.01 adds a writing eprom test (or debug) :)
+
+#define YASS_VERSION "1.01"
 
 // must be a static function, not a method
 void YASS_MAINTENANCE_updateData(bool direction);
@@ -73,6 +75,8 @@ class YASS_MAINTENANCE
         byte gpv2;
         unsigned long int milestone;
         int userValue;
+        word eepromAddr;
+        byte eepromValue;
     
         YASS_KEYB* keyb;
         YASS_BEEPER* beeper;
