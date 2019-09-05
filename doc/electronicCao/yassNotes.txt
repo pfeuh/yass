@@ -1,0 +1,32 @@
+YASS notes
+
+jlcpcb.com
+
+pour rajouter la surface des rails de fixation
+en haut et en bas ajouter 19 pas sur une grille 25 mils
+
+gerber a generer:
+B.Cu
+F.Cu
+B.SilkS -> mettre en miroir pour lisibilité (pdf)
+F.SilkS
+B.Mask
+F.Mask
+
+carte realisee chez jlcpcb -> https://jlcpcb.com/
+
+rajouter une diode anti inversion de polarite juste apres le connecteur d'alimentation.
+Rajouter +5V et GND sur la serigraphie a cote du connecteur d'alimentation.
+
+pour la V2:
+Sérigraphie plus claire des 2 cotes.
+Rajouter points de test clock, latch etc...
+Supprimer et bypasser les 4 transistors du display.
+Rajouter diode anti inversion de polarite.
+Revoir le calcul des resistances de leds, celles des bleues et des jaunes sont trop faibles.
+Aligner les boutons et les leds, MEME SI ON EST HORS DE LA GRILLE!
+Implanter plutot les gros boutons qui ne nececcitent pas de piece 3D. 
+
+
+
+

@@ -1,0 +1,2076 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>C:\Users\pfeuh\Documents\CAO\kicad\YASS_v2\YASS_v2.sch</source>
+    <date>19/06/2019 08:44:48</date>
+    <tool>Eeschema (5.1.2)-1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>YASS_v2.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="SW18">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF0410D</tstamp>
+    </comp>
+    <comp ref="SW19">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF065D9</tstamp>
+    </comp>
+    <comp ref="SW21">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>PLAY</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1764F</tstamp>
+    </comp>
+    <comp ref="SW22">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF17659</tstamp>
+    </comp>
+    <comp ref="SW23">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF17663</tstamp>
+    </comp>
+    <comp ref="SW24">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1766D</tstamp>
+    </comp>
+    <comp ref="SW26">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1DBF4</tstamp>
+    </comp>
+    <comp ref="SW27">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1DBFE</tstamp>
+    </comp>
+    <comp ref="SW28">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1DC08</tstamp>
+    </comp>
+    <comp ref="SW29">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>PLAY</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1DC1D</tstamp>
+    </comp>
+    <comp ref="SW30">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1DC27</tstamp>
+    </comp>
+    <comp ref="SW31">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1DC31</tstamp>
+    </comp>
+    <comp ref="SW17">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>PLAY</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF03B16</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0D52A2</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E48BA</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E5B33</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E63F0</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E765D</tstamp>
+    </comp>
+    <comp ref="D7">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E8412</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E938B</tstamp>
+    </comp>
+    <comp ref="D8">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E9F4E</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>7-SEGMENT-4DIGIT-10MM-RED</value>
+      <footprint>YASS_v2:4x7segments</footprint>
+      <fields>
+        <field name="Champ4">COMP-09493</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="7-SEGMENT-4DIGIT-10MM-RED" description="4 Digit 7 Segment Display This is a part for the 4-Digit 7-segment LEDs from Young Sun.  Different from the Digikey LEDs, all 16 pins are used.&lt;br&gt;The LONGPADS Variant is used for a test jig, but you may like it because there is more pad to solder to. If you are concerned about routing space, the standard works just fine though. &lt;h4&gt;Datasheets:&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;http://www.sparkfun.com/datasheets/Components/LED/7-Segment/YSD-439AR6B-35.pdf&quot;&gt;Red&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;http://www.sparkfun.com/datasheets/Components/LED/7-Segment/YSD-439AY2B-35.pdf&quot;&gt;Yellow&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;http://www.sparkfun.com/datasheets/Components/LED/7-Segment/YSD-439AK2B-35.pdf&quot;&gt;Kelly Green&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;http://www.sparkfun.com/datasheets/Components/LED/7-Segment/YSD-439AB4B-35.pdf&quot;&gt;Blue&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;http://cdn.sparkfun.com/datasheets/Components/LED/ATA3492BW_2.pdf&quot;&gt;White&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h4&gt;SparkFun Products&lt;/h4&gt;&lt;ul&gt;&lt;h5&gt;Raw Components&lt;/h5&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/9483&quot;&gt;7-Segment Display - 4-Digit (Red)&lt;/a&gt; (COM-09483)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/9480&quot;&gt;7-Segment Display - 4-Digit (Yellow)&lt;/a&gt; (COM-09480)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/9482&quot;&gt;7-Segment Display - 4-Digit (Kelly Green)&lt;/a&gt; (COM-09482)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/9481&quot;&gt;7-Segment Display - 4-Digit (Blue)&lt;/a&gt; (COM-09481)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/10931&quot;&gt;7-Segment Display - 4-Digit (White)&lt;/a&gt; ( COM-10931)&lt;/li&gt;&lt;h5&gt;Serial Controlled&lt;/h5&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11441&quot;&gt;SparkFun 7-Segment Serial Display - Red&lt;/a&gt; (COM-11441)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11443&quot;&gt;SparkFun 7-Segment Serial Display - Yellow&lt;/a&gt; (COM-11443)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11440&quot;&gt;SparkFun 7-Segment Serial Display - Kelly Green&lt;/a&gt; (COM-11440)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11442&quot;&gt;SparkFun 7-Segment Serial Display - Blue&lt;/a&gt; (COM-11442)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11629&quot;&gt;SparkFun 7-Segment Serial Display - White&lt;/a&gt; (COM-11629)&lt;/li&gt;&lt;h5&gt;Other&lt;/h5&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11734&quot;&gt;SparkFun BigTime Watch Kit&lt;/a&gt; (KIT-11734)&lt;/li&gt;&lt;/ul&gt;"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D2988F7</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D402210</tstamp>
+    </comp>
+    <comp ref="SW1">
+      <value>ENCODER-SWITCH</value>
+      <footprint>YASS_v2:ROTARY_ENCODER</footprint>
+      <fields>
+        <field name="Champ4">COM-09117</field>
+      </fields>
+      <libsource lib="SparkFun-Switches" part="ENCODER-SWITCH" description="Rotary Encoder w/ Select Switch Encoders rotate similarly to potentiometers, but they re different from potentiometers in that an encoder has full rotation without limits. They output gray code so that you can tell how much and in which direction the encoder has been turned. This encoder includes a push-down select switch built into the shaft. &lt;h4&gt;SparkFun Products&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/9117&quot;&gt;Rotary Encoder&lt;/a&gt; (COM-09117)&lt;/li&gt;&lt;/ul&gt;"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF19E06</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CFE5251</tstamp>
+    </comp>
+    <comp ref="T1">
+      <value>2N2222</value>
+      <footprint>TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval</footprint>
+      <datasheet>http://www.fairchildsemi.com/ds/PN/PN2222A.pdf</datasheet>
+      <libsource lib="Transistor_BJT" part="PN2222A" description="1A Ic, 40V Vce, NPN Transistor, General Purpose Transistor, TO-92"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CFE6540</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D060B22</tstamp>
+    </comp>
+    <comp ref="T2">
+      <value>PN2222A</value>
+      <footprint>TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval</footprint>
+      <datasheet>http://www.fairchildsemi.com/ds/PN/PN2222A.pdf</datasheet>
+      <libsource lib="Transistor_BJT" part="PN2222A" description="1A Ic, 40V Vce, NPN Transistor, General Purpose Transistor, TO-92"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D060B2C</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D068648</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D06865C</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>74595</value>
+      <footprint>Silicon-Standard:DIP16</footprint>
+      <libsource lib="SparkFun-IC-Logic" part="74595" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF8BF56</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>74595</value>
+      <footprint>Silicon-Standard:DIP16</footprint>
+      <libsource lib="SparkFun-IC-Logic" part="74595" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D12C50E</tstamp>
+    </comp>
+    <comp ref="U5">
+      <value>74595</value>
+      <footprint>Silicon-Standard:DIP16</footprint>
+      <libsource lib="SparkFun-IC-Logic" part="74595" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D13C0D3</tstamp>
+    </comp>
+    <comp ref="U6">
+      <value>74595</value>
+      <footprint>Silicon-Standard:DIP16</footprint>
+      <libsource lib="SparkFun-IC-Logic" part="74595" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D13C113</tstamp>
+    </comp>
+    <comp ref="U7">
+      <value>74595</value>
+      <footprint>Silicon-Standard:DIP16</footprint>
+      <libsource lib="SparkFun-IC-Logic" part="74595" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1B1AA1</tstamp>
+    </comp>
+    <comp ref="R20">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA705</tstamp>
+    </comp>
+    <comp ref="D20">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA6DA</tstamp>
+    </comp>
+    <comp ref="R24">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA70F</tstamp>
+    </comp>
+    <comp ref="D24">
+      <value>3mm blue</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA6E5</tstamp>
+    </comp>
+    <comp ref="D30">
+      <value>3mm yellow</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D181B49</tstamp>
+    </comp>
+    <comp ref="R30">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D181B71</tstamp>
+    </comp>
+    <comp ref="R26">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D181B67</tstamp>
+    </comp>
+    <comp ref="R22">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D181B5D</tstamp>
+    </comp>
+    <comp ref="D26">
+      <value>3mm yellow</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D181B3E</tstamp>
+    </comp>
+    <comp ref="D22">
+      <value>3mm blue</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D181B33</tstamp>
+    </comp>
+    <comp ref="R25">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D151F25</tstamp>
+    </comp>
+    <comp ref="R21">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D151B31</tstamp>
+    </comp>
+    <comp ref="R17">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D14CA7B</tstamp>
+    </comp>
+    <comp ref="D25">
+      <value>3mm blue</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D10FBA6</tstamp>
+    </comp>
+    <comp ref="D21">
+      <value>3mm blue</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D10F52C</tstamp>
+    </comp>
+    <comp ref="D17">
+      <value>3mm green</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D10ED25</tstamp>
+    </comp>
+    <comp ref="R23">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA6A8</tstamp>
+    </comp>
+    <comp ref="D23">
+      <value>3mm blue</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA67E</tstamp>
+    </comp>
+    <comp ref="R31">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA6BC</tstamp>
+    </comp>
+    <comp ref="R27">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA6B2</tstamp>
+    </comp>
+    <comp ref="D31">
+      <value>3mm yellow</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA694</tstamp>
+    </comp>
+    <comp ref="D27">
+      <value>3mm yellow</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA689</tstamp>
+    </comp>
+    <comp ref="D28">
+      <value>3mm yellow</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA6F0</tstamp>
+    </comp>
+    <comp ref="R28">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D1BA719</tstamp>
+    </comp>
+    <comp ref="D16">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0EAB26</tstamp>
+    </comp>
+    <comp ref="D12">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0EA4FF</tstamp>
+    </comp>
+    <comp ref="D15">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E8DF0</tstamp>
+    </comp>
+    <comp ref="D11">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E8953</tstamp>
+    </comp>
+    <comp ref="D14">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E6FF0</tstamp>
+    </comp>
+    <comp ref="D10">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E6A1B</tstamp>
+    </comp>
+    <comp ref="D13">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E5512</tstamp>
+    </comp>
+    <comp ref="D9">
+      <value>3mm red</value>
+      <footprint>YASS_v2:LED_3MM</footprint>
+      <fields>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <libsource lib="SparkFun-LED" part="LED-3MM-NO_SILK" description="&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0E4EE7</tstamp>
+    </comp>
+    <comp ref="T4">
+      <value>2N2222</value>
+      <footprint>TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval</footprint>
+      <datasheet>http://www.fairchildsemi.com/ds/PN/PN2222A.pdf</datasheet>
+      <libsource lib="Transistor_BJT" part="PN2222A" description="1A Ic, 40V Vce, NPN Transistor, General Purpose Transistor, TO-92"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D068666</tstamp>
+    </comp>
+    <comp ref="T3">
+      <value>2N2222</value>
+      <footprint>TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval</footprint>
+      <datasheet>http://www.fairchildsemi.com/ds/PN/PN2222A.pdf</datasheet>
+      <libsource lib="Transistor_BJT" part="PN2222A" description="1A Ic, 40V Vce, NPN Transistor, General Purpose Transistor, TO-92"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D068652</tstamp>
+    </comp>
+    <comp ref="R48">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF77117</tstamp>
+    </comp>
+    <comp ref="R47">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF7709A</tstamp>
+    </comp>
+    <comp ref="R46">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF7701D</tstamp>
+    </comp>
+    <comp ref="R45">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF76F54</tstamp>
+    </comp>
+    <comp ref="R44">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF76ED7</tstamp>
+    </comp>
+    <comp ref="R43">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF76E5A</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>Arduino_Nano_v2.x</value>
+      <footprint>Modules:Arduino_Nano</footprint>
+      <datasheet>https://www.arduino.cc/en/uploads/Main/ArduinoNanoManual23.pdf</datasheet>
+      <libsource lib="MCU_Module" part="Arduino_Nano_v2.x" description="Arduino Nano v2.x"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D02C0E5</tstamp>
+    </comp>
+    <comp ref="SW25">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>PLAY</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF1DBEA</tstamp>
+    </comp>
+    <comp ref="SW20">
+      <value>SW_Push</value>
+      <footprint>YASS_v2:KEY_PUSH_6mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF06B29</tstamp>
+    </comp>
+    <comp ref="CD3">
+      <value>100nF</value>
+      <footprint>Capacitors_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EFFB822</tstamp>
+    </comp>
+    <comp ref="CD4">
+      <value>100nF</value>
+      <footprint>Capacitors_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EFFD71C</tstamp>
+    </comp>
+    <comp ref="CD5">
+      <value>100nF</value>
+      <footprint>Capacitors_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EFFE62E</tstamp>
+    </comp>
+    <comp ref="CD6">
+      <value>100nF</value>
+      <footprint>Capacitors_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EFFE638</tstamp>
+    </comp>
+    <comp ref="CD7">
+      <value>100nF</value>
+      <footprint>Capacitors_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F04D0B3</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>CONN_03</value>
+      <footprint>sparkfunConnectors:1X03</footprint>
+      <fields>
+        <field name="Champ4">MIDI OUT</field>
+      </fields>
+      <libsource lib="SparkFun-Connectors" part="CONN_03" description="Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/116&quot;&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/553&quot;&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/115&quot;&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/117&quot;&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/743&quot;&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/13875&quot;&gt; Stackable Header - 3 Pin (Female, 0.1&quot;)&lt;/a&gt; (PRT-13875)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/search/results?term=Screw+Terminals&quot;&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11375&quot;&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11367&quot;&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/categories/141&quot;&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt;     Molex polarized connector foot print use with SKU : PRT-08232 with associated crimp pins and housings."/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F3097B2</tstamp>
+    </comp>
+    <comp ref="R52">
+      <value>220</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F2DD566</tstamp>
+    </comp>
+    <comp ref="R51">
+      <value>220</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F2DC337</tstamp>
+    </comp>
+    <comp ref="U8">
+      <value>6N138</value>
+      <footprint>Housings_DIP:DIP-8_W7.62mm</footprint>
+      <datasheet>http://www.onsemi.com/pub/Collateral/HCPL2731-D.pdf</datasheet>
+      <libsource lib="Isolator" part="6N138" description="Low Input Current high Gain Split Darlington Optocouplers, -0.5V to 7V VDD, DIP-8"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F50CB4A</tstamp>
+    </comp>
+    <comp ref="D51">
+      <value>1N4148</value>
+      <footprint>YASS_v2:DIODE</footprint>
+      <datasheet>https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf</datasheet>
+      <libsource lib="Diode" part="1N4148" description="100V 0.15A standard switching diode, DO-35"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F50F587</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>CONN_02</value>
+      <footprint>sparkfunConnectors:1X02</footprint>
+      <fields>
+        <field name="Champ4">MIDI IN</field>
+      </fields>
+      <libsource lib="SparkFun-Connectors" part="CONN_02" description="Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/116&quot;&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/553&quot;&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/115&quot;&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/117&quot;&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/743&quot;&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/search/results?term=Screw+Terminals&quot;&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11375&quot;&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11367&quot;&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/categories/141&quot;&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt; Molex polarized connector foot print use with: PRT-08233 with associated crimp pins and housings.&lt;br&gt;&lt;br&gt;2.54_SCREWTERM for use with  PRT-10571.&lt;br&gt;&lt;br&gt;3.5mm Screw Terminal footprints for  PRT-08084&lt;br&gt;&lt;br&gt;5mm Screw Terminal footprints for use with PRT-08432"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F511B73</tstamp>
+    </comp>
+    <comp ref="R53">
+      <value>220</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F54132A</tstamp>
+    </comp>
+    <comp ref="R54">
+      <value>10K</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F68CC65</tstamp>
+    </comp>
+    <comp ref="R55">
+      <value>470</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F68EA1A</tstamp>
+    </comp>
+    <comp ref="CD8">
+      <value>100nF</value>
+      <footprint>Capacitors_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F7EE217</tstamp>
+    </comp>
+    <comp ref="SW2">
+      <value>SWITCH_TOGGLE_SPST_RIGHT_ANGLE</value>
+      <footprint>Switches:SWITCH_SPDT_PTH_11.6X4.0MM</footprint>
+      <fields>
+        <field name="Champ4">PRT-13888</field>
+      </fields>
+      <libsource lib="SparkFun-Switches" part="SWITCH_TOGGLE_SPST_RIGHT_ANGLE" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF80547</tstamp>
+    </comp>
+    <comp ref="J3">
+      <value>POWER CONNECTOR</value>
+      <footprint>sparkfunConnectors:1X02</footprint>
+      <fields>
+        <field name="Champ4">POWER</field>
+      </fields>
+      <libsource lib="SparkFun-Connectors" part="CONN_02" description="Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/116&quot;&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/553&quot;&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/115&quot;&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/117&quot;&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/743&quot;&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/search/results?term=Screw+Terminals&quot;&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11375&quot;&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11367&quot;&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/categories/141&quot;&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt; Molex polarized connector foot print use with: PRT-08233 with associated crimp pins and housings.&lt;br&gt;&lt;br&gt;2.54_SCREWTERM for use with  PRT-10571.&lt;br&gt;&lt;br&gt;3.5mm Screw Terminal footprints for  PRT-08084&lt;br&gt;&lt;br&gt;5mm Screw Terminal footprints for use with PRT-08432"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D09E2CF</tstamp>
+    </comp>
+    <comp ref="U9">
+      <value>LM7805_TO220</value>
+      <footprint>Power_Integrations:TO-220</footprint>
+      <datasheet>http://www.fairchildsemi.com/ds/LM/LM7805.pdf</datasheet>
+      <libsource lib="Regulator_Linear" part="LM7805_TO220" description="Positive 1A 35V Linear Regulator, Fixed Output 5V, TO-220"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0A0095</tstamp>
+    </comp>
+    <comp ref="CD9">
+      <value>100nF</value>
+      <footprint>Capacitors_THT:C_Disc_D4.3mm_W1.9mm_P5.00mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D32286A</tstamp>
+    </comp>
+    <comp ref="BU1">
+      <value>BUZZER-PTH_KIT_NO_SILK</value>
+      <footprint>Buzzers_Beepers:MagneticBuzzer_ProSignal_ABI-009-RC</footprint>
+      <fields>
+        <field name="Champ4">ACTIVE BUZZER</field>
+      </fields>
+      <libsource lib="Device" part="Buzzer" description="Buzzer, polarized"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D49966F</tstamp>
+    </comp>
+    <comp ref="T5">
+      <value>2N2222</value>
+      <footprint>TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval</footprint>
+      <datasheet>http://www.fairchildsemi.com/ds/PN/PN2222A.pdf</datasheet>
+      <libsource lib="Transistor_BJT" part="PN2222A" description="1A Ic, 40V Vce, NPN Transistor, General Purpose Transistor, TO-92"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D4D6AED</tstamp>
+    </comp>
+    <comp ref="R56">
+      <value>1K</value>
+      <footprint>Resistors_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D5B75BC</tstamp>
+    </comp>
+    <comp ref="J4">
+      <value>CONN_04</value>
+      <footprint>sparkfunConnectors:1X04</footprint>
+      <fields>
+        <field name="Champ4">I2C_EXT</field>
+      </fields>
+      <libsource lib="SparkFun-Connectors" part="CONN_04" description="Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/116&quot;&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/553&quot;&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/115&quot;&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/117&quot;&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/743&quot;&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/search/results?term=Screw+Terminals&quot;&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11375&quot;&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11367&quot;&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/categories/141&quot;&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt;   Molex polarized connector foot print use with SKU : PRT-08231 with associated crimp pins and housings. 1MM SMD Version SKU: PRT-10208"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D829AF5</tstamp>
+    </comp>
+    <comp ref="R42">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF76D7E</tstamp>
+    </comp>
+    <comp ref="H1">
+      <value>MountingHole</value>
+      <footprint>Mounting_Holes:MountingHole_3.2mm_M3</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CFD4999</tstamp>
+    </comp>
+    <comp ref="H2">
+      <value>MountingHole</value>
+      <footprint>Mounting_Holes:MountingHole_3.2mm_M3</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CFD5D8B</tstamp>
+    </comp>
+    <comp ref="H3">
+      <value>MountingHole</value>
+      <footprint>Mounting_Holes:MountingHole_3.2mm_M3</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CFD6F8F</tstamp>
+    </comp>
+    <comp ref="H4">
+      <value>MountingHole</value>
+      <footprint>Mounting_Holes:MountingHole_3.2mm_M3</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CFD82FF</tstamp>
+    </comp>
+    <comp ref="TP3">
+      <value>TestPoint</value>
+      <footprint>sparkfunConnectors:1X01</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D051DEA</tstamp>
+    </comp>
+    <comp ref="TP4">
+      <value>TestPoint</value>
+      <footprint>sparkfunConnectors:1X01</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0557A5</tstamp>
+    </comp>
+    <comp ref="TP1">
+      <value>TestPoint</value>
+      <footprint>sparkfunConnectors:1X01</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D096659</tstamp>
+    </comp>
+    <comp ref="TP2">
+      <value>TestPoint</value>
+      <footprint>sparkfunConnectors:1X01</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D096663</tstamp>
+    </comp>
+    <comp ref="R41">
+      <value>1k</value>
+      <footprint>YASS_v2:R</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF51D19</tstamp>
+    </comp>
+    <comp ref="J5">
+      <value>CONN_05</value>
+      <footprint>1X05</footprint>
+      <fields>
+        <field name="Champ4">OUT_EXT</field>
+      </fields>
+      <libsource lib="SparkFun-Connectors" part="CONN_05" description="Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/116&quot;&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/553&quot;&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/115&quot;&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/117&quot;&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/743&quot;&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/search/results?term=Screw+Terminals&quot;&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11375&quot;&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/products/11367&quot;&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.sparkfun.com/categories/141&quot;&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt;   Molex polarized connector foot print use with SKU : PRT-08231 with associated crimp pins and housings. 1MM SMD Version SKU: PRT-10208"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D281E75</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="TestPoint">
+      <description>test point</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Pin*</fp>
+        <fp>Test*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TestPoint</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Buzzer">
+      <description>Buzzer, polarized</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>*Buzzer*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">BZ</field>
+        <field name="Value">Buzzer</field>
+      </fields>
+      <pins>
+        <pin num="1" name="-" type="passive"/>
+        <pin num="2" name="+" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Diode" part="1N4148">
+      <aliases>
+        <alias>1N4448</alias>
+        <alias>1N4149</alias>
+        <alias>1N4151</alias>
+        <alias>1N914</alias>
+        <alias>BA243</alias>
+        <alias>BA244</alias>
+        <alias>BA282</alias>
+        <alias>BA283</alias>
+        <alias>BAV17</alias>
+        <alias>BAV18</alias>
+        <alias>BAV19</alias>
+        <alias>BAV20</alias>
+        <alias>BAV21</alias>
+        <alias>BAW75</alias>
+        <alias>BAW76</alias>
+        <alias>BAY93</alias>
+      </aliases>
+      <description>100V 0.15A standard switching diode, DO-35</description>
+      <docs>https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf</docs>
+      <footprints>
+        <fp>D*DO?35*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">1N4148</field>
+        <field name="Footprint">Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Isolator" part="6N138">
+      <aliases>
+        <alias>6N139</alias>
+      </aliases>
+      <description>Low Input Current high Gain Split Darlington Optocouplers, -0.5V to 7V VDD, DIP-8</description>
+      <docs>http://www.onsemi.com/pub/Collateral/HCPL2731-D.pdf</docs>
+      <footprints>
+        <fp>DIP*W7.62mm*</fp>
+        <fp>SMDIP*W9.53mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">6N138</field>
+      </fields>
+      <pins>
+        <pin num="1" name="NC" type="NotConnected"/>
+        <pin num="2" name="C1" type="passive"/>
+        <pin num="3" name="C2" type="passive"/>
+        <pin num="4" name="NC" type="NotConnected"/>
+        <pin num="5" name="GND" type="passive"/>
+        <pin num="6" name="VO2" type="passive"/>
+        <pin num="7" name="VO1" type="passive"/>
+        <pin num="8" name="VCC" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="MCU_Module" part="Arduino_Nano_v3.x">
+      <aliases>
+        <alias>Arduino_Nano_v2.x</alias>
+      </aliases>
+      <description>Arduino Nano v3.x</description>
+      <docs>http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf</docs>
+      <footprints>
+        <fp>Arduino*Nano*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">A</field>
+        <field name="Value">Arduino_Nano_v3.x</field>
+        <field name="Footprint">Module:Arduino_Nano</field>
+      </fields>
+      <pins>
+        <pin num="1" name="D1/TX" type="BiDi"/>
+        <pin num="2" name="D0/RX" type="BiDi"/>
+        <pin num="3" name="RESET" type="input"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="D2" type="BiDi"/>
+        <pin num="6" name="D3" type="BiDi"/>
+        <pin num="7" name="D4" type="BiDi"/>
+        <pin num="8" name="D5" type="BiDi"/>
+        <pin num="9" name="D6" type="BiDi"/>
+        <pin num="10" name="D7" type="BiDi"/>
+        <pin num="11" name="D8" type="BiDi"/>
+        <pin num="12" name="D9" type="BiDi"/>
+        <pin num="13" name="D10" type="BiDi"/>
+        <pin num="14" name="D11" type="BiDi"/>
+        <pin num="15" name="D12" type="BiDi"/>
+        <pin num="16" name="D13" type="BiDi"/>
+        <pin num="17" name="3V3" type="power_out"/>
+        <pin num="18" name="AREF" type="input"/>
+        <pin num="19" name="A0" type="BiDi"/>
+        <pin num="20" name="A1" type="BiDi"/>
+        <pin num="21" name="A2" type="BiDi"/>
+        <pin num="22" name="A3" type="BiDi"/>
+        <pin num="23" name="A4" type="BiDi"/>
+        <pin num="24" name="A5" type="BiDi"/>
+        <pin num="25" name="A6" type="BiDi"/>
+        <pin num="26" name="A7" type="BiDi"/>
+        <pin num="27" name="+5V" type="power_out"/>
+        <pin num="28" name="RESET" type="input"/>
+        <pin num="29" name="GND" type="power_in"/>
+        <pin num="30" name="VIN" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+      </fields>
+    </libpart>
+    <libpart lib="Regulator_Linear" part="LM7805_TO220">
+      <aliases>
+        <alias>LM7806_TO220</alias>
+        <alias>LM7808_TO220</alias>
+        <alias>LM7809_TO220</alias>
+        <alias>LM7810_TO220</alias>
+        <alias>LM7812_TO220</alias>
+        <alias>LM7815_TO220</alias>
+        <alias>LM7818_TO220</alias>
+        <alias>LM7824_TO220</alias>
+        <alias>LM78M05_TO220</alias>
+        <alias>SPX2920U-3.3_TO220</alias>
+        <alias>SPX2920U-5.0_TO220</alias>
+        <alias>LF15_TO220</alias>
+        <alias>LF18_TO220</alias>
+        <alias>LF25_TO220</alias>
+        <alias>LF33_TO220</alias>
+        <alias>LF50_TO220</alias>
+        <alias>LF60_TO220</alias>
+        <alias>LF80_TO220</alias>
+        <alias>LF85_TO220</alias>
+        <alias>LF120_TO220</alias>
+        <alias>LF47_TO220</alias>
+        <alias>LF90_TO220</alias>
+        <alias>LM341T-05_TO220</alias>
+        <alias>LM341T-12_TO220</alias>
+        <alias>LM341T-15_TO220</alias>
+        <alias>LM2937xT</alias>
+      </aliases>
+      <description>Positive 1A 35V Linear Regulator, Fixed Output 5V, TO-220</description>
+      <docs>http://www.fairchildsemi.com/ds/LM/LM7805.pdf</docs>
+      <footprints>
+        <fp>TO?220*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM7805_TO220</field>
+        <field name="Footprint">Package_TO_SOT_THT:TO-220-3_Vertical</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VI" type="power_in"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="VO" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-Connectors" part="CONN_02">
+      <description>Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/116"&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/553"&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/115"&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/117"&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/743"&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/search/results?term=Screw+Terminals"&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11375"&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11367"&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/categories/141"&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt; Molex polarized connector foot print use with: PRT-08233 with associated crimp pins and housings.&lt;br&gt;&lt;br&gt;2.54_SCREWTERM for use with  PRT-10571.&lt;br&gt;&lt;br&gt;3.5mm Screw Terminal footprints for  PRT-08084&lt;br&gt;&lt;br&gt;5mm Screw Terminal footprints for use with PRT-08432</description>
+      <footprints>
+        <fp>*1X02*</fp>
+        <fp>*JST-2-PTH-NS*</fp>
+        <fp>*1X02_NO_SILK*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-2*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-2-NS*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-2_LOCK*</fp>
+        <fp>*SCREWTERMINAL-5MM-2*</fp>
+        <fp>*JST-2-PTH*</fp>
+        <fp>*JST-2-PTH-KIT*</fp>
+        <fp>*1X02_LOCK*</fp>
+        <fp>*1X02_LOCK_LONGPADS*</fp>
+        <fp>*1X02_PP_HOLES_ONLY*</fp>
+        <fp>*MOLEX-1X2*</fp>
+        <fp>*MOLEX-1X2_LOCK*</fp>
+        <fp>*1X02_LONGPADS*</fp>
+        <fp>*1X02_XTRA_BIG*</fp>
+        <fp>*1X02_RA_PTH_FEMALE*</fp>
+        <fp>*SPRINGTERMINAL-2.54MM-2*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_02</field>
+        <field name="Footprint">1X02</field>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-Connectors" part="CONN_03">
+      <description>Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/116"&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/553"&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/115"&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/117"&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/743"&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/13875"&gt; Stackable Header - 3 Pin (Female, 0.1")&lt;/a&gt; (PRT-13875)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/search/results?term=Screw+Terminals"&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11375"&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11367"&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/categories/141"&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt;     Molex polarized connector foot print use with SKU : PRT-08232 with associated crimp pins and housings.</description>
+      <footprints>
+        <fp>*1X03*</fp>
+        <fp>*SCREWTERMINAL-5MM-3*</fp>
+        <fp>*1X03_NO_SILK*</fp>
+        <fp>*1X03_SMD_RA_MALE_POST_SMALLER*</fp>
+        <fp>*1X03_SMD_RA_MALE_POST_SMALLEST*</fp>
+        <fp>*JST-3-PTH*</fp>
+        <fp>*JST-3-PTH-NS*</fp>
+        <fp>*JST-3-PTH-VERT*</fp>
+        <fp>*JST-3-SMD*</fp>
+        <fp>*1X03_LOCK*</fp>
+        <fp>*1X03_LOCK_LONGPADS*</fp>
+        <fp>*1X03_LOCK_NO_SILK*</fp>
+        <fp>*1X03_LONGPADS*</fp>
+        <fp>*1X03_PP_HOLES_ONLY*</fp>
+        <fp>*MOLEX-1X3*</fp>
+        <fp>*MOLEX-1X3_LOCK*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-3*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-3-NS*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-3_LOCK.007S*</fp>
+        <fp>*1X03-1MM-RA*</fp>
+        <fp>*1X03_SMD_RA_FEMALE*</fp>
+        <fp>*1X03_SMD_RA_MALE*</fp>
+        <fp>*1X03_SMD_RA_MALE_POST*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_03</field>
+        <field name="Footprint">1X03</field>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-Connectors" part="CONN_04">
+      <description>Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/116"&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/553"&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/115"&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/117"&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/743"&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/search/results?term=Screw+Terminals"&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11375"&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11367"&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/categories/141"&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt;   Molex polarized connector foot print use with SKU : PRT-08231 with associated crimp pins and housings. 1MM SMD Version SKU: PRT-10208</description>
+      <footprints>
+        <fp>*1X04*</fp>
+        <fp>*1X04_1.27MM*</fp>
+        <fp>*1X04_NO_SILK*</fp>
+        <fp>*JST-4-PTH*</fp>
+        <fp>*JST-4-PTH-VERT*</fp>
+        <fp>*1X04_LOCK*</fp>
+        <fp>*1X04_LOCK_LONGPADS*</fp>
+        <fp>*1X04_LONGPADS*</fp>
+        <fp>*MOLEX-1X4*</fp>
+        <fp>*MOLEX-1X4_LOCK*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-4*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-4_LOCK*</fp>
+        <fp>*1X04_SMD_RA_MALE*</fp>
+        <fp>*1X04_1MM_RA*</fp>
+        <fp>*1X04_SMD_LONG*</fp>
+        <fp>*1X04_SMD_RA_FEMALE*</fp>
+        <fp>*1X04_SMD_VERTICAL_COMBO*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_04</field>
+        <field name="Footprint">1X04</field>
+        <field name="Champ4">CONN-09696</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-Connectors" part="CONN_05">
+      <description>Multi connection point. Often used as Generic Header-pin footprint for 0.1 inch spaced/style header connections  &lt;b&gt;On any of the 0.1 inch spaced packages, you can populate with these:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/116"&gt; Break Away Headers - Straight&lt;/a&gt; (PRT-00116)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/553"&gt; Break Away Male Headers - Right Angle&lt;/a&gt; (PRT-00553)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/115"&gt; Female Headers&lt;/a&gt; (PRT-00115)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/117"&gt; Break Away Headers - Machine Pin&lt;/a&gt; (PRT-00117)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/743"&gt; Break Away Female Headers - Swiss Machine Pin&lt;/a&gt; (PRT-00743)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt; For SCREWTERMINALS and SPRING TERMINALS visit here:&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/search/results?term=Screw+Terminals"&gt; Screw Terimnals on SparkFun.com&lt;/a&gt; (5mm/3.5mm/2.54mm spacing)&lt;/li&gt;&lt;/ul&gt; &lt;b&gt;This device is also useful as a general connection point to wire up your design to another part of your project. Our various solder wires solder well into these plated through hole pads.&lt;/b&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11375"&gt; Hook-Up Wire - Assortment (Stranded, 22 AWG)&lt;/a&gt; (PRT-11375)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11367"&gt; Hook-Up Wire - Assortment (Solid Core, 22 AWG)&lt;/a&gt; (PRT-11367)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/categories/141"&gt; View the entire wire category on our website here&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;b&gt;Special notes:&lt;/b&gt;   Molex polarized connector foot print use with SKU : PRT-08231 with associated crimp pins and housings. 1MM SMD Version SKU: PRT-10208</description>
+      <footprints>
+        <fp>*1X05*</fp>
+        <fp>*1X05_1.27MM*</fp>
+        <fp>*JST-5-PTH*</fp>
+        <fp>*JST-5-PTH-VERT*</fp>
+        <fp>*1X05_LOCK*</fp>
+        <fp>*1X05_LOCK_LONGPADS*</fp>
+        <fp>*1X05_NO_SILK*</fp>
+        <fp>*1X05_LONGPADS*</fp>
+        <fp>*SCREWTERMINAL-3.5MM-5*</fp>
+        <fp>*1X05_1MM*</fp>
+        <fp>*1X05_1MM_RA*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_05</field>
+        <field name="Footprint">1X05</field>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-IC-Logic" part="74595">
+      <footprints>
+        <fp>*TSSOP16*</fp>
+        <fp>*SO16*</fp>
+        <fp>*DIP16*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">74595</field>
+        <field name="Footprint">TSSOP16</field>
+      </fields>
+      <pins>
+        <pin num="1" name="QB" type="3state"/>
+        <pin num="2" name="QC" type="3state"/>
+        <pin num="3" name="QD" type="3state"/>
+        <pin num="4" name="QE" type="3state"/>
+        <pin num="5" name="QF" type="3state"/>
+        <pin num="6" name="QG" type="3state"/>
+        <pin num="7" name="QH" type="3state"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="QH*" type="3state"/>
+        <pin num="10" name="SCL" type="input"/>
+        <pin num="11" name="SCK" type="input"/>
+        <pin num="12" name="RCK" type="input"/>
+        <pin num="13" name="G" type="input"/>
+        <pin num="14" name="SER" type="input"/>
+        <pin num="15" name="QA" type="3state"/>
+        <pin num="16" name="VCC" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-LED" part="7-SEGMENT-4DIGIT-10MM-RED">
+      <description>4 Digit 7 Segment Display This is a part for the 4-Digit 7-segment LEDs from Young Sun.  Different from the Digikey LEDs, all 16 pins are used.&lt;br&gt;The LONGPADS Variant is used for a test jig, but you may like it because there is more pad to solder to. If you are concerned about routing space, the standard works just fine though. &lt;h4&gt;Datasheets:&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://www.sparkfun.com/datasheets/Components/LED/7-Segment/YSD-439AR6B-35.pdf"&gt;Red&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.sparkfun.com/datasheets/Components/LED/7-Segment/YSD-439AY2B-35.pdf"&gt;Yellow&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.sparkfun.com/datasheets/Components/LED/7-Segment/YSD-439AK2B-35.pdf"&gt;Kelly Green&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="http://www.sparkfun.com/datasheets/Components/LED/7-Segment/YSD-439AB4B-35.pdf"&gt;Blue&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="http://cdn.sparkfun.com/datasheets/Components/LED/ATA3492BW_2.pdf"&gt;White&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h4&gt;SparkFun Products&lt;/h4&gt;&lt;ul&gt;&lt;h5&gt;Raw Components&lt;/h5&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/9483"&gt;7-Segment Display - 4-Digit (Red)&lt;/a&gt; (COM-09483)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/9480"&gt;7-Segment Display - 4-Digit (Yellow)&lt;/a&gt; (COM-09480)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/9482"&gt;7-Segment Display - 4-Digit (Kelly Green)&lt;/a&gt; (COM-09482)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/9481"&gt;7-Segment Display - 4-Digit (Blue)&lt;/a&gt; (COM-09481)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/10931"&gt;7-Segment Display - 4-Digit (White)&lt;/a&gt; ( COM-10931)&lt;/li&gt;&lt;h5&gt;Serial Controlled&lt;/h5&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11441"&gt;SparkFun 7-Segment Serial Display - Red&lt;/a&gt; (COM-11441)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11443"&gt;SparkFun 7-Segment Serial Display - Yellow&lt;/a&gt; (COM-11443)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11440"&gt;SparkFun 7-Segment Serial Display - Kelly Green&lt;/a&gt; (COM-11440)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11442"&gt;SparkFun 7-Segment Serial Display - Blue&lt;/a&gt; (COM-11442)&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11629"&gt;SparkFun 7-Segment Serial Display - White&lt;/a&gt; (COM-11629)&lt;/li&gt;&lt;h5&gt;Other&lt;/h5&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11734"&gt;SparkFun BigTime Watch Kit&lt;/a&gt; (KIT-11734)&lt;/li&gt;&lt;/ul&gt;</description>
+      <footprints>
+        <fp>*7-SEGMENT-4DIGIT-YOUNGSUN*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">LED</field>
+        <field name="Value">7-SEGMENT-4DIGIT-10MM-RED</field>
+        <field name="Footprint">7-SEGMENT-4DIGIT-YOUNGSUN</field>
+        <field name="Champ4">COMP-09493</field>
+      </fields>
+      <pins>
+        <pin num="1" name="DIG1" type="BiDi"/>
+        <pin num="2" name="DIG2" type="BiDi"/>
+        <pin num="3" name="D" type="BiDi"/>
+        <pin num="4" name="COL-A" type="BiDi"/>
+        <pin num="5" name="E" type="BiDi"/>
+        <pin num="6" name="DIG3" type="BiDi"/>
+        <pin num="7" name="DP" type="BiDi"/>
+        <pin num="8" name="DIG4" type="BiDi"/>
+        <pin num="9" name="APOS-C" type="BiDi"/>
+        <pin num="10" name="APOS-A" type="BiDi"/>
+        <pin num="11" name="F" type="BiDi"/>
+        <pin num="12" name="COL-C" type="BiDi"/>
+        <pin num="13" name="C" type="BiDi"/>
+        <pin num="14" name="A" type="BiDi"/>
+        <pin num="15" name="G" type="BiDi"/>
+        <pin num="16" name="B" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-LED" part="LED-3MM-NO_SILK">
+      <description>&lt;b&gt;LED (Generic)&lt;/b&gt;Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LEDs. Generic LEDs with no color specified.</description>
+      <footprints>
+        <fp>*LED_3MM-NS*</fp>
+        <fp>*LED_3MM*</fp>
+        <fp>*LED_5MM*</fp>
+        <fp>*LED_5MM-KIT*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED-3MM-NO_SILK</field>
+        <field name="Footprint">LED_3MM-NS</field>
+        <field name="Champ4">XXX-00000</field>
+      </fields>
+      <pins>
+        <pin num="A" name="A" type="passive"/>
+        <pin num="K" name="C" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-Switches" part="ENCODER-SWITCH">
+      <description>Rotary Encoder w/ Select Switch Encoders rotate similarly to potentiometers, but they re different from potentiometers in that an encoder has full rotation without limits. They output gray code so that you can tell how much and in which direction the encoder has been turned. This encoder includes a push-down select switch built into the shaft. &lt;h4&gt;SparkFun Products&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/9117"&gt;Rotary Encoder&lt;/a&gt; (COM-09117)&lt;/li&gt;&lt;/ul&gt;</description>
+      <footprints>
+        <fp>*ROTARY_ENC_PLAIN*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">S</field>
+        <field name="Value">ENCODER-SWITCH</field>
+        <field name="Footprint">ROTARY_ENC_PLAIN</field>
+        <field name="Champ4">COM-09117</field>
+      </fields>
+      <pins>
+        <pin num="A" name="A" type="BiDi"/>
+        <pin num="B" name="B" type="BiDi"/>
+        <pin num="C" name="C" type="BiDi"/>
+        <pin num="SW+" name="SW+" type="BiDi"/>
+        <pin num="SW-" name="SW-" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="SparkFun-Switches" part="SWITCH_TOGGLE_SPST_RIGHT_ANGLE">
+      <fields>
+        <field name="Reference">S</field>
+        <field name="Value">SWITCH_TOGGLE_SPST_RIGHT_ANGLE</field>
+        <field name="Champ4">PRT-13888</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="output"/>
+        <pin num="2" name="~" type="input"/>
+        <pin num="3" name="~" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="Switch" part="SW_Push">
+      <description>Push button switch, generic, two pins</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_Push</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Transistor_BJT" part="PN2222A">
+      <description>1A Ic, 40V Vce, NPN Transistor, General Purpose Transistor, TO-92</description>
+      <docs>http://www.fairchildsemi.com/ds/PN/PN2222A.pdf</docs>
+      <footprints>
+        <fp>TO?92*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">PN2222A</field>
+        <field name="Footprint">Package_TO_SOT_THT:TO-92_Inline</field>
+      </fields>
+      <pins>
+        <pin num="1" name="E" type="passive"/>
+        <pin num="2" name="B" type="input"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+    </library>
+    <library logical="Diode">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Diode.lib</uri>
+    </library>
+    <library logical="Isolator">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Isolator.lib</uri>
+    </library>
+    <library logical="MCU_Module">
+      <uri>C:\Program Files\KiCad\share\kicad\library/MCU_Module.lib</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Mechanical.lib</uri>
+    </library>
+    <library logical="Regulator_Linear">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Regulator_Linear.lib</uri>
+    </library>
+    <library logical="SparkFun-Connectors">
+      <uri>C:/Users/pfeuh/Documents/CAO/kicad/SparkFun-KiCad-Libraries-master/Libraries/SparkFun-Connectors.lib</uri>
+    </library>
+    <library logical="SparkFun-IC-Logic">
+      <uri>C:/Users/pfeuh/Documents/CAO/kicad/SparkFun-KiCad-Libraries-master/Libraries/SparkFun-IC-Logic.lib</uri>
+    </library>
+    <library logical="SparkFun-LED">
+      <uri>C:/Users/pfeuh/Documents/CAO/kicad/SparkFun-KiCad-Libraries-master/Libraries/SparkFun-LED.lib</uri>
+    </library>
+    <library logical="SparkFun-Switches">
+      <uri>C:/Users/pfeuh/Documents/CAO/kicad/SparkFun-KiCad-Libraries-master/Libraries/SparkFun-Switches.lib</uri>
+    </library>
+    <library logical="Switch">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Switch.lib</uri>
+    </library>
+    <library logical="Transistor_BJT">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Transistor_BJT.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="COL_3">
+      <node ref="SW23" pin="2"/>
+      <node ref="SW18" pin="2"/>
+      <node ref="SW1" pin="SW+"/>
+      <node ref="SW29" pin="2"/>
+      <node ref="U1" pin="10"/>
+    </net>
+    <net code="2" name="COL_2">
+      <node ref="U1" pin="9"/>
+      <node ref="SW28" pin="2"/>
+      <node ref="SW22" pin="2"/>
+      <node ref="SW17" pin="2"/>
+    </net>
+    <net code="3" name="COL_1">
+      <node ref="SW27" pin="2"/>
+      <node ref="SW26" pin="2"/>
+      <node ref="U1" pin="8"/>
+      <node ref="SW21" pin="2"/>
+    </net>
+    <net code="4" name="Net-(U1-Pad30)">
+      <node ref="U1" pin="30"/>
+    </net>
+    <net code="5" name="Net-(U1-Pad3)">
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="6" name="Net-(U1-Pad28)">
+      <node ref="U1" pin="28"/>
+    </net>
+    <net code="7" name="+5V">
+      <node ref="J5" pin="5"/>
+      <node ref="U8" pin="8"/>
+      <node ref="U9" pin="3"/>
+      <node ref="U5" pin="16"/>
+      <node ref="CD9" pin="1"/>
+      <node ref="BU1" pin="1"/>
+      <node ref="R1" pin="2"/>
+      <node ref="R21" pin="1"/>
+      <node ref="CD5" pin="1"/>
+      <node ref="CD4" pin="1"/>
+      <node ref="U5" pin="10"/>
+      <node ref="CD3" pin="1"/>
+      <node ref="R17" pin="1"/>
+      <node ref="U4" pin="16"/>
+      <node ref="R25" pin="1"/>
+      <node ref="R20" pin="1"/>
+      <node ref="R24" pin="1"/>
+      <node ref="R30" pin="1"/>
+      <node ref="R26" pin="1"/>
+      <node ref="R22" pin="1"/>
+      <node ref="R23" pin="1"/>
+      <node ref="U7" pin="16"/>
+      <node ref="U7" pin="10"/>
+      <node ref="R55" pin="1"/>
+      <node ref="CD8" pin="1"/>
+      <node ref="CD7" pin="1"/>
+      <node ref="CD6" pin="1"/>
+      <node ref="TP4" pin="1"/>
+      <node ref="TP3" pin="1"/>
+      <node ref="U6" pin="16"/>
+      <node ref="U4" pin="10"/>
+      <node ref="J4" pin="1"/>
+      <node ref="U6" pin="10"/>
+      <node ref="R52" pin="1"/>
+      <node ref="U1" pin="27"/>
+      <node ref="R31" pin="1"/>
+      <node ref="R27" pin="1"/>
+      <node ref="U3" pin="16"/>
+      <node ref="R28" pin="1"/>
+      <node ref="U3" pin="10"/>
+    </net>
+    <net code="8" name="Net-(U1-Pad26)">
+      <node ref="U1" pin="26"/>
+    </net>
+    <net code="9" name="Net-(U1-Pad25)">
+      <node ref="U1" pin="25"/>
+    </net>
+    <net code="10" name="ROW_2">
+      <node ref="U1" pin="14"/>
+      <node ref="SW17" pin="1"/>
+      <node ref="SW26" pin="1"/>
+      <node ref="SW20" pin="1"/>
+      <node ref="SW19" pin="1"/>
+      <node ref="SW18" pin="1"/>
+    </net>
+    <net code="11" name="ROW_3">
+      <node ref="U1" pin="15"/>
+      <node ref="SW27" pin="1"/>
+      <node ref="SW28" pin="1"/>
+      <node ref="SW30" pin="1"/>
+      <node ref="SW1" pin="SW-"/>
+      <node ref="SW31" pin="1"/>
+      <node ref="SW29" pin="1"/>
+    </net>
+    <net code="12" name="COL_4">
+      <node ref="SW30" pin="2"/>
+      <node ref="SW19" pin="2"/>
+      <node ref="SW24" pin="2"/>
+      <node ref="U1" pin="11"/>
+    </net>
+    <net code="13" name="COL_5">
+      <node ref="SW31" pin="2"/>
+      <node ref="SW25" pin="2"/>
+      <node ref="SW20" pin="2"/>
+      <node ref="U1" pin="12"/>
+    </net>
+    <net code="14" name="SCL">
+      <node ref="J4" pin="3"/>
+      <node ref="U1" pin="24"/>
+    </net>
+    <net code="15" name="ROW_1">
+      <node ref="U1" pin="13"/>
+      <node ref="SW21" pin="1"/>
+      <node ref="SW23" pin="1"/>
+      <node ref="SW22" pin="1"/>
+      <node ref="SW25" pin="1"/>
+      <node ref="SW24" pin="1"/>
+    </net>
+    <net code="16" name="DIGIT_1">
+      <node ref="U2" pin="1"/>
+      <node ref="T1" pin="3"/>
+    </net>
+    <net code="17" name="DIGIT_4">
+      <node ref="U2" pin="8"/>
+      <node ref="T4" pin="3"/>
+    </net>
+    <net code="18" name="DIGIT_3">
+      <node ref="T3" pin="3"/>
+      <node ref="U2" pin="6"/>
+    </net>
+    <net code="19" name="DIGIT_2">
+      <node ref="U2" pin="2"/>
+      <node ref="T2" pin="3"/>
+    </net>
+    <net code="20" name="Net-(R5-Pad2)">
+      <node ref="T4" pin="2"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="21" name="SEG_D">
+      <node ref="R44" pin="2"/>
+      <node ref="U2" pin="3"/>
+    </net>
+    <net code="22" name="Net-(R44-Pad1)">
+      <node ref="U7" pin="3"/>
+      <node ref="R44" pin="1"/>
+    </net>
+    <net code="23" name="SEG_E">
+      <node ref="U2" pin="5"/>
+      <node ref="R45" pin="2"/>
+    </net>
+    <net code="24" name="Net-(R45-Pad1)">
+      <node ref="R45" pin="1"/>
+      <node ref="U7" pin="4"/>
+    </net>
+    <net code="25" name="SEG_F">
+      <node ref="U2" pin="11"/>
+      <node ref="R46" pin="2"/>
+    </net>
+    <net code="26" name="Net-(R46-Pad1)">
+      <node ref="U7" pin="5"/>
+      <node ref="R46" pin="1"/>
+    </net>
+    <net code="27" name="SEG_G">
+      <node ref="U2" pin="15"/>
+      <node ref="R47" pin="2"/>
+    </net>
+    <net code="28" name="Net-(R47-Pad1)">
+      <node ref="U7" pin="6"/>
+      <node ref="R47" pin="1"/>
+    </net>
+    <net code="29" name="Net-(R48-Pad1)">
+      <node ref="R48" pin="1"/>
+      <node ref="U7" pin="7"/>
+    </net>
+    <net code="30" name="Net-(R5-Pad1)">
+      <node ref="R5" pin="1"/>
+      <node ref="U4" pin="7"/>
+    </net>
+    <net code="31" name="Net-(R4-Pad1)">
+      <node ref="U4" pin="6"/>
+      <node ref="R4" pin="1"/>
+    </net>
+    <net code="32" name="Net-(R3-Pad1)">
+      <node ref="U4" pin="5"/>
+      <node ref="R3" pin="1"/>
+    </net>
+    <net code="33" name="Net-(R2-Pad1)">
+      <node ref="U4" pin="4"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="34" name="GND">
+      <node ref="T1" pin="1"/>
+      <node ref="U8" pin="5"/>
+      <node ref="T2" pin="1"/>
+      <node ref="U7" pin="13"/>
+      <node ref="U5" pin="13"/>
+      <node ref="U6" pin="8"/>
+      <node ref="SW1" pin="C"/>
+      <node ref="U3" pin="8"/>
+      <node ref="U3" pin="13"/>
+      <node ref="U4" pin="8"/>
+      <node ref="U4" pin="13"/>
+      <node ref="U5" pin="8"/>
+      <node ref="U6" pin="13"/>
+      <node ref="TP1" pin="1"/>
+      <node ref="TP2" pin="1"/>
+      <node ref="J1" pin="2"/>
+      <node ref="U7" pin="8"/>
+      <node ref="U9" pin="2"/>
+      <node ref="J3" pin="1"/>
+      <node ref="T5" pin="1"/>
+      <node ref="J5" pin="1"/>
+      <node ref="CD9" pin="2"/>
+      <node ref="J4" pin="4"/>
+      <node ref="T3" pin="1"/>
+      <node ref="T4" pin="1"/>
+      <node ref="CD4" pin="2"/>
+      <node ref="CD5" pin="2"/>
+      <node ref="CD6" pin="2"/>
+      <node ref="U1" pin="29"/>
+      <node ref="CD3" pin="2"/>
+      <node ref="CD7" pin="2"/>
+      <node ref="CD8" pin="2"/>
+      <node ref="U1" pin="4"/>
+      <node ref="R54" pin="2"/>
+    </net>
+    <net code="35" name="Net-(R43-Pad1)">
+      <node ref="U7" pin="2"/>
+      <node ref="R43" pin="1"/>
+    </net>
+    <net code="36" name="Net-(R2-Pad2)">
+      <node ref="T1" pin="2"/>
+      <node ref="R2" pin="2"/>
+    </net>
+    <net code="37" name="Net-(R3-Pad2)">
+      <node ref="R3" pin="2"/>
+      <node ref="T2" pin="2"/>
+    </net>
+    <net code="38" name="Net-(R4-Pad2)">
+      <node ref="R4" pin="2"/>
+      <node ref="T3" pin="2"/>
+    </net>
+    <net code="39" name="DP">
+      <node ref="U2" pin="7"/>
+      <node ref="R48" pin="2"/>
+    </net>
+    <net code="40" name="Net-(U1-Pad16)">
+      <node ref="U1" pin="16"/>
+    </net>
+    <net code="41" name="Net-(U1-Pad17)">
+      <node ref="U1" pin="17"/>
+    </net>
+    <net code="42" name="Net-(U1-Pad18)">
+      <node ref="U1" pin="18"/>
+    </net>
+    <net code="43" name="Net-(U1-Pad22)">
+      <node ref="U1" pin="22"/>
+    </net>
+    <net code="44" name="SDA">
+      <node ref="J4" pin="2"/>
+      <node ref="U1" pin="23"/>
+    </net>
+    <net code="45" name="SEG_C">
+      <node ref="U2" pin="13"/>
+      <node ref="R43" pin="2"/>
+    </net>
+    <net code="46" name="SEG_B">
+      <node ref="U2" pin="16"/>
+      <node ref="R42" pin="2"/>
+    </net>
+    <net code="47" name="SEG_A">
+      <node ref="U2" pin="14"/>
+      <node ref="R41" pin="2"/>
+    </net>
+    <net code="48" name="Net-(R42-Pad1)">
+      <node ref="R42" pin="1"/>
+      <node ref="U7" pin="1"/>
+    </net>
+    <net code="49" name="Net-(R41-Pad1)">
+      <node ref="R41" pin="1"/>
+      <node ref="U7" pin="15"/>
+    </net>
+    <net code="50" name="Net-(BU1-Pad2)">
+      <node ref="BU1" pin="2"/>
+      <node ref="T5" pin="3"/>
+    </net>
+    <net code="51" name="BUZ">
+      <node ref="U1" pin="21"/>
+      <node ref="R56" pin="2"/>
+    </net>
+    <net code="52" name="Net-(R56-Pad1)">
+      <node ref="R56" pin="1"/>
+      <node ref="T5" pin="2"/>
+    </net>
+    <net code="53" name="Net-(SW2-Pad1)">
+      <node ref="SW2" pin="1"/>
+    </net>
+    <net code="54" name="Net-(R54-Pad1)">
+      <node ref="U8" pin="7"/>
+      <node ref="R54" pin="1"/>
+    </net>
+    <net code="55" name="Net-(J3-Pad2)">
+      <node ref="J3" pin="2"/>
+      <node ref="U9" pin="1"/>
+    </net>
+    <net code="56" name="CLOCK">
+      <node ref="U6" pin="11"/>
+      <node ref="U4" pin="11"/>
+      <node ref="U5" pin="11"/>
+      <node ref="U1" pin="6"/>
+      <node ref="U7" pin="11"/>
+      <node ref="U3" pin="11"/>
+      <node ref="J5" pin="4"/>
+    </net>
+    <net code="57" name="LATCH">
+      <node ref="U5" pin="12"/>
+      <node ref="J5" pin="3"/>
+      <node ref="U1" pin="7"/>
+      <node ref="U3" pin="12"/>
+      <node ref="U7" pin="12"/>
+      <node ref="U6" pin="12"/>
+      <node ref="U4" pin="12"/>
+    </net>
+    <net code="58" name="DATA_BIT_6">
+      <node ref="U7" pin="9"/>
+      <node ref="J5" pin="2"/>
+    </net>
+    <net code="59" name="Net-(R51-Pad2)">
+      <node ref="R51" pin="2"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="60" name="Net-(J1-Pad1)">
+      <node ref="J1" pin="1"/>
+      <node ref="R52" pin="2"/>
+    </net>
+    <net code="61" name="Net-(J1-Pad3)">
+      <node ref="J1" pin="3"/>
+      <node ref="R51" pin="1"/>
+    </net>
+    <net code="62" name="TRACK_A">
+      <node ref="U1" pin="19"/>
+      <node ref="SW1" pin="A"/>
+    </net>
+    <net code="63" name="TRACK_B">
+      <node ref="SW1" pin="B"/>
+      <node ref="U1" pin="20"/>
+    </net>
+    <net code="64" name="RX">
+      <node ref="U1" pin="2"/>
+      <node ref="SW2" pin="3"/>
+    </net>
+    <net code="65" name="Net-(R55-Pad2)">
+      <node ref="U8" pin="6"/>
+      <node ref="SW2" pin="2"/>
+      <node ref="R55" pin="2"/>
+    </net>
+    <net code="66" name="Net-(D51-Pad2)">
+      <node ref="U8" pin="3"/>
+      <node ref="R53" pin="1"/>
+      <node ref="D51" pin="2"/>
+    </net>
+    <net code="67" name="Net-(U8-Pad4)">
+      <node ref="U8" pin="4"/>
+    </net>
+    <net code="68" name="Net-(U8-Pad1)">
+      <node ref="U8" pin="1"/>
+    </net>
+    <net code="69" name="Net-(J2-Pad1)">
+      <node ref="J2" pin="1"/>
+      <node ref="R53" pin="2"/>
+    </net>
+    <net code="70" name="Net-(D51-Pad1)">
+      <node ref="J2" pin="2"/>
+      <node ref="D51" pin="1"/>
+      <node ref="U8" pin="2"/>
+    </net>
+    <net code="71" name="DATA_BIT_2">
+      <node ref="U4" pin="14"/>
+      <node ref="U3" pin="9"/>
+    </net>
+    <net code="72" name="Net-(D31-PadK)">
+      <node ref="D31" pin="K"/>
+      <node ref="U4" pin="15"/>
+    </net>
+    <net code="73" name="Net-(D30-PadK)">
+      <node ref="D30" pin="K"/>
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="74" name="Net-(D28-PadK)">
+      <node ref="D28" pin="K"/>
+      <node ref="U4" pin="2"/>
+    </net>
+    <net code="75" name="DATA_BIT_3">
+      <node ref="U4" pin="9"/>
+      <node ref="U5" pin="14"/>
+    </net>
+    <net code="76" name="Net-(D9-PadK)">
+      <node ref="U6" pin="15"/>
+      <node ref="D9" pin="K"/>
+    </net>
+    <net code="77" name="DATA_BIT_4">
+      <node ref="U6" pin="14"/>
+      <node ref="U5" pin="9"/>
+    </net>
+    <net code="78" name="Net-(D10-PadK)">
+      <node ref="D10" pin="K"/>
+      <node ref="U6" pin="1"/>
+    </net>
+    <net code="79" name="Net-(D11-PadK)">
+      <node ref="D11" pin="K"/>
+      <node ref="U6" pin="2"/>
+    </net>
+    <net code="80" name="Net-(D12-PadK)">
+      <node ref="D12" pin="K"/>
+      <node ref="U6" pin="3"/>
+    </net>
+    <net code="81" name="Net-(D13-PadK)">
+      <node ref="U6" pin="4"/>
+      <node ref="D13" pin="K"/>
+    </net>
+    <net code="82" name="Net-(D8-PadK)">
+      <node ref="D8" pin="K"/>
+      <node ref="U5" pin="7"/>
+    </net>
+    <net code="83" name="Net-(U2-Pad4)">
+      <node ref="U2" pin="4"/>
+    </net>
+    <net code="84" name="Net-(U2-Pad9)">
+      <node ref="U2" pin="9"/>
+    </net>
+    <net code="85" name="Net-(D7-PadK)">
+      <node ref="U5" pin="6"/>
+      <node ref="D7" pin="K"/>
+    </net>
+    <net code="86" name="Net-(D3-PadK)">
+      <node ref="U5" pin="2"/>
+      <node ref="D3" pin="K"/>
+    </net>
+    <net code="87" name="Net-(U2-Pad10)">
+      <node ref="U2" pin="10"/>
+    </net>
+    <net code="88" name="Net-(U2-Pad12)">
+      <node ref="U2" pin="12"/>
+    </net>
+    <net code="89" name="Net-(D6-PadK)">
+      <node ref="D6" pin="K"/>
+      <node ref="U5" pin="5"/>
+    </net>
+    <net code="90" name="Net-(D5-PadK)">
+      <node ref="U5" pin="4"/>
+      <node ref="D5" pin="K"/>
+    </net>
+    <net code="91" name="Net-(D2-PadK)">
+      <node ref="U5" pin="1"/>
+      <node ref="D2" pin="K"/>
+    </net>
+    <net code="92" name="Net-(D26-PadK)">
+      <node ref="U3" pin="15"/>
+      <node ref="D26" pin="K"/>
+    </net>
+    <net code="93" name="DATA_BIT_1">
+      <node ref="U1" pin="5"/>
+      <node ref="U3" pin="14"/>
+    </net>
+    <net code="94" name="Net-(D25-PadK)">
+      <node ref="U3" pin="1"/>
+      <node ref="D25" pin="K"/>
+    </net>
+    <net code="95" name="Net-(D24-PadK)">
+      <node ref="U3" pin="2"/>
+      <node ref="D24" pin="K"/>
+    </net>
+    <net code="96" name="Net-(D23-PadK)">
+      <node ref="U3" pin="3"/>
+      <node ref="D23" pin="K"/>
+    </net>
+    <net code="97" name="Net-(D4-PadK)">
+      <node ref="D4" pin="K"/>
+      <node ref="U5" pin="3"/>
+    </net>
+    <net code="98" name="Net-(D1-PadK)">
+      <node ref="D1" pin="K"/>
+      <node ref="U5" pin="15"/>
+    </net>
+    <net code="99" name="Net-(D15-PadK)">
+      <node ref="U6" pin="6"/>
+      <node ref="D15" pin="K"/>
+    </net>
+    <net code="100" name="Net-(D16-PadK)">
+      <node ref="U6" pin="7"/>
+      <node ref="D16" pin="K"/>
+    </net>
+    <net code="101" name="DATA_BIT_5">
+      <node ref="U6" pin="9"/>
+      <node ref="U7" pin="14"/>
+    </net>
+    <net code="102" name="Net-(D1-PadA)">
+      <node ref="D7" pin="A"/>
+      <node ref="D8" pin="A"/>
+      <node ref="D4" pin="A"/>
+      <node ref="R1" pin="1"/>
+      <node ref="D16" pin="A"/>
+      <node ref="D3" pin="A"/>
+      <node ref="D5" pin="A"/>
+      <node ref="D2" pin="A"/>
+      <node ref="D6" pin="A"/>
+      <node ref="D1" pin="A"/>
+      <node ref="D15" pin="A"/>
+      <node ref="D12" pin="A"/>
+      <node ref="D14" pin="A"/>
+      <node ref="D10" pin="A"/>
+      <node ref="D13" pin="A"/>
+      <node ref="D9" pin="A"/>
+      <node ref="D11" pin="A"/>
+    </net>
+    <net code="103" name="Net-(D14-PadK)">
+      <node ref="D14" pin="K"/>
+      <node ref="U6" pin="5"/>
+    </net>
+    <net code="104" name="Net-(D30-PadA)">
+      <node ref="R30" pin="2"/>
+      <node ref="D30" pin="A"/>
+    </net>
+    <net code="105" name="Net-(D26-PadA)">
+      <node ref="R26" pin="2"/>
+      <node ref="D26" pin="A"/>
+    </net>
+    <net code="106" name="Net-(D24-PadA)">
+      <node ref="D24" pin="A"/>
+      <node ref="R24" pin="2"/>
+    </net>
+    <net code="107" name="Net-(D20-PadK)">
+      <node ref="D20" pin="K"/>
+      <node ref="U3" pin="6"/>
+    </net>
+    <net code="108" name="Net-(D20-PadA)">
+      <node ref="R20" pin="2"/>
+      <node ref="D20" pin="A"/>
+    </net>
+    <net code="109" name="Net-(D22-PadA)">
+      <node ref="R22" pin="2"/>
+      <node ref="D22" pin="A"/>
+    </net>
+    <net code="110" name="Net-(D22-PadK)">
+      <node ref="D22" pin="K"/>
+      <node ref="U3" pin="4"/>
+    </net>
+    <net code="111" name="Net-(D25-PadA)">
+      <node ref="D25" pin="A"/>
+      <node ref="R25" pin="2"/>
+    </net>
+    <net code="112" name="Net-(D21-PadA)">
+      <node ref="D21" pin="A"/>
+      <node ref="R21" pin="2"/>
+    </net>
+    <net code="113" name="Net-(D21-PadK)">
+      <node ref="D21" pin="K"/>
+      <node ref="U3" pin="5"/>
+    </net>
+    <net code="114" name="Net-(D17-PadA)">
+      <node ref="R17" pin="2"/>
+      <node ref="D17" pin="A"/>
+    </net>
+    <net code="115" name="Net-(D17-PadK)">
+      <node ref="D17" pin="K"/>
+      <node ref="U3" pin="7"/>
+    </net>
+    <net code="116" name="Net-(D23-PadA)">
+      <node ref="D23" pin="A"/>
+      <node ref="R23" pin="2"/>
+    </net>
+    <net code="117" name="Net-(D27-PadK)">
+      <node ref="D27" pin="K"/>
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="118" name="Net-(D31-PadA)">
+      <node ref="D31" pin="A"/>
+      <node ref="R31" pin="2"/>
+    </net>
+    <net code="119" name="Net-(D28-PadA)">
+      <node ref="R28" pin="2"/>
+      <node ref="D28" pin="A"/>
+    </net>
+    <net code="120" name="Net-(D27-PadA)">
+      <node ref="R27" pin="2"/>
+      <node ref="D27" pin="A"/>
+    </net>
+  </nets>
+</export>
