@@ -1,0 +1,30 @@
+100NF=100nF capacitor
+10K=10k resistor
+1K=1k resistor
+1K5=1.5k resistor
+1N4148
+220=220ohms resistor
+2N2222=2n2222 transistor
+3MM BLUE=LED 3mm blue
+3MM GREEN=LED 3mm green
+3MM RED=LED 3mm red
+3MM YELLOW=LED 3mm yellow
+470=470ohms resistor
+510=510ohms resistor
+6N138
+7-SEGMENT-4DIGIT-10MM-RED
+74595=74LS595 shift register
+ARDUINO_NANO_V2.X=Arduino Nano
+BUZZER-PTH_KIT_NO_SILK=Active buzzer
+CONN_02=DIL male 2 points
+CONN_03=DIL male 3 points
+CONN_04=DIL male 4 points
+CONN_05=DIL male 5 points
+ENCODER-SWITCH=Encoder
+LM7805_TO220=7805
+MOUNTINGHOLE=hidden
+PN2222A=2n2222 transistor
+POWER CONNECTOR
+SWITCH_TOGGLE_SPST_RIGHT_ANGLE=switch
+SW_PUSH=push button
+TESTPOINT=hidden

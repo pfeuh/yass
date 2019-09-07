@@ -29,6 +29,10 @@ Aligner les boutons et les leds, MEME SI ON EST HORS DE LA GRILLE!
 Implanter plutot les gros boutons qui ne necessitent pas de piece 3D.
 Utiliser un afficheur 7 segment beaucoup plus courant.
 
+leds vertes 1k5
+leds bleues 1k5
+leds rouges 1k
+leds jaunes 510
 
 
 
