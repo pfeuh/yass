@@ -130,6 +130,22 @@ class SKETCH():
     ELLIPSE_ID = 1
     TEXT_ID = 1
     
+    def makeCSV(self, fname):
+        def flt2csvFlt(flt):
+            return ("%f"%flt).replace(".", ",")
+        lines = []
+        objnames = self.getObjnames()
+        for objname in objnames:
+            x_in = flt2csvFlt(self.getRawXy(objname)[0])
+            y_in = flt2csvFlt(self.getRawXy(objname)[1])
+            x_mm = flt2csvFlt(self.cvrt(self.getRawXy(objname)[0]))
+            y_mm = flt2csvFlt(self.cvrt(self.getRawXy(objname)[1]))
+            lines.append("%s;%s;%s;%s;%s\n"%(objname, x_in, y_in, x_mm, y_mm))
+        with open(fname, "w") as fp:
+            fp.write("Object;x inches;y inches;x mm,y mm\n")
+            fp.write("".join(lines))
+        sys.stdout.write("file %s saved.\n"%fname)
+
     def __init__(self, fname, unit="mm"):
         self.changeUnit(unit)
         self.__x_origin = 0.0
@@ -138,9 +154,14 @@ class SKETCH():
         self.__objects = {}
         self.__raw_xy = {}
         
+    def getObjnames(self):
+        objnames = self.__raw_xy.keys()[:]
+        objnames.sort()
+        return objnames
+        
     def getRawXy(self, objname):
         if objname in self.__raw_xy.keys():
-            return self.__raw_xy[key]
+            return self.__raw_xy[objname]
 
     def cvrt(self, value):
         return float(value) * self.__coeff
@@ -158,44 +179,59 @@ class SKETCH():
 
     def changeOrigin(self, x, y):
         self.__x_origin = self.cvrt(x)
-        self.__y_origin = self.cvrt(y)
-        
-    def addRectangle(self, x, y, w, h, radius=0):
-        label = "rect%u"%SKETCH.RECTANGLE_ID
-        self.__raw_xy[label] = float(x), float(y)
+        self.__y_origin = -self.cvrt(y)
+    
+    def translation(self, x, y):
+        x += self.__x_origin
+        y += self.__y_origin
+        return x, y
+
+    def addRectangle(self, x, y, w, h, radius=0, label=None):
+        key = "rect%u"%SKETCH.RECTANGLE_ID
         SKETCH.RECTANGLE_ID += 1
+        if label == None:
+            label = key
+        self.__raw_xy[label] = float(x), float(y)
         x, y, w, h, radius = self.cvrt(x), self.cvrt(y), self.cvrt(w), self.cvrt(h), self.cvrt(radius)
         x = x - w / 2.0 
         y = 0.0 - y - h / 2.0 
+        #~ x, y = self.translation(x, y)
         x += self.__x_origin
         y += self.__y_origin
-        self.__objects[label] = [x, y, w, h, radius]
+        self.__objects[key] = [x, y, w, h, radius]
         if SHOW_RECTANGLES:
-            sys.stdout.write("%s %s\n"%(label, str(self.__objects[label])))
-        return label
+            sys.stdout.write("%s %s\n"%(key, str(self.__objects[key])))
+        return key
 
-    def addCircle(self, x, y, r):
-        label = "elli%u"%SKETCH.ELLIPSE_ID
+    def addCircle(self, x, y, r, label=None):
+        key = "elli%u"%SKETCH.ELLIPSE_ID
         SKETCH.ELLIPSE_ID += 1
+        if label == None:
+            label = key
+        self.__raw_xy[label] = float(x), float(y)
         x, y, r = self.cvrt(x), 0.0 - self.cvrt(y), self.cvrt(r)
         x += self.__x_origin
         y += self.__y_origin
-        self.__objects[label] = [x, y, r]
+        self.__objects[key] = [x, y, r]
         if SHOW_CIRCLES:
-            sys.stdout.write("%s %s\n"%(label, str(self.__objects[label])))
-        return label
+            sys.stdout.write("%s %s\n"%(key, str(self.__objects[key])))
+        return key
 
-    def addText(self, text, x, y, font_size=1.5, anchor="start", transform=None):
-        label = "text%u"%SKETCH.TEXT_ID
+    def addText(self, text, x, y, font_size=1.5, anchor="start", transform=None, label=None):
+        font_size = self.cvrt(font_size)
+        key = "text%u"%SKETCH.TEXT_ID
         SKETCH.TEXT_ID += 1
+        if label == None:
+            label = key
+        self.__raw_xy[label] = float(x), float(y)
         x, y = self.cvrt(x), self.cvrt(y)
         y = 0.0 - y
         x += self.__x_origin
         y += self.__y_origin
-        self.__objects[label] = [x, y, str(text), font_size, anchor, transform]
+        self.__objects[key] = [x, y, str(text), font_size, anchor, transform]
         if SHOW_TEXTS:
-            sys.stdout.write("%s %s\n"%(label, str(self.__objects[label])))
-        return label
+            sys.stdout.write("%s %s\n"%(key, str(self.__objects[key])))
+        return key
 
     def save(self):
         objects_code = ""
@@ -260,6 +296,9 @@ if __name__ == "__main__":
     LED_HEIGHT = 1.1
     BUTTON_X_OFFSET = -2.95
     
+    # I don't know why drawing it out of the sheet, but I can fix it
+    sketch.changeOrigin(6, -7.5)
+
     # let's compute front pannel border
     sketch.addRectangle(0, 0, 7.8, 5.2, 0.15)
 
@@ -271,10 +310,8 @@ if __name__ == "__main__":
         sketch.addCircle(x, y, r)
         x += LED_WIDTH
 
-    for idx in range(5):
-        x = 0.0
-        y = float(idx) * 0.55
-        sketch.addText("text %u"%(idx), x, y, 1, "start")
-
+    sketch.addText("This is only a test", 0, 1, font_size=0.08, anchor="middle")
+    
     sketch.save()
-
+    sketch.makeCSV("img/coordinates.csv")
+    

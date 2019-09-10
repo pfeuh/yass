@@ -42,10 +42,10 @@ TEKO_FRONT_PANNEL_WIDTH = 8.24
 TEKO_FRONT_PANNEL_HEIGHT = 4.94 # 5.12
 FRONT_PANNEL_CORNER_RADIUS = 0.395
 
-BUTTON_FONT_SIZE = 1.5
-LED_FONT_SIZE = 1.0
-TITLE_FONT_SIZE = 4.0
-LEGEND_FONT_SIZE = 0.8
+BUTTON_FONT_SIZE = 0.06
+LED_FONT_SIZE = 0.04
+TITLE_FONT_SIZE = 0.16
+LEGEND_FONT_SIZE = 0.033
 
 LED_RADIUS = 0.061
 STEP_LED_X_ORIGIN = -2.975
@@ -76,9 +76,9 @@ def addButton(sketch, x, y, text):
 def drawFrontPannel(sketch):
     # let's compute front pannel border
     if USE_TEKO_BOX: 
-        sketch.addRectangle(0, 0, TEKO_FRONT_PANNEL_WIDTH, TEKO_FRONT_PANNEL_HEIGHT, 0)
+        sketch.addRectangle(0, 0, TEKO_FRONT_PANNEL_WIDTH, TEKO_FRONT_PANNEL_HEIGHT, 0, label="tekoFrontPannel")
     else: 
-        sketch.addRectangle(0, 0, FRONT_PANNEL_WIDTH, FRONT_PANNEL_HEIGHT, FRONT_PANNEL_CORNER_RADIUS)
+        sketch.addRectangle(0, 0, FRONT_PANNEL_WIDTH, FRONT_PANNEL_HEIGHT, FRONT_PANNEL_CORNER_RADIUS, label="frontPannel")
 
     # let's compute step leds
     glob_text = ["In", "Out", "Prog. num.", "Arpeggiator", "Clock in", "Clock out", "Key click ", "Audio beat", "Accept sysEx", "Transposition", "Dump all", "Load all", "Save all", "Dump global", "Load global", "Save global"]
@@ -87,10 +87,10 @@ def drawFrontPannel(sketch):
     y = STEP_LED_Y_ORIGIN
     r = LED_RADIUS
     for led_num in range(16):
-        sketch.addCircle(x, y, r)
+        sketch.addCircle(x, y, r, label="step led %u"%(led_num+1))
         if USE_TEXT:
-            sketch.addText(glob_text[led_num], x + STEP_LED_H_TEXT_OFFSET, y + STEP_LED_V_TEXT_OFFSET, font_size = LED_FONT_SIZE, transform="-90")
-            sketch.addText(seq_text[led_num], x + STEP_LED_H_TEXT_OFFSET, y - STEP_LED_V_TEXT_OFFSET, font_size = LED_FONT_SIZE, anchor="end", transform="-90")
+            sketch.addText(glob_text[led_num], x + STEP_LED_H_TEXT_OFFSET, y + STEP_LED_V_TEXT_OFFSET, font_size = LED_FONT_SIZE, transform="-90", label="globalText%u"%(led_num+1))
+            sketch.addText(seq_text[led_num], x + STEP_LED_H_TEXT_OFFSET, y - STEP_LED_V_TEXT_OFFSET, font_size = LED_FONT_SIZE, anchor="end", transform="-90", label="sequenceText%u"%(led_num+1))
         x += STEP_LED_H_INTERVAL
 
     # let's compute buttons
@@ -101,14 +101,14 @@ def drawFrontPannel(sketch):
     button_x   = []
     button_y   = []
     for button_num in range(len(button_text)):
+        text = button_text[button_num]
         button_x.append(BUTTON_X_ORIGIN + STEP_LED_H_INTERVAL * button_nb_x_intervals[button_num])
         button_y.append(BUTTON_Y_ORIGIN + STEP_BUTTON_V_INTERVAL * button_nb_y_intervals[button_num])
-        sketch.addCircle(button_x[button_num], button_y[button_num], BUTTON_RADIUS)
+        sketch.addCircle(button_x[button_num], button_y[button_num], BUTTON_RADIUS, label="button%s"%(text))
         if button_led[button_num]:
-            sketch.addCircle(button_x[button_num] - BUTTON_LED_H_INTERVAL, button_y[button_num] + BUTTON_LED_V_INTERVAL, LED_RADIUS)
+            sketch.addCircle(button_x[button_num] - BUTTON_LED_H_INTERVAL, button_y[button_num] + BUTTON_LED_V_INTERVAL, LED_RADIUS, label="buttonLed%s"%(text))
         anchor = "middle"
         x = button_x[button_num]
-        text = button_text[button_num]
         if text != "":
             if button_num < 9:
                 y = button_y[button_num] + BUTTON_TEXT_DOWN
@@ -119,16 +119,14 @@ def drawFrontPannel(sketch):
             else:
                 y = button_y[button_num] + BUTTON_TEXT_UP
             if USE_TEXT:
-                sketch.addText(text, x, y, anchor = anchor)
-            
-        print button_num, str(text), button_led[button_num], button_x[button_num], button_y[button_num]
+                sketch.addText(text, x, y, anchor=anchor, font_size=BUTTON_FONT_SIZE, label="buttonLed%s"%(text))
 
     # let's add 4 holes to fix board
     if MAKE_BOARD_FIXATION:
-        sketch.addCircle(-3.05, 0.80, LED_RADIUS)
-        sketch.addCircle(-3.05, -1.10, LED_RADIUS)
-        sketch.addCircle(3.15, 1.0, LED_RADIUS)
-        sketch.addCircle(3.15, -1.2, LED_RADIUS)
+        sketch.addCircle(-3.05, 0.80, LED_RADIUS, label="boardFixHole1")
+        sketch.addCircle(-3.05, -1.10, LED_RADIUS, label="boardFixHole2")
+        sketch.addCircle(3.15, 1.0, LED_RADIUS, label="boardFixHole3")
+        sketch.addCircle(3.15, -1.2, LED_RADIUS, label="boardFixHole4")
 
     # let's add 4 holes to fix front pannel on box
     if MAKE_BOARD_FIXATION:
@@ -136,28 +134,28 @@ def drawFrontPannel(sketch):
             x, y = 3.9375, 2.265
         else:
             x, y = 3.588, 2.238
-        sketch.addCircle(-x, y, LED_RADIUS)
-        sketch.addCircle(-x, -y, LED_RADIUS)
-        sketch.addCircle(x, y, LED_RADIUS)
-        sketch.addCircle(x, -y, LED_RADIUS)
+        sketch.addCircle(-x, y, LED_RADIUS, label="boxFixHole1")
+        sketch.addCircle(-x, -y, LED_RADIUS, label="boxFixHole2")
+        sketch.addCircle(x, y, LED_RADIUS, label="boxFixHole3")
+        sketch.addCircle(x, -y, LED_RADIUS, label="boxFixHole4")
 
     # let's compute 4x7 segments display
-    sketch.addRectangle(0.2, 1.52, 1.587, 0.55, 0)
+    sketch.addRectangle(0.2, 1.52, 1.587, 0.55, 0, label="display4x7segments")
 
     # let's compute encoder button
     x = 1.850
-    sketch.addCircle(x, 1.5, 0.29)
+    sketch.addCircle(x, 1.5, 0.29, label="encoder")
     if USE_TEXT:
-        sketch.addText("- DATA +", x, BUTTON_Y_ORIGIN + STEP_BUTTON_V_INTERVAL * 3 + BUTTON_TEXT_UP, anchor="middle")
+        sketch.addText("- DATA +", x, BUTTON_Y_ORIGIN + STEP_BUTTON_V_INTERVAL * 3 + BUTTON_TEXT_UP, font_size=BUTTON_FONT_SIZE, anchor="middle", label="encoderText")
 
     # some advertisement
     if USE_TEXT:
-        sketch.addText("YASS", 0.2, 1.95, font_size=TITLE_FONT_SIZE, anchor="middle")
+        sketch.addText("YASS", 0.2, 1.95, font_size=TITLE_FONT_SIZE, anchor="middle", label="yassText")
         if USE_TEKO_BOX:
             width = TEKO_FRONT_PANNEL_WIDTH
         else:
             width = FRONT_PANNEL_WIDTH
-        sketch.addText("Yet Another Step Sequencer - c. MMXIX", -width / 2.0 + 0.2, 0, font_size=LEGEND_FONT_SIZE, anchor="middle", transform="-90")
+        sketch.addText("Yet Another Step Sequencer - MMXIX", -width / 2.0 + 0.2, 0, font_size=LEGEND_FONT_SIZE, anchor="middle", transform="-90", label="yet...Text")
 
 if __name__ == "__main__":
 
@@ -166,7 +164,12 @@ if __name__ == "__main__":
     filename = "%s/%s.svg"%(IMG_PATH, FNAME)
     sketch = scriptSvg.SKETCH(filename, "in")
     
+    # I don't know why drawing it out of the sheet, but I can fix it
+    sketch.changeOrigin(6, -7.5)
+
     drawFrontPannel(sketch)
   
     sketch.save()
+    sketch.makeCSV("img/coordinates.csv")
 
+    
