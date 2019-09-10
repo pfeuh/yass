@@ -6,7 +6,7 @@ As it is extreme programming, I've only implemented what I need.
 
 How does it work? I sliced a dummy svg file with a circle, a text
 and a rectangle. I use theses sliced texts as templates, filling
-coordinates and other full stuff from file yassTrontpannel_xx.py.
+coordinates and other cool stuff from file yassFrontpannel_xx.py.
 
 The main problem for me was to create texts in 4 directions with
 the 3 anchors start, middle & end. It's now fixed.
