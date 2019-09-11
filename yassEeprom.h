@@ -45,6 +45,8 @@ class YASS_EEPROM
         void begin(YASS_CONFIG* config_ptr, YASS_SEQUENCE* seqs_ptr);
         void saveSequence(byte seq_num);
         void loadSequence(byte seq_num);
+        void saveGlobal();
+        void loadGlobal();
         void saveAll();
         void loadAll();
     

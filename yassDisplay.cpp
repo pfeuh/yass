@@ -167,6 +167,30 @@ const byte YASS_DISPLAY_FONT[] PROGMEM =
 /* Private methods */
 /*******************/
 
+void YASS_DISPLAY::subPrintWord(word value, byte base, bool negative)
+{
+    clear();
+    if(negative)
+        write('-');
+    byte stack[nbDigits];
+    for(byte idx = 0; idx < nbDigits; idx++)
+    {
+        stack[idx] = value % base;
+        value = value / base;
+    }
+    bool started = false;
+    for(byte idx = nbDigits - 1; idx != 255; idx--)
+    {
+        // don't display leading zeros
+        if(stack[idx])
+            started = true;
+        if(started)
+            write(stack[idx]);
+    }
+    if(!started)
+        write(0);
+}
+
 /******************/
 /* Public methods */
 /******************/
@@ -212,24 +236,15 @@ void YASS_DISPLAY::printHexWord(word value, byte digit_num)
 
 void YASS_DISPLAY::printWord(word value, byte base)
 {
-    byte stack[nbDigits];
-    for(byte idx = 0; idx < nbDigits; idx++)
-    {
-        stack[idx] = value % base;
-        value = value / base;
-    }
-    clear();
-    bool started = false;
-    for(byte idx = nbDigits - 1; idx != 255; idx--)
-    {
-        // don't display leading zeros
-        if(stack[idx])
-            started = true;
-        if(started)
-            write(stack[idx]);
-    }
-    if(!started)
-        write(0);
+    subPrintWord(value, base, false);
+}
+
+void YASS_DISPLAY::printSignedWord(word value, byte base)
+{
+    if(!(value & 0x8000))
+        subPrintWord(value, base, false);
+    else
+        subPrintWord(0-value, base, true);
 }
 
 void YASS_DISPLAY::printLut(const char* lut, byte index, byte word_size)

@@ -73,10 +73,22 @@ void YASS_EEPROM::loadSequence(byte seq_num)
     read(wpeek(seqAddr + seq_num), seqsPtr[seq_num].getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
 }
 
-void YASS_EEPROM::saveAll()
+void YASS_EEPROM::saveGlobal()
 {
     // global configuration
     write(configPtr->getDataPointer(), YASS_EEPROM_BASE_GLOBAL, YASS_CONFIG_DATA_SIZE);
+}
+
+void YASS_EEPROM::loadGlobal()
+{
+    // global configuration
+    read(YASS_EEPROM_BASE_GLOBAL, configPtr->getDataPointer(), YASS_CONFIG_DATA_SIZE);
+}
+
+void YASS_EEPROM::saveAll()
+{
+    // global configuration
+    saveGlobal();
     
     // sequences
     for(byte seq_num = 0; seq_num < NB_SEQS; seq_num++)
@@ -86,7 +98,7 @@ void YASS_EEPROM::saveAll()
 void YASS_EEPROM::loadAll()
 {
     // global configuration
-    read(YASS_EEPROM_BASE_GLOBAL, configPtr->getDataPointer(), YASS_CONFIG_DATA_SIZE);
+    loadGlobal();
     
     // sequences
     for(byte seq_num = 0; seq_num < NB_SEQS; seq_num++)

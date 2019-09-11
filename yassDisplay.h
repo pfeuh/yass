@@ -34,6 +34,7 @@ class YASS_DISPLAY
         void printHexByte(byte value, byte digit_num);
         void printHexWord(word value, byte digit_num);
         void printWord(word value, byte base);
+        void printSignedWord(word value, byte base);
         void printLut(const char* lut, byte index, byte word_size);
         void writeDot(bool value, byte digit_num);
         void clear();
@@ -46,6 +47,8 @@ class YASS_DISPLAY
         byte nbDigits;
         byte* digits;
         byte cursor;
+    
+        void subPrintWord(word value, byte base, bool negative);
     
 };
 

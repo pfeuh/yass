@@ -23,55 +23,7 @@
 #include <Arduino.h>
 #include "yassEncoder.h"
 
-#define YASS_EDIT_FSM_VERSION "1.00"
-
-/*********************/
-/* states definition */
-/*********************/
-
-#define YASS_EDIT_FSM_STATE_TEMPO 1
-#define YASS_EDIT_FSM_STATE_RECORD_EDIT 2
-
-// global parameters
-#define YASS_EDIT_FSM_FIRST_GLOBAL     16
-
-#define YASS_EDIT_FSM_MIDI_IN_CHANNEL YASS_EDIT_FSM_FIRST_GLOBAL
-#define YASS_EDIT_FSM_MIDI_OUT_CHANNEL 17
-#define YASS_EDIT_FSM_PROGRAM_NUMBER   18
-#define YASS_EDIT_FSM_ARPEGGIATOR      19
-#define YASS_EDIT_FSM_CLOCK_IN         20
-#define YASS_EDIT_FSM_CLOCK_OUT        21
-#define YASS_EDIT_FSM_KEY_ECHO         22
-#define YASS_EDIT_FSM_CLICK            23
-#define YASS_EDIT_FSM_USE_SYSEX        24
-#define YASS_EDIT_FSM_TRANSPOSITION    24
-#define YASS_EDIT_FSM_ALL_DUMP         26
-#define YASS_EDIT_FSM_ALL_LOAD         27
-#define YASS_EDIT_FSM_ALL_SAVE         28
-#define YASS_EDIT_FSM_GLOB_DUMP        29
-#define YASS_EDIT_FSM_GLOB_LOAD        30
-#define YASS_EDIT_FSM_GLOB_SAVE        31
-
-#define YASS_EDIT_FSM_LAST_GLOBAL YASS_EDIT_FSM_GLOB_SAVE
-
-// sequence parameters
-#define YASS_EDIT_FSM_FIRST_SEQ       32
-
-#define YASS_EDIT_FSM_GROOVE YASS_EDIT_FSM_FIRST_SEQ
-#define YASS_EDIT_FSM_GATE_MODE        33
-#define YASS_EDIT_FSM_LAST_STEP        34
-#define YASS_EDIT_FSM_DATA_MODE        35
-#define YASS_EDIT_FSM_CTRL_CHG         36
-#define YASS_EDIT_FSM_FIX_VEL          37
-// here rooms for 4 extra states
-#define YASS_EDIT_FSM_SWAP             42
-#define YASS_EDIT_FSM_COPY             43
-#define YASS_EDIT_FSM_SEQ_LOAD_FACTORY 44
-#define YASS_EDIT_FSM_SEQ_DUMP         45
-#define YASS_EDIT_FSM_SEQ_LOAD         46
-#define YASS_EDIT_FSM_SEQ_SAVE         47
-
-#define YASS_EDIT_FSM_LAST_SEQ YASS_EDIT_FSM_SEQ_SAVE
+#define YASS_EDIT_FSM_STATE_VERSION "1.00"
 
 class YASS_EDIT_FSM
 {

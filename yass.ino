@@ -111,33 +111,23 @@ void keyBeep()
         beeper.beep();
 }
 
-void setEditNotImplemented()
-{
-    editor.setState(YASS_EDIT_FSM_STATE_TEMPO, &dummyEdit);
-}
-
-void setEditTempo()
-{
-    editor.setState(YASS_EDIT_FSM_STATE_TEMPO, &editTempo);
-}
-
 bool functionWaitsValidation()
 {
     bool ret_val;
     switch(editor.getState())
     {
-        case YASS_EDIT_FSM_ALL_DUMP:
-        case YASS_EDIT_FSM_ALL_LOAD:
-        case YASS_EDIT_FSM_ALL_SAVE:
-        case YASS_EDIT_FSM_GLOB_DUMP:
-        case YASS_EDIT_FSM_GLOB_LOAD:
-        case YASS_EDIT_FSM_GLOB_SAVE:
-        case YASS_EDIT_FSM_COPY:
-        case YASS_EDIT_FSM_SWAP:
-        case YASS_EDIT_FSM_SEQ_LOAD_FACTORY:
-        case YASS_EDIT_FSM_SEQ_LOAD:
-        case YASS_EDIT_FSM_SEQ_SAVE:
-        case YASS_EDIT_FSM_SEQ_DUMP:
+        case EDIT_STATE_ALL_DUMP:
+        case EDIT_STATE_ALL_LOAD:
+        case EDIT_STATE_ALL_SAVE:
+        case EDIT_STATE_GLOB_DUMP:
+        case EDIT_STATE_GLOB_LOAD:
+        case EDIT_STATE_GLOB_SAVE:
+        case EDIT_STATE_COPY:
+        case EDIT_STATE_SWAP:
+        case EDIT_STATE_SEQ_LOAD_FACTORY:
+        case EDIT_STATE_SEQ_LOAD:
+        case EDIT_STATE_SEQ_SAVE:
+        case EDIT_STATE_SEQ_DUMP:
             ret_val = true;
             break;
         default:
@@ -289,12 +279,193 @@ void receiveContinue()
     }
 }
 /***********************/
+/* display's callbacks */
+/***********************/
+
+void displayTempo()
+{
+    if(!globConf.getClockIn())
+        display.printWord(ticks.getTempo(), DEFAULT_BASE);        
+    else
+    {
+        if(player.isRunning())
+            display.printWord(beatCalc.getTempo(), DEFAULT_BASE);
+        else
+            display.printLut(genericLut, LUT_INDEX_NO_BPM, NB_DIGITS);
+    }
+}
+
+void displayRecord()
+{
+    if(editDataFlag)
+        display.printWord(player.getCurrentSequence()->getData(player.getRecordIndex()), DEFAULT_BASE);
+    else
+        display.printLut(noteLabelLut, player.getCurrentSequence()->getNote(player.getRecordIndex()), NB_DIGITS);
+}
+
+void displayNoCode()
+{
+    display.printLut(genericLut, LUT_INDEX_NO_CODE, NB_DIGITS);
+}
+
+void displayMidiIn()
+{
+
+    if(globConf.getOmni())
+        display.printLut(genericLut, LUT_INDEX_OMNI, NB_DIGITS);
+    else
+        display.printWord(globConf.getChannelIn(), DEFAULT_BASE);
+}
+
+void displayMidiOut()
+{
+    display.printWord(globConf.getChannelOut(), DEFAULT_BASE);
+}
+
+void displayProgNum()
+{
+    if(globConf.getUseProgNum())
+        display.printLut(voiceLabelLut, globConf.getProgNum(), NB_DIGITS);
+    else
+        display.printLut(genericLut, LUT_INDEX_NONE, NB_DIGITS);
+}
+
+void displayArpeggiator()
+{
+    display.printLut(sqArpLut, globConf.getArpeggiator(), NB_DIGITS);
+}
+
+void displayClockIn()
+{
+    display.printLut(boolLut, globConf.getClockIn(), NB_DIGITS);
+}
+
+void displayClockOut()
+{
+    display.printLut(boolLut, globConf.getClockOut(), NB_DIGITS);
+}
+
+void displayKeyEcho()
+{
+    display.printLut(boolLut, globConf.getKeyEcho(), NB_DIGITS);
+}
+
+void displayClick()
+{
+    display.printLut(boolLut, globConf.getClick(), NB_DIGITS);
+}
+
+void displayUseSysEx()
+{
+    display.printLut(boolLut, globConf.getUseSysEx(), NB_DIGITS);
+}
+
+void displayTransposition()
+{
+    display.printSignedWord(transposition, DEFAULT_BASE);
+}
+
+void displayDumpAll()
+{
+    display.printLut(ioLut, LUT_INDEX_DUMP_ALL, NB_DIGITS);
+}
+
+void displayLoadAll()
+{
+    display.printLut(ioLut, LUT_INDEX_LOAD_ALL, NB_DIGITS);
+}
+
+void displaySaveAll()
+{
+    display.printLut(ioLut, LUT_INDEX_SAVE_ALL, NB_DIGITS);
+}
+
+void displayDumpGlo()
+{
+    display.printLut(ioLut, LUT_INDEX_DUMP_GLO, NB_DIGITS);
+}
+
+void displayLoadGlo()
+{
+    display.printLut(ioLut, LUT_INDEX_LOAD_GLO, NB_DIGITS);
+}
+
+void displaySaveGlo()
+{
+    display.printLut(ioLut, LUT_INDEX_SAVE_GLO, NB_DIGITS);
+}
+        
+void displayGroove()
+{
+    display.printLut(grooveLut, player.getCurrentSequence()->getGroove(), NB_DIGITS);
+}
+
+void displayGateMode()
+{
+    display.printLut(gateModeLut, player.getCurrentSequence()->getGateMode(), NB_DIGITS);
+}
+
+void displayLastStep()
+{
+    display.printWord(player.getCurrentSequence()->getLastStep() + 1, DEFAULT_BASE);
+}
+
+void displayDataMode()
+{
+    display.printLut(dataModeLut, player.getCurrentSequence()->getDataMode(), NB_DIGITS);
+}
+
+void displayCtrlChg()
+{
+    display.printWord(player.getCurrentSequence()->getControlChange(), DEFAULT_BASE);
+}
+
+void displayFixedVelocity()
+{
+    display.printWord(player.getCurrentSequence()->getFixedVelocity(), DEFAULT_BASE);
+}
+
+void displaySeqLoadFactory()
+{
+    display.printWord(romSequenceIndex, DEFAULT_BASE);
+}
+
+void displayCopy()
+{
+    display.printWord(copySeqIndex + 1, DEFAULT_BASE);
+}
+void displaySwap()
+{
+    display.printWord(swapSeqIndex + 1, DEFAULT_BASE);
+}
+
+void displaySeqDump()
+{
+    display.printLut(ioLut, LUT_INDEX_DUMP_SEQ, NB_DIGITS);
+}
+void displaySeqLoad()
+{
+    display.printLut(ioLut, LUT_INDEX_LOAD_SEQ, NB_DIGITS);
+}
+
+void displaySeqSave()
+{
+    display.printLut(ioLut, LUT_INDEX_SAVE_SEQ, NB_DIGITS);
+}
+
+/***********************/
 /* encoder's callbacks */
 /***********************/
 
-void dummyEdit(bool direction)
+void editTempo(bool direction)
 {
-    direction++; // just to fake the compiler
+    if(!globConf.getClockIn())
+    {
+        if(direction == YASS_ENCODER_DIRECTION_UP)
+            ticks.setTempo(ticks.getTempo() + 1);
+        else
+            ticks.setTempo(ticks.getTempo() - 1);
+    }
 }
 
 void editRecord(bool direction)
@@ -332,18 +503,12 @@ void editRecord(bool direction)
     }
 }
 
-void editTempo(bool direction)
+void editNoCode(bool direction)
 {
-    if(!globConf.getClockIn())
-    {
-        if(direction == YASS_ENCODER_DIRECTION_UP)
-            ticks.setTempo(ticks.getTempo() + 1);
-        else
-            ticks.setTempo(ticks.getTempo() - 1);
-    }
+    direction++; // just to fake the compiler
 }
 
-void editMidiInChannel(bool direction)
+void editMidiIn(bool direction)
 {
     if(direction == YASS_ENCODER_DIRECTION_UP)
     {
@@ -366,13 +531,49 @@ void editMidiInChannel(bool direction)
     }
 }
 
-void editMidiOutChannel(bool direction)
+void editMidiOut(bool direction)
 {
     player.stopCurrentNote();
     if(direction == YASS_ENCODER_DIRECTION_UP)
         globConf.setChannelOut(globConf.getChannelOut() + 1);
     else
         globConf.setChannelOut(globConf.getChannelOut() - 1);
+}
+
+void editProgNum(bool direction)
+{
+    player.stopCurrentNote();
+    byte prog_num = globConf.getProgNum();
+    if(direction == YASS_ENCODER_DIRECTION_UP)
+    {
+        if(globConf.getUseProgNum()) 
+        {
+            if(prog_num < LAST_MIDI_PROG_NUM)
+                globConf.setProgNum(prog_num + 1);
+        }
+        else
+        {
+            globConf.setProgNum(FIRST_MIDI_PROG_NUM);
+            globConf.setUseProgNum(1);
+        }
+    }
+    else
+        if(globConf.getUseProgNum()) 
+        {
+            if(prog_num > FIRST_MIDI_PROG_NUM)
+                globConf.setProgNum(prog_num - 1);
+            else
+                globConf.setUseProgNum(0);
+        }
+    changeProgramm() ;
+}
+    
+void editArpeggiator(bool direction)
+{
+    if(direction == YASS_ENCODER_DIRECTION_UP)
+        globConf.setArpeggiator(1);
+    else
+        globConf.setArpeggiator(0);
 }
 
 void editClockIn(bool direction)
@@ -415,12 +616,12 @@ void editSysEx(bool direction)
         globConf.setUseSysEx(0);
 }
 
-void editArpeggiator(bool direction)
+void editTransposition(bool direction)
 {
     if(direction == YASS_ENCODER_DIRECTION_UP)
-        globConf.setArpeggiator(1);
+        transposition++;
     else
-        globConf.setArpeggiator(0);
+        transposition--;
 }
 
 void editGroove(bool direction)
@@ -472,34 +673,6 @@ void editLastStep(bool direction)
     
 }
 
-void editProgNum(bool direction)
-{
-    player.stopCurrentNote();
-    byte prog_num = globConf.getProgNum();
-    if(direction == YASS_ENCODER_DIRECTION_UP)
-    {
-        if(globConf.getUseProgNum()) 
-        {
-            if(prog_num < LAST_MIDI_PROG_NUM)
-                globConf.setProgNum(prog_num + 1);
-        }
-        else
-        {
-            globConf.setProgNum(FIRST_MIDI_PROG_NUM);
-            globConf.setUseProgNum(1);
-        }
-    }
-    else
-        if(globConf.getUseProgNum()) 
-        {
-            if(prog_num > FIRST_MIDI_PROG_NUM)
-                globConf.setProgNum(prog_num - 1);
-            else
-                globConf.setUseProgNum(0);
-        }
-    changeProgramm() ;
-}
-    
 void editCtrlChg(bool direction)
 {
     YASS_SEQUENCE* seq = player.getCurrentSequence();
@@ -589,135 +762,202 @@ void editLoadFactory(bool direction)
 /* routing the encoder's callbacks */
 /***********************************/
 
-void setEditParam(byte state)
+void setEditState(byte state)
 {
     switch(state)
     {
-        case YASS_EDIT_FSM_MIDI_IN_CHANNEL:
-            editor.setState(YASS_EDIT_FSM_MIDI_IN_CHANNEL, &editMidiInChannel);
+        case EDIT_STATE_TEMPO:
+            editor.setState(EDIT_STATE_TEMPO, &editTempo);
+            displayCallback = &displayTempo;
             break;
-        case YASS_EDIT_FSM_MIDI_OUT_CHANNEL:
-            editor.setState(YASS_EDIT_FSM_MIDI_OUT_CHANNEL, &editMidiOutChannel);
+        case EDIT_STATE_RECORD:
+            editor.setState(EDIT_STATE_RECORD, &editRecord);
+            displayCallback = &displayRecord;
             break;
-        case YASS_EDIT_FSM_CLOCK_IN:
-            editor.setState(YASS_EDIT_FSM_CLOCK_IN, &editClockIn);
+        case EDIT_STATE_MIDI_IN:
+            editor.setState(EDIT_STATE_MIDI_IN, &editMidiIn);
+            displayCallback = &displayMidiIn;
             break;
-        case YASS_EDIT_FSM_CLOCK_OUT:
-            editor.setState(YASS_EDIT_FSM_CLOCK_OUT, &editClockOut);
+        case EDIT_STATE_MIDI_OUT:
+            editor.setState(EDIT_STATE_MIDI_OUT, &editMidiOut);
+            displayCallback = &displayMidiOut;
             break;
-        case YASS_EDIT_FSM_KEY_ECHO:
-            editor.setState(YASS_EDIT_FSM_KEY_ECHO, &editKeyEcho);
+        case EDIT_STATE_PROGRAM_NUMBER:
+            editor.setState(EDIT_STATE_PROGRAM_NUMBER, &editProgNum);
+            displayCallback = &displayProgNum;
             break;
-        case YASS_EDIT_FSM_CLICK:
-            editor.setState(YASS_EDIT_FSM_CLICK, &editClick);
+        case EDIT_STATE_ARPEGGIATOR:
+            editor.setState(EDIT_STATE_ARPEGGIATOR, &editArpeggiator);
+            displayCallback = &displayArpeggiator;
             break;
-        case YASS_EDIT_FSM_PROGRAM_NUMBER:
-            editor.setState(YASS_EDIT_FSM_PROGRAM_NUMBER, &editProgNum);
+        case EDIT_STATE_CLOCK_IN:
+            editor.setState(EDIT_STATE_CLOCK_IN, &editClockIn);
+            displayCallback = &displayClockIn;
             break;
-        case YASS_EDIT_FSM_ARPEGGIATOR:
-            editor.setState(YASS_EDIT_FSM_PROGRAM_NUMBER, &editArpeggiator);
+        case EDIT_STATE_CLOCK_OUT:
+            editor.setState(EDIT_STATE_CLOCK_OUT, &editClockOut);
+            displayCallback = &displayClockOut;
             break;
-        case YASS_EDIT_FSM_GLOB_DUMP:
-            editor.setState(YASS_EDIT_FSM_GLOB_DUMP, &dummyEdit);
+        case EDIT_STATE_KEY_ECHO:
+            editor.setState(EDIT_STATE_KEY_ECHO, &editKeyEcho);
+            displayCallback = &displayKeyEcho;
             break;
-        case YASS_EDIT_FSM_GLOB_LOAD:
-            editor.setState(YASS_EDIT_FSM_GLOB_LOAD, &dummyEdit);
+        case EDIT_STATE_CLICK:
+            editor.setState(EDIT_STATE_CLICK, &editClick);
+            displayCallback = &displayClick;
             break;
-        case YASS_EDIT_FSM_GLOB_SAVE:
-            editor.setState(YASS_EDIT_FSM_GLOB_SAVE, &dummyEdit);
+        case EDIT_STATE_USE_SYSEX:
+            editor.setState(EDIT_STATE_USE_SYSEX, &editSysEx);
+            displayCallback = &displayUseSysEx;
             break;
-        case YASS_EDIT_FSM_USE_SYSEX:
-            editor.setState(YASS_EDIT_FSM_USE_SYSEX, &editSysEx);
+        case EDIT_STATE_TRANSPOSITION:
+            editor.setState(EDIT_STATE_TRANSPOSITION, &editTransposition);
+            displayCallback = &displayTransposition;
             break;
-        case YASS_EDIT_FSM_GROOVE:
-            editor.setState(YASS_EDIT_FSM_GROOVE, &editGroove);
+        case EDIT_STATE_ALL_DUMP:
+            editor.setState(EDIT_STATE_ALL_DUMP, &editNoCode);
+            displayCallback = &displayDumpAll;
             break;
-        case YASS_EDIT_FSM_GATE_MODE:
-            editor.setState(YASS_EDIT_FSM_GATE_MODE, &editGateMode);
+        case EDIT_STATE_ALL_LOAD:
+            editor.setState(EDIT_STATE_ALL_LOAD, &editNoCode);
+            displayCallback = &displayLoadAll;
             break;
-        case YASS_EDIT_FSM_LAST_STEP:
-            editor.setState(YASS_EDIT_FSM_LAST_STEP, &editLastStep);
+        case EDIT_STATE_ALL_SAVE:
+            editor.setState(EDIT_STATE_ALL_SAVE, &editNoCode);
+            displayCallback = &displaySaveAll;
             break;
-        case YASS_EDIT_FSM_DATA_MODE:
-            editor.setState(YASS_EDIT_FSM_LAST_STEP, &editDataMode);
+        case EDIT_STATE_GLOB_DUMP:
+            editor.setState(EDIT_STATE_GLOB_DUMP, &editNoCode);
+            displayCallback = &displayDumpGlo;
             break;
-        case YASS_EDIT_FSM_CTRL_CHG:
-            editor.setState(YASS_EDIT_FSM_CTRL_CHG, &editCtrlChg);
+        case EDIT_STATE_GLOB_LOAD:
+            editor.setState(EDIT_STATE_GLOB_LOAD, &editNoCode);
+            displayCallback = &displayLoadGlo;
             break;
-        case YASS_EDIT_FSM_FIX_VEL:
-            editor.setState(YASS_EDIT_FSM_FIX_VEL, &editFixedVelocity);
-            break;
-        case YASS_EDIT_FSM_COPY:
-            editor.setState(YASS_EDIT_FSM_COPY, &editCopySeq);
-            break;
-        case YASS_EDIT_FSM_SWAP:
-            editor.setState(YASS_EDIT_FSM_SWAP, &editSwapSeq);
-            break;
-        case YASS_EDIT_FSM_SEQ_LOAD_FACTORY:
-            editor.setState(YASS_EDIT_FSM_SEQ_LOAD_FACTORY, &editLoadFactory);
-            break;
-        case YASS_EDIT_FSM_SEQ_DUMP:
-            editor.setState(YASS_EDIT_FSM_SEQ_DUMP, &dummyEdit);
-            break;
-        case YASS_EDIT_FSM_SEQ_LOAD:
-            editor.setState(YASS_EDIT_FSM_SEQ_LOAD, &dummyEdit);
-            break;
-        case YASS_EDIT_FSM_SEQ_SAVE:
-            editor.setState(YASS_EDIT_FSM_SEQ_SAVE, &dummyEdit);
-            break;
-        case YASS_EDIT_FSM_ALL_DUMP:
-            editor.setState(YASS_EDIT_FSM_ALL_DUMP, &dummyEdit);
+        case EDIT_STATE_GLOB_SAVE:
+            editor.setState(EDIT_STATE_GLOB_SAVE, &editNoCode);
+            displayCallback = &displaySaveGlo;
             break;
 
+        case EDIT_STATE_GROOVE:
+            editor.setState(EDIT_STATE_GROOVE, &editGroove);
+            displayCallback = &displayGroove;
+            break;
+        case EDIT_STATE_GATE_MODE:
+            editor.setState(EDIT_STATE_GATE_MODE, &editGateMode);
+            displayCallback = &displayGateMode;
+            break;
+        case EDIT_STATE_LAST_STEP:
+            editor.setState(EDIT_STATE_LAST_STEP, &editLastStep);
+            displayCallback = &displayLastStep;
+            break;
+        case EDIT_STATE_DATA_MODE:
+            editor.setState(EDIT_STATE_DATA_MODE, &editDataMode);
+            displayCallback = &displayDataMode;
+            break;
+        case EDIT_STATE_CTRL_CHG:
+            editor.setState(EDIT_STATE_CTRL_CHG, &editCtrlChg);
+            displayCallback = &displayCtrlChg;
+            break;
+        case EDIT_STATE_FIX_VEL:
+            editor.setState(EDIT_STATE_FIX_VEL, &editFixedVelocity);
+            displayCallback = &displayFixedVelocity;
+            break;
+        case EDIT_STATE_COPY:
+            editor.setState(EDIT_STATE_COPY, &editCopySeq);
+            displayCallback = &displayCopy;
+            break;
+        case EDIT_STATE_SWAP:
+            editor.setState(EDIT_STATE_SWAP, &editSwapSeq);
+            displayCallback = &displaySwap;
+            break;
+        case EDIT_STATE_SEQ_LOAD_FACTORY:
+            editor.setState(EDIT_STATE_SEQ_LOAD_FACTORY, &editLoadFactory);
+            displayCallback = &displaySeqLoadFactory;
+            break;
+        case EDIT_STATE_SEQ_DUMP:
+            editor.setState(EDIT_STATE_SEQ_DUMP, &editNoCode);
+            displayCallback = &displaySeqDump;
+            break;
+        case EDIT_STATE_SEQ_LOAD:
+            editor.setState(EDIT_STATE_SEQ_LOAD, &editNoCode);
+            displayCallback = &displaySeqLoad;
+            break;
+        case EDIT_STATE_SEQ_SAVE:
+            editor.setState(EDIT_STATE_SEQ_SAVE, &editNoCode);
+            displayCallback = &displaySeqSave;
+            break;
         default:
+            
+            console.print(F("Unexpected "));   
+        
+            editor.setState(EDIT_STATE_NO_CODE, &editNoCode);
+            displayCallback = &displayNoCode;
             break;
     }
+
+    console.print(F("state is "));   
+    console.println(editor.getState());
+    
 }
 
-void setNextGlobalEditParam()
+void setEditParam(bool direction)
 {
-    if(globEditIndex >= YASS_EDIT_FSM_LAST_GLOBAL)
-        globEditIndex = YASS_EDIT_FSM_FIRST_GLOBAL;
-    else if(globEditIndex == YASS_EDIT_FSM_USE_SYSEX)
-        globEditIndex = YASS_EDIT_FSM_ALL_DUMP;
-    else
-        globEditIndex += 1;
-    setEditParam(globEditIndex);
-}
+    byte state = editor.getState();
 
-void setPreviousGlobalEditParam()
-{
-    if(!globEditIndex)
-        globEditIndex = YASS_EDIT_FSM_LAST_GLOBAL;
-    else if(globEditIndex == YASS_EDIT_FSM_ALL_DUMP)
-        globEditIndex = YASS_EDIT_FSM_USE_SYSEX;
+    console.print(F("Switch from "));   
+    console.print(state);
+    
+    if(direction == PARAM_INCREASE)
+    {
+        switch(state)
+        {
+            case EDIT_STATE_LAST_SEQ:
+                state = EDIT_STATE_FIRST_SEQ;
+                break;
+            case EDIT_STATE_FIX_VEL:
+                state = EDIT_STATE_SWAP;
+                break;
+            case EDIT_STATE_LAST_GLOBAL:
+                state = EDIT_STATE_FIRST_GLOBAL;
+                break;
+            default:
+            // let's switch to next state
+                state ++;
+                break;
+        }
+    }
     else
-        globEditIndex -= 1;
-    setEditParam(globEditIndex);
+    {
+        switch(state)
+        {
+            case EDIT_STATE_FIRST_SEQ:
+                state = EDIT_STATE_LAST_SEQ;
+                break;
+            case EDIT_STATE_SWAP:
+                state = EDIT_STATE_FIX_VEL;
+                break;
+            case EDIT_STATE_FIRST_GLOBAL:
+                state = EDIT_STATE_LAST_GLOBAL;
+                break;
+            default:
+                // let's switch to previous state
+                state--;
+            break;
+        }
+    }
+    
+    if(globEditFlag)
+        globEditIndex = state;
+    else if(seqEditFlag)
+        seqEditIndex = state;
+    
+    
+    console.print(F("to "));   
+    console.println(state);
+    
+    setEditState(state);
 }
-
-void setNextSeqEditParam()
-{
-    if(seqEditIndex >= YASS_EDIT_FSM_LAST_SEQ)
-        seqEditIndex = YASS_EDIT_FSM_FIRST_SEQ;
-    else if(seqEditIndex == YASS_EDIT_FSM_FIX_VEL)
-        seqEditIndex = YASS_EDIT_FSM_SWAP;
-    else
-        seqEditIndex += 1;
-    setEditParam(seqEditIndex);
-}
-
-void setPreviousSeqEditParam()
-{
-    if(!seqEditIndex)
-        seqEditIndex = YASS_EDIT_FSM_LAST_SEQ;
-    else if(seqEditIndex == YASS_EDIT_FSM_SWAP)
-        seqEditIndex = YASS_EDIT_FSM_FIX_VEL;
-    else
-        seqEditIndex -= 1;
-    setEditParam(seqEditIndex);
-}
-
 /****************/
 /* HMI commands */
 /****************/
@@ -743,7 +983,7 @@ void commandStop()
 {
     execStop();
     if(!player.isRecording())
-        setEditTempo();
+        setEditState(EDIT_STATE_TEMPO);
 }
 
 void commandRecord()
@@ -751,7 +991,7 @@ void commandRecord()
     if(player.isRecording())
     {
         player.stopRecordSequencer();
-        setEditTempo();
+        setEditState(EDIT_STATE_TEMPO);
         keyBeep();
     }
     else
@@ -760,41 +1000,49 @@ void commandRecord()
         {
             switch(editor.getState())
             {
-                case YASS_EDIT_FSM_ALL_DUMP:
+                // states for global edition
+                case EDIT_STATE_ALL_DUMP:
                     sysEx.sendAll();
                     break;
-                case YASS_EDIT_FSM_GLOB_DUMP:
-                    sysEx.sendGlobal();
-                    break;
-                case YASS_EDIT_FSM_ALL_LOAD:
+                case EDIT_STATE_ALL_LOAD:
                     storage.loadAll();
                     break;
-                case YASS_EDIT_FSM_ALL_SAVE:
+                case EDIT_STATE_ALL_SAVE:
                     storage.saveAll();
                     break;
-                case YASS_EDIT_FSM_SEQ_LOAD:
-                    storage.loadSequence(player.getCurrentSequenceIndex());
+                case EDIT_STATE_GLOB_DUMP:
+                    sysEx.sendGlobal();
                     break;
-                case YASS_EDIT_FSM_SEQ_SAVE:
-                    storage.saveSequence(player.getCurrentSequenceIndex());
+                case EDIT_STATE_GLOB_LOAD:
+                    storage.loadGlobal();
                     break;
-                case YASS_EDIT_FSM_COPY:
-                    memcpy(player.getSequence(copySeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
+                case EDIT_STATE_GLOB_SAVE:
+                    storage.saveGlobal();
                     break;
-                case YASS_EDIT_FSM_SWAP:
+                // states for current sequence edition
+                case EDIT_STATE_SWAP:
                     swap(player.getSequence(swapSeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
                     break;
-                case YASS_EDIT_FSM_SEQ_LOAD_FACTORY:
+                case EDIT_STATE_COPY:
+                    memcpy(player.getSequence(copySeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
+                    break;
+                case EDIT_STATE_SEQ_LOAD_FACTORY:
                     YASS_ROM_SEQUENCES_load(romSequenceIndex, player.getCurrentSequence());
                     break;
-                case YASS_EDIT_FSM_SEQ_DUMP:
+                case EDIT_STATE_SEQ_LOAD:
+                    storage.loadSequence(player.getCurrentSequenceIndex());
+                    break;
+                case EDIT_STATE_SEQ_SAVE:
+                    storage.saveSequence(player.getCurrentSequenceIndex());
+                    break;
+                case EDIT_STATE_SEQ_DUMP:
                     sysEx.sendSequence(player.getCurrentSequenceIndex());
                     break;
                 default:
                     break;
             }
             exitEdit();
-            setEditTempo();
+            setEditState(EDIT_STATE_TEMPO);
             keyBeep();
         }
         else
@@ -802,7 +1050,7 @@ void commandRecord()
             if(!(globEditFlag | seqEditFlag))
             {
                 player.startRecordSequencer();
-                editor.setState(YASS_EDIT_FSM_STATE_RECORD_EDIT, &editRecord);
+                setEditState(EDIT_STATE_RECORD);
                 keyBeep();
             }
         }
@@ -852,12 +1100,12 @@ void commandSequenceEdit()
         {
             // entering sequence edition mode
             globEditFlag = false;
-            setEditParam(seqEditIndex);        
+            setEditState(seqEditIndex);        
         }
         else
         {
             // exiting sequence edition mode
-            setEditTempo();
+            setEditState(EDIT_STATE_TEMPO);
         }
     }
     else
@@ -874,12 +1122,12 @@ void commandGlobalEdit()
         {
             // entering global edition mode
             seqEditFlag = false;
-            setEditParam(globEditIndex);        
+            setEditState(globEditIndex);        
         }
         else
         {
             // exiting global edition mode
-            setEditTempo();
+            setEditState(EDIT_STATE_TEMPO);
         }
     }
     else
@@ -889,17 +1137,12 @@ void commandGlobalEdit()
 
 void commandNext()
 {
-    if(globEditFlag)
+    if(globEditFlag | seqEditFlag)
     {
-        setNextGlobalEditParam();
+        setEditParam(PARAM_INCREASE);
         keyBeep();
     }
-    else if(seqEditFlag)
-    {
-        setNextSeqEditParam();
-        keyBeep();
-    }
-    else if(editor.getState() == YASS_EDIT_FSM_STATE_TEMPO)
+    else if(editor.getState() == EDIT_STATE_TEMPO)
     {
         if(!globConf.getClockIn())
         {
@@ -916,14 +1159,9 @@ void commandNext()
 
 void commandPrevious()
 {
-    if(globEditFlag)
+    if(globEditFlag | seqEditFlag)
     {
-        setPreviousGlobalEditParam();
-        keyBeep();
-    }
-    else if(seqEditFlag)
-    {
-        setPreviousSeqEditParam();
+        setEditParam(PARAM_DECREASE);
         keyBeep();
     }
     else if(player.isRecording())
@@ -1104,125 +1342,8 @@ void keybTask()
 
 void updateDisplay()
 {
-    YASS_SEQUENCE* seq = player.getCurrentSequence();
-    byte record_index = player.getRecordIndex();
-
-    if(player.isRecording())
-    {
-        if(editDataFlag)
-            display.printWord(seq->getData(record_index), DEFAULT_BASE);
-        else
-            display.printLut(noteLabelLut, seq->getNote(record_index), NB_DIGITS);
-    }
-    
-    else if(globEditFlag)
-        switch(globEditIndex)
-        {
-            case YASS_EDIT_FSM_MIDI_IN_CHANNEL:
-                if(globConf.getOmni())
-                    display.printLut(genericLut, LUT_INDEX_OMNI, NB_DIGITS);
-                else
-                    display.printWord(globConf.getChannelIn(), DEFAULT_BASE);
-                break;
-            case YASS_EDIT_FSM_MIDI_OUT_CHANNEL:
-                display.printWord(globConf.getChannelOut(), DEFAULT_BASE);
-                break;
-            case YASS_EDIT_FSM_CLOCK_IN:
-                display.printLut(boolLut, globConf.getClockIn(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_CLOCK_OUT:
-                display.printLut(boolLut, globConf.getClockOut(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_KEY_ECHO:
-                display.printLut(boolLut, globConf.getKeyEcho(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_CLICK:
-                display.printLut(boolLut, globConf.getClick(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_USE_SYSEX:
-                display.printLut(boolLut, globConf.getUseSysEx(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_ARPEGGIATOR:
-                display.printLut(sqArpLut, globConf.getArpeggiator(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_PROGRAM_NUMBER:
-                if(globConf.getUseProgNum())
-                    display.printLut(voiceLabelLut, globConf.getProgNum(), NB_DIGITS);
-                else
-                    display.printLut(genericLut, LUT_INDEX_NONE, NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_GLOB_DUMP:
-            case YASS_EDIT_FSM_ALL_DUMP:
-                display.printLut(genericLut, LUT_INDEX_DUMP, NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_GLOB_LOAD:
-                display.printLut(genericLut, LUT_INDEX_LOAD, NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_GLOB_SAVE:
-                display.printLut(genericLut, LUT_INDEX_STOR, NB_DIGITS);
-                break;
-            default:
-                display.printLut(genericLut, LUT_INDEX_NOTI, NB_DIGITS);
-                break;
-        }
-        
-    else if(seqEditFlag)
-        switch(seqEditIndex)
-        {
-            case YASS_EDIT_FSM_GROOVE:
-                display.printLut(grooveLut, seq->getGroove(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_GATE_MODE:
-                display.printLut(gateModeLut, seq->getGateMode(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_LAST_STEP:
-                display.printWord(seq->getLastStep() + 1, DEFAULT_BASE);
-                break;
-            case YASS_EDIT_FSM_DATA_MODE:
-                display.printLut(dataModeLut, seq->getDataMode(), NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_CTRL_CHG:
-                display.printWord(seq->getControlChange(), DEFAULT_BASE);
-                break;
-            case YASS_EDIT_FSM_FIX_VEL:
-                display.printWord(seq->getFixedVelocity(), DEFAULT_BASE);
-                break;
-            case YASS_EDIT_FSM_SEQ_LOAD_FACTORY:
-                display.printWord(romSequenceIndex, DEFAULT_BASE);
-                break;
-            case YASS_EDIT_FSM_COPY:
-                display.printWord(copySeqIndex + 1, DEFAULT_BASE);
-                break;
-            case YASS_EDIT_FSM_SWAP:
-                display.printWord(swapSeqIndex + 1, DEFAULT_BASE);
-                break;
-            case YASS_EDIT_FSM_SEQ_DUMP:
-                display.printLut(genericLut, LUT_INDEX_DUMP, NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_SEQ_LOAD:
-                display.printLut(genericLut, LUT_INDEX_LOAD, NB_DIGITS);
-                break;
-            case YASS_EDIT_FSM_SEQ_SAVE:
-                display.printLut(genericLut, LUT_INDEX_STOR, NB_DIGITS);
-                break;
-            default:
-                display.printLut(genericLut, LUT_INDEX_NOTI, NB_DIGITS);
-                break;
-        }
-        
-    else
-    {
-        if(!globConf.getClockIn())
-            display.printWord(ticks.getTempo(), DEFAULT_BASE);        
-        else
-        {
-            if(player.isRunning())
-                display.printWord(beatCalc.getTempo(), DEFAULT_BASE);
-            else
-                display.printLut(genericLut, LUT_INDEX_NO_BPM, NB_DIGITS);
-        }
-        
-    }
+    if(displayCallback)
+        displayCallback();
 }
 
 void UpdateLeds()
@@ -1350,7 +1471,7 @@ void setup()
     keyb.begin();
     
     editor.begin(ENC_A, ENC_B);
-    setEditTempo();
+    setEditState(EDIT_STATE_TEMPO);
     
     shifter.begin();
     leds.begin();
@@ -1451,6 +1572,8 @@ void setup()
     sysEx.setSenderCallback(sendExclusive);
     
     display.begin();
+    
+    debug.open();
 }
 
 void loop()

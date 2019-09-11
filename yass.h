@@ -23,6 +23,9 @@
 #define ENC_A A1
 #define ENC_B A0
 
+#define PARAM_DECREASE false
+#define PARAM_INCREASE true
+
 #define CC_ALL_NOTES_OFF 120
 #define FIRST_MIDI_CHANNEL 1
 #define LAST_MIDI_CHANNEL 16
@@ -44,6 +47,53 @@
 #define PR_PLAY_ONLY   1
 #define PR_RECORD_ONLY 2
 #define PR_PLAY_RECORD 3
+
+/*********************/
+/* states definition */
+/*********************/
+
+#define EDIT_STATE_TEMPO            1
+#define EDIT_STATE_RECORD           2
+#define EDIT_STATE_NO_CODE          3
+
+// global parameters
+#define EDIT_STATE_MIDI_IN          16
+#define EDIT_STATE_MIDI_OUT         17
+#define EDIT_STATE_PROGRAM_NUMBER   18
+#define EDIT_STATE_ARPEGGIATOR      19
+#define EDIT_STATE_CLOCK_IN         20
+#define EDIT_STATE_CLOCK_OUT        21
+#define EDIT_STATE_KEY_ECHO         22
+#define EDIT_STATE_CLICK            23
+#define EDIT_STATE_USE_SYSEX        24
+#define EDIT_STATE_TRANSPOSITION    25
+#define EDIT_STATE_ALL_DUMP         26
+#define EDIT_STATE_ALL_LOAD         27
+#define EDIT_STATE_ALL_SAVE         28
+#define EDIT_STATE_GLOB_DUMP        29
+#define EDIT_STATE_GLOB_LOAD        30
+#define EDIT_STATE_GLOB_SAVE        31
+
+#define EDIT_STATE_FIRST_GLOBAL     EDIT_STATE_MIDI_IN
+#define EDIT_STATE_LAST_GLOBAL      EDIT_STATE_GLOB_SAVE
+
+// sequence parameters
+#define EDIT_STATE_GROOVE           32
+#define EDIT_STATE_GATE_MODE        33
+#define EDIT_STATE_LAST_STEP        34
+#define EDIT_STATE_DATA_MODE        35
+#define EDIT_STATE_CTRL_CHG         36
+#define EDIT_STATE_FIX_VEL          37
+// here rooms for 4 extra states
+#define EDIT_STATE_SWAP             42
+#define EDIT_STATE_COPY             43
+#define EDIT_STATE_SEQ_LOAD_FACTORY 44
+#define EDIT_STATE_SEQ_DUMP         45
+#define EDIT_STATE_SEQ_LOAD         46
+#define EDIT_STATE_SEQ_SAVE         47
+
+#define EDIT_STATE_FIRST_SEQ        EDIT_STATE_GROOVE
+#define EDIT_STATE_LAST_SEQ         EDIT_STATE_SEQ_SAVE
 
 /********************/
 /* Some cpp objects */
@@ -172,13 +222,15 @@ enum _yassState {stopped=1, paused=2, running=3};
 enum _yassState yassState;
 
 bool globEditFlag;
-byte globEditIndex = YASS_EDIT_FSM_FIRST_GLOBAL;
+byte globEditIndex = EDIT_STATE_FIRST_GLOBAL;
 bool seqEditFlag;
-byte seqEditIndex = YASS_EDIT_FSM_FIRST_SEQ;
+byte seqEditIndex = EDIT_STATE_FIRST_SEQ;
 bool editDataFlag;
 byte romSequenceIndex =YASS_ROM_SEQUENCE_FIRST;
 byte copySeqIndex = 0;
 byte swapSeqIndex = 0;
+void (*displayCallback)() = NULL;
+signed char transposition = 0;
 
 #ifdef INCLUDE_MAINTENANCE
 bool serialDebug = false;
@@ -186,22 +238,32 @@ bool serialDebug = false;
 
 const byte sequenceLedLut[] PROGMEM = {LED_1, LED_2, LED_3, LED_4, LED_5};
 
-#define LUT_INDEX_NOTI   0
-#define LUT_INDEX_OMNI   1
-#define LUT_INDEX_NONE   2
-#define LUT_INDEX_LOAD   3
-#define LUT_INDEX_STOR   4
-#define LUT_INDEX_COPY   5
-#define LUT_INDEX_PAST   6
-#define LUT_INDEX_DUMP   7
-#define LUT_INDEX_NO_BPM 8
-#define LUT_INDEX_FCT0   9
-#define LUT_INDEX_FCT1   10
-#define LUT_INDEX_FCT2   11
-#define LUT_INDEX_DEBUG  12
-#define LUT_INDEX_FCT3   13
+#define LUT_INDEX_DUMP_SEQ 0
+#define LUT_INDEX_LOAD_SEQ 1
+#define LUT_INDEX_SAVE_SEQ 2
+#define LUT_INDEX_DUMP_ALL 3
+#define LUT_INDEX_LOAD_ALL 4
+#define LUT_INDEX_SAVE_ALL 5
+#define LUT_INDEX_DUMP_GLO 6
+#define LUT_INDEX_LOAD_GLO 7
+#define LUT_INDEX_SAVE_GLO 8
+
+const char ioLut[]  PROGMEM = 
+    "Dseq" "Lseq" "Sseq" "DaLL" "LAll" "SAll" "Dglo" "Lglo" "Sglo" ;
+
+#define LUT_INDEX_NO_CODE 0
+#define LUT_INDEX_OMNI    1
+#define LUT_INDEX_NONE    2
+#define LUT_INDEX_COPY    3
+#define LUT_INDEX_PAST    4
+#define LUT_INDEX_NO_BPM  5
+#define LUT_INDEX_FCT0    6
+#define LUT_INDEX_FCT1    7
+#define LUT_INDEX_FCT2    8
+#define LUT_INDEX_DEBUG   9
+#define LUT_INDEX_FCT3    10
 const char genericLut[]  PROGMEM = 
-    "noti" "oMni" "none" "Load" "stor" "copy" "past" "dump" "----" "init" "ron1" "ron2" "dbug" "ron3";
+    "noco" "oMni" "none" "copy" "past" "----" "init" "ron1" "ron2" "dbug" "ron3";
 const char sqArpLut[]     PROGMEM = 
     "sequ" "arpe";
 const char boolLut[]     PROGMEM = 
