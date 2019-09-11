@@ -57,7 +57,7 @@ YASS_MONOSTABLE dotInMonostable = YASS_MONOSTABLE();
 #define DOT_MONO_STABLE_DELAY_MSEC 50
 
 // data editor's finite state machine
-YASS_CONF_FSM editor = YASS_CONF_FSM();
+YASS_EDIT_FSM editor = YASS_EDIT_FSM();
 
 // Keyboard
 #define KBD_NO_KEY                      0x0000
@@ -172,9 +172,9 @@ enum _yassState {stopped=1, paused=2, running=3};
 enum _yassState yassState;
 
 bool globEditFlag;
-byte globEditIndex = YASS_CONF_FSM_FIRST_GLOBAL;
+byte globEditIndex = YASS_EDIT_FSM_FIRST_GLOBAL;
 bool seqEditFlag;
-byte seqEditIndex = YASS_CONF_FSM_FIRST_SEQ;
+byte seqEditIndex = YASS_EDIT_FSM_FIRST_SEQ;
 bool editDataFlag;
 byte romSequenceIndex =YASS_ROM_SEQUENCE_FIRST;
 byte copySeqIndex = 0;

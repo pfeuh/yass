@@ -370,7 +370,7 @@ YASS_MAINTENANCE::YASS_MAINTENANCE()
 }
 
 void YASS_MAINTENANCE::begin(
-        YASS_CONF_FSM* _editor,
+        YASS_EDIT_FSM* _editor,
         YASS_KEYB* _keyb,
         YASS_BEEPER* _beeper,
         YASS_CONFIG* glob_conf,

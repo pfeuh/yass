@@ -24,7 +24,7 @@
 /* ok to use a huge quantity of constants */
 #include <avr/pgmspace.h>
 /* a finite state machine for editing each parameter */
-#include "yassConfFsm.h"
+#include "yassEditFsm.h"
 /* HMI parts */
 #include "yassKeyb.h"
 #include "yassBeeper.h"
@@ -59,7 +59,7 @@ class YASS_MAINTENANCE
     public:
         YASS_MAINTENANCE();
         void begin(
-            YASS_CONF_FSM*,
+            YASS_EDIT_FSM*,
             YASS_KEYB*,
             YASS_BEEPER*,
             YASS_CONFIG*,

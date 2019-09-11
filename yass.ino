@@ -27,7 +27,7 @@
 /* ok to use a huge quantity of constants */
 #include <avr/pgmspace.h>
 /* a finite state machine for editing each parameter */
-#include "yassConfFsm.h"
+#include "yassEditFsm.h"
 /* HMI parts */
 #include "yassKeyb.h"
 #include "yassBeeper.h"
@@ -113,12 +113,12 @@ void keyBeep()
 
 void setEditNotImplemented()
 {
-    editor.setState(YASS_CONF_FSM_STATE_TEMPO, &dummyEdit);
+    editor.setState(YASS_EDIT_FSM_STATE_TEMPO, &dummyEdit);
 }
 
 void setEditTempo()
 {
-    editor.setState(YASS_CONF_FSM_STATE_TEMPO, &editTempo);
+    editor.setState(YASS_EDIT_FSM_STATE_TEMPO, &editTempo);
 }
 
 bool functionWaitsValidation()
@@ -126,16 +126,18 @@ bool functionWaitsValidation()
     bool ret_val;
     switch(editor.getState())
     {
-        case YASS_CONF_FSM_ALL_DUMP:
-        case YASS_CONF_FSM_GLOB_DUMP:
-        case YASS_CONF_FSM_GLOB_LOAD:
-        case YASS_CONF_FSM_GLOB_SAVE:
-        case YASS_CONF_FSM_COPY:
-        case YASS_CONF_FSM_SWAP:
-        case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
-        case YASS_CONF_FSM_SEQ_LOAD:
-        case YASS_CONF_FSM_SEQ_SAVE:
-        case YASS_CONF_FSM_SEQ_DUMP:
+        case YASS_EDIT_FSM_ALL_DUMP:
+        case YASS_EDIT_FSM_ALL_LOAD:
+        case YASS_EDIT_FSM_ALL_SAVE:
+        case YASS_EDIT_FSM_GLOB_DUMP:
+        case YASS_EDIT_FSM_GLOB_LOAD:
+        case YASS_EDIT_FSM_GLOB_SAVE:
+        case YASS_EDIT_FSM_COPY:
+        case YASS_EDIT_FSM_SWAP:
+        case YASS_EDIT_FSM_SEQ_LOAD_FACTORY:
+        case YASS_EDIT_FSM_SEQ_LOAD:
+        case YASS_EDIT_FSM_SEQ_SAVE:
+        case YASS_EDIT_FSM_SEQ_DUMP:
             ret_val = true;
             break;
         default:
@@ -591,80 +593,80 @@ void setEditParam(byte state)
 {
     switch(state)
     {
-        case YASS_CONF_FSM_MIDI_IN_CHANNEL:
-            editor.setState(YASS_CONF_FSM_MIDI_IN_CHANNEL, &editMidiInChannel);
+        case YASS_EDIT_FSM_MIDI_IN_CHANNEL:
+            editor.setState(YASS_EDIT_FSM_MIDI_IN_CHANNEL, &editMidiInChannel);
             break;
-        case YASS_CONF_FSM_MIDI_OUT_CHANNEL:
-            editor.setState(YASS_CONF_FSM_MIDI_OUT_CHANNEL, &editMidiOutChannel);
+        case YASS_EDIT_FSM_MIDI_OUT_CHANNEL:
+            editor.setState(YASS_EDIT_FSM_MIDI_OUT_CHANNEL, &editMidiOutChannel);
             break;
-        case YASS_CONF_FSM_CLOCK_IN:
-            editor.setState(YASS_CONF_FSM_CLOCK_IN, &editClockIn);
+        case YASS_EDIT_FSM_CLOCK_IN:
+            editor.setState(YASS_EDIT_FSM_CLOCK_IN, &editClockIn);
             break;
-        case YASS_CONF_FSM_CLOCK_OUT:
-            editor.setState(YASS_CONF_FSM_CLOCK_OUT, &editClockOut);
+        case YASS_EDIT_FSM_CLOCK_OUT:
+            editor.setState(YASS_EDIT_FSM_CLOCK_OUT, &editClockOut);
             break;
-        case YASS_CONF_FSM_KEY_ECHO:
-            editor.setState(YASS_CONF_FSM_KEY_ECHO, &editKeyEcho);
+        case YASS_EDIT_FSM_KEY_ECHO:
+            editor.setState(YASS_EDIT_FSM_KEY_ECHO, &editKeyEcho);
             break;
-        case YASS_CONF_FSM_CLICK:
-            editor.setState(YASS_CONF_FSM_CLICK, &editClick);
+        case YASS_EDIT_FSM_CLICK:
+            editor.setState(YASS_EDIT_FSM_CLICK, &editClick);
             break;
-        case YASS_CONF_FSM_PROGRAM_NUMBER:
-            editor.setState(YASS_CONF_FSM_PROGRAM_NUMBER, &editProgNum);
+        case YASS_EDIT_FSM_PROGRAM_NUMBER:
+            editor.setState(YASS_EDIT_FSM_PROGRAM_NUMBER, &editProgNum);
             break;
-        case YASS_CONF_FSM_ARPEGGIATOR:
-            editor.setState(YASS_CONF_FSM_PROGRAM_NUMBER, &editArpeggiator);
+        case YASS_EDIT_FSM_ARPEGGIATOR:
+            editor.setState(YASS_EDIT_FSM_PROGRAM_NUMBER, &editArpeggiator);
             break;
-        case YASS_CONF_FSM_GLOB_DUMP:
-            editor.setState(YASS_CONF_FSM_GLOB_DUMP, &dummyEdit);
+        case YASS_EDIT_FSM_GLOB_DUMP:
+            editor.setState(YASS_EDIT_FSM_GLOB_DUMP, &dummyEdit);
             break;
-        case YASS_CONF_FSM_GLOB_LOAD:
-            editor.setState(YASS_CONF_FSM_GLOB_LOAD, &dummyEdit);
+        case YASS_EDIT_FSM_GLOB_LOAD:
+            editor.setState(YASS_EDIT_FSM_GLOB_LOAD, &dummyEdit);
             break;
-        case YASS_CONF_FSM_GLOB_SAVE:
-            editor.setState(YASS_CONF_FSM_GLOB_SAVE, &dummyEdit);
+        case YASS_EDIT_FSM_GLOB_SAVE:
+            editor.setState(YASS_EDIT_FSM_GLOB_SAVE, &dummyEdit);
             break;
-        case YASS_CONF_FSM_USE_SYSEX:
-            editor.setState(YASS_CONF_FSM_USE_SYSEX, &editSysEx);
+        case YASS_EDIT_FSM_USE_SYSEX:
+            editor.setState(YASS_EDIT_FSM_USE_SYSEX, &editSysEx);
             break;
-        case YASS_CONF_FSM_GROOVE:
-            editor.setState(YASS_CONF_FSM_GROOVE, &editGroove);
+        case YASS_EDIT_FSM_GROOVE:
+            editor.setState(YASS_EDIT_FSM_GROOVE, &editGroove);
             break;
-        case YASS_CONF_FSM_GATE_MODE:
-            editor.setState(YASS_CONF_FSM_GATE_MODE, &editGateMode);
+        case YASS_EDIT_FSM_GATE_MODE:
+            editor.setState(YASS_EDIT_FSM_GATE_MODE, &editGateMode);
             break;
-        case YASS_CONF_FSM_LAST_STEP:
-            editor.setState(YASS_CONF_FSM_LAST_STEP, &editLastStep);
+        case YASS_EDIT_FSM_LAST_STEP:
+            editor.setState(YASS_EDIT_FSM_LAST_STEP, &editLastStep);
             break;
-        case YASS_CONF_FSM_DATA_MODE:
-            editor.setState(YASS_CONF_FSM_LAST_STEP, &editDataMode);
+        case YASS_EDIT_FSM_DATA_MODE:
+            editor.setState(YASS_EDIT_FSM_LAST_STEP, &editDataMode);
             break;
-        case YASS_CONF_FSM_CTRL_CHG:
-            editor.setState(YASS_CONF_FSM_CTRL_CHG, &editCtrlChg);
+        case YASS_EDIT_FSM_CTRL_CHG:
+            editor.setState(YASS_EDIT_FSM_CTRL_CHG, &editCtrlChg);
             break;
-        case YASS_CONF_FSM_FIX_VEL:
-            editor.setState(YASS_CONF_FSM_FIX_VEL, &editFixedVelocity);
+        case YASS_EDIT_FSM_FIX_VEL:
+            editor.setState(YASS_EDIT_FSM_FIX_VEL, &editFixedVelocity);
             break;
-        case YASS_CONF_FSM_COPY:
-            editor.setState(YASS_CONF_FSM_COPY, &editCopySeq);
+        case YASS_EDIT_FSM_COPY:
+            editor.setState(YASS_EDIT_FSM_COPY, &editCopySeq);
             break;
-        case YASS_CONF_FSM_SWAP:
-            editor.setState(YASS_CONF_FSM_SWAP, &editSwapSeq);
+        case YASS_EDIT_FSM_SWAP:
+            editor.setState(YASS_EDIT_FSM_SWAP, &editSwapSeq);
             break;
-        case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
-            editor.setState(YASS_CONF_FSM_SEQ_LOAD_FACTORY, &editLoadFactory);
+        case YASS_EDIT_FSM_SEQ_LOAD_FACTORY:
+            editor.setState(YASS_EDIT_FSM_SEQ_LOAD_FACTORY, &editLoadFactory);
             break;
-        case YASS_CONF_FSM_SEQ_DUMP:
-            editor.setState(YASS_CONF_FSM_SEQ_DUMP, &dummyEdit);
+        case YASS_EDIT_FSM_SEQ_DUMP:
+            editor.setState(YASS_EDIT_FSM_SEQ_DUMP, &dummyEdit);
             break;
-        case YASS_CONF_FSM_SEQ_LOAD:
-            editor.setState(YASS_CONF_FSM_SEQ_LOAD, &dummyEdit);
+        case YASS_EDIT_FSM_SEQ_LOAD:
+            editor.setState(YASS_EDIT_FSM_SEQ_LOAD, &dummyEdit);
             break;
-        case YASS_CONF_FSM_SEQ_SAVE:
-            editor.setState(YASS_CONF_FSM_SEQ_SAVE, &dummyEdit);
+        case YASS_EDIT_FSM_SEQ_SAVE:
+            editor.setState(YASS_EDIT_FSM_SEQ_SAVE, &dummyEdit);
             break;
-        case YASS_CONF_FSM_ALL_DUMP:
-            editor.setState(YASS_CONF_FSM_ALL_DUMP, &dummyEdit);
+        case YASS_EDIT_FSM_ALL_DUMP:
+            editor.setState(YASS_EDIT_FSM_ALL_DUMP, &dummyEdit);
             break;
 
         default:
@@ -674,10 +676,10 @@ void setEditParam(byte state)
 
 void setNextGlobalEditParam()
 {
-    if(globEditIndex >= YASS_CONF_FSM_LAST_GLOBAL)
-        globEditIndex = YASS_CONF_FSM_FIRST_GLOBAL;
-    else if(globEditIndex == YASS_CONF_FSM_USE_SYSEX)
-        globEditIndex = YASS_CONF_FSM_ALL_DUMP;
+    if(globEditIndex >= YASS_EDIT_FSM_LAST_GLOBAL)
+        globEditIndex = YASS_EDIT_FSM_FIRST_GLOBAL;
+    else if(globEditIndex == YASS_EDIT_FSM_USE_SYSEX)
+        globEditIndex = YASS_EDIT_FSM_ALL_DUMP;
     else
         globEditIndex += 1;
     setEditParam(globEditIndex);
@@ -686,9 +688,9 @@ void setNextGlobalEditParam()
 void setPreviousGlobalEditParam()
 {
     if(!globEditIndex)
-        globEditIndex = YASS_CONF_FSM_LAST_GLOBAL;
-    else if(globEditIndex == YASS_CONF_FSM_ALL_DUMP)
-        globEditIndex = YASS_CONF_FSM_USE_SYSEX;
+        globEditIndex = YASS_EDIT_FSM_LAST_GLOBAL;
+    else if(globEditIndex == YASS_EDIT_FSM_ALL_DUMP)
+        globEditIndex = YASS_EDIT_FSM_USE_SYSEX;
     else
         globEditIndex -= 1;
     setEditParam(globEditIndex);
@@ -696,10 +698,10 @@ void setPreviousGlobalEditParam()
 
 void setNextSeqEditParam()
 {
-    if(seqEditIndex >= YASS_CONF_FSM_LAST_SEQ)
-        seqEditIndex = YASS_CONF_FSM_FIRST_SEQ;
-    else if(seqEditIndex == YASS_CONF_FSM_FIX_VEL)
-        seqEditIndex = YASS_CONF_FSM_SWAP;
+    if(seqEditIndex >= YASS_EDIT_FSM_LAST_SEQ)
+        seqEditIndex = YASS_EDIT_FSM_FIRST_SEQ;
+    else if(seqEditIndex == YASS_EDIT_FSM_FIX_VEL)
+        seqEditIndex = YASS_EDIT_FSM_SWAP;
     else
         seqEditIndex += 1;
     setEditParam(seqEditIndex);
@@ -708,9 +710,9 @@ void setNextSeqEditParam()
 void setPreviousSeqEditParam()
 {
     if(!seqEditIndex)
-        seqEditIndex = YASS_CONF_FSM_LAST_SEQ;
-    else if(seqEditIndex == YASS_CONF_FSM_SWAP)
-        seqEditIndex = YASS_CONF_FSM_FIX_VEL;
+        seqEditIndex = YASS_EDIT_FSM_LAST_SEQ;
+    else if(seqEditIndex == YASS_EDIT_FSM_SWAP)
+        seqEditIndex = YASS_EDIT_FSM_FIX_VEL;
     else
         seqEditIndex -= 1;
     setEditParam(seqEditIndex);
@@ -758,34 +760,34 @@ void commandRecord()
         {
             switch(editor.getState())
             {
-                case YASS_CONF_FSM_ALL_DUMP:
+                case YASS_EDIT_FSM_ALL_DUMP:
                     sysEx.sendAll();
                     break;
-                case YASS_CONF_FSM_GLOB_DUMP:
+                case YASS_EDIT_FSM_GLOB_DUMP:
                     sysEx.sendGlobal();
                     break;
-                case YASS_CONF_FSM_ALL_LOAD:
+                case YASS_EDIT_FSM_ALL_LOAD:
                     storage.loadAll();
                     break;
-                case YASS_CONF_FSM_ALL_SAVE:
+                case YASS_EDIT_FSM_ALL_SAVE:
                     storage.saveAll();
                     break;
-                case YASS_CONF_FSM_SEQ_LOAD:
+                case YASS_EDIT_FSM_SEQ_LOAD:
                     storage.loadSequence(player.getCurrentSequenceIndex());
                     break;
-                case YASS_CONF_FSM_SEQ_SAVE:
+                case YASS_EDIT_FSM_SEQ_SAVE:
                     storage.saveSequence(player.getCurrentSequenceIndex());
                     break;
-                case YASS_CONF_FSM_COPY:
+                case YASS_EDIT_FSM_COPY:
                     memcpy(player.getSequence(copySeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
                     break;
-                case YASS_CONF_FSM_SWAP:
+                case YASS_EDIT_FSM_SWAP:
                     swap(player.getSequence(swapSeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
                     break;
-                case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
+                case YASS_EDIT_FSM_SEQ_LOAD_FACTORY:
                     YASS_ROM_SEQUENCES_load(romSequenceIndex, player.getCurrentSequence());
                     break;
-                case YASS_CONF_FSM_SEQ_DUMP:
+                case YASS_EDIT_FSM_SEQ_DUMP:
                     sysEx.sendSequence(player.getCurrentSequenceIndex());
                     break;
                 default:
@@ -800,7 +802,7 @@ void commandRecord()
             if(!(globEditFlag | seqEditFlag))
             {
                 player.startRecordSequencer();
-                editor.setState(YASS_CONF_FSM_STATE_RECORD_EDIT, &editRecord);
+                editor.setState(YASS_EDIT_FSM_STATE_RECORD_EDIT, &editRecord);
                 keyBeep();
             }
         }
@@ -897,7 +899,7 @@ void commandNext()
         setNextSeqEditParam();
         keyBeep();
     }
-    else if(editor.getState() == YASS_CONF_FSM_STATE_TEMPO)
+    else if(editor.getState() == YASS_EDIT_FSM_STATE_TEMPO)
     {
         if(!globConf.getClockIn())
         {
@@ -1116,47 +1118,47 @@ void updateDisplay()
     else if(globEditFlag)
         switch(globEditIndex)
         {
-            case YASS_CONF_FSM_MIDI_IN_CHANNEL:
+            case YASS_EDIT_FSM_MIDI_IN_CHANNEL:
                 if(globConf.getOmni())
                     display.printLut(genericLut, LUT_INDEX_OMNI, NB_DIGITS);
                 else
                     display.printWord(globConf.getChannelIn(), DEFAULT_BASE);
                 break;
-            case YASS_CONF_FSM_MIDI_OUT_CHANNEL:
+            case YASS_EDIT_FSM_MIDI_OUT_CHANNEL:
                 display.printWord(globConf.getChannelOut(), DEFAULT_BASE);
                 break;
-            case YASS_CONF_FSM_CLOCK_IN:
+            case YASS_EDIT_FSM_CLOCK_IN:
                 display.printLut(boolLut, globConf.getClockIn(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_CLOCK_OUT:
+            case YASS_EDIT_FSM_CLOCK_OUT:
                 display.printLut(boolLut, globConf.getClockOut(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_KEY_ECHO:
+            case YASS_EDIT_FSM_KEY_ECHO:
                 display.printLut(boolLut, globConf.getKeyEcho(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_CLICK:
+            case YASS_EDIT_FSM_CLICK:
                 display.printLut(boolLut, globConf.getClick(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_USE_SYSEX:
+            case YASS_EDIT_FSM_USE_SYSEX:
                 display.printLut(boolLut, globConf.getUseSysEx(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_ARPEGGIATOR:
+            case YASS_EDIT_FSM_ARPEGGIATOR:
                 display.printLut(sqArpLut, globConf.getArpeggiator(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_PROGRAM_NUMBER:
+            case YASS_EDIT_FSM_PROGRAM_NUMBER:
                 if(globConf.getUseProgNum())
                     display.printLut(voiceLabelLut, globConf.getProgNum(), NB_DIGITS);
                 else
                     display.printLut(genericLut, LUT_INDEX_NONE, NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_GLOB_DUMP:
-            case YASS_CONF_FSM_ALL_DUMP:
+            case YASS_EDIT_FSM_GLOB_DUMP:
+            case YASS_EDIT_FSM_ALL_DUMP:
                 display.printLut(genericLut, LUT_INDEX_DUMP, NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_GLOB_LOAD:
+            case YASS_EDIT_FSM_GLOB_LOAD:
                 display.printLut(genericLut, LUT_INDEX_LOAD, NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_GLOB_SAVE:
+            case YASS_EDIT_FSM_GLOB_SAVE:
                 display.printLut(genericLut, LUT_INDEX_STOR, NB_DIGITS);
                 break;
             default:
@@ -1167,40 +1169,40 @@ void updateDisplay()
     else if(seqEditFlag)
         switch(seqEditIndex)
         {
-            case YASS_CONF_FSM_GROOVE:
+            case YASS_EDIT_FSM_GROOVE:
                 display.printLut(grooveLut, seq->getGroove(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_GATE_MODE:
+            case YASS_EDIT_FSM_GATE_MODE:
                 display.printLut(gateModeLut, seq->getGateMode(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_LAST_STEP:
+            case YASS_EDIT_FSM_LAST_STEP:
                 display.printWord(seq->getLastStep() + 1, DEFAULT_BASE);
                 break;
-            case YASS_CONF_FSM_DATA_MODE:
+            case YASS_EDIT_FSM_DATA_MODE:
                 display.printLut(dataModeLut, seq->getDataMode(), NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_CTRL_CHG:
+            case YASS_EDIT_FSM_CTRL_CHG:
                 display.printWord(seq->getControlChange(), DEFAULT_BASE);
                 break;
-            case YASS_CONF_FSM_FIX_VEL:
+            case YASS_EDIT_FSM_FIX_VEL:
                 display.printWord(seq->getFixedVelocity(), DEFAULT_BASE);
                 break;
-            case YASS_CONF_FSM_SEQ_LOAD_FACTORY:
+            case YASS_EDIT_FSM_SEQ_LOAD_FACTORY:
                 display.printWord(romSequenceIndex, DEFAULT_BASE);
                 break;
-            case YASS_CONF_FSM_COPY:
+            case YASS_EDIT_FSM_COPY:
                 display.printWord(copySeqIndex + 1, DEFAULT_BASE);
                 break;
-            case YASS_CONF_FSM_SWAP:
+            case YASS_EDIT_FSM_SWAP:
                 display.printWord(swapSeqIndex + 1, DEFAULT_BASE);
                 break;
-            case YASS_CONF_FSM_SEQ_DUMP:
+            case YASS_EDIT_FSM_SEQ_DUMP:
                 display.printLut(genericLut, LUT_INDEX_DUMP, NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_SEQ_LOAD:
+            case YASS_EDIT_FSM_SEQ_LOAD:
                 display.printLut(genericLut, LUT_INDEX_LOAD, NB_DIGITS);
                 break;
-            case YASS_CONF_FSM_SEQ_SAVE:
+            case YASS_EDIT_FSM_SEQ_SAVE:
                 display.printLut(genericLut, LUT_INDEX_STOR, NB_DIGITS);
                 break;
             default:
