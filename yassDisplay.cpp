@@ -169,6 +169,7 @@ const byte YASS_DISPLAY_FONT[] PROGMEM =
 
 void YASS_DISPLAY::subPrintWord(word value, byte base, bool negative)
 {
+    // not exactly a word: from -999 to 9999
     clear();
     if(negative)
         write('-');
@@ -189,6 +190,13 @@ void YASS_DISPLAY::subPrintWord(word value, byte base, bool negative)
     }
     if(!started)
         write(0);
+    // right justification
+    while(cursor++ < nbDigits)
+    {
+        for(byte idx = nbDigits-1; idx; idx--)
+            digits[idx] = digits[idx-1];
+        digits[0] = getGlyphe(' ');
+    }
 }
 
 /******************/
@@ -219,19 +227,6 @@ void YASS_DISPLAY::printGlyphe(byte value, byte digit_num)
 {
     if(digit_num < nbDigits)
         digits[digit_num] = (digits[digit_num] & YASS_DISPLAY_DOT_WEIGHT) | getGlyphe(value);
-}
-
-void YASS_DISPLAY::printHexByte(byte value, byte digit_num)
-{
-    printGlyphe((value & 0xf0) >> 4, digit_num++);
-    printGlyphe( value & 0x0f, digit_num);
-}
-
-void YASS_DISPLAY::printHexWord(word value, byte digit_num)
-{
-    printHexByte((value & 0xff00) >> 8, digit_num);
-    digit_num += 2;
-    printHexByte(value & 0x00ff, digit_num);
 }
 
 void YASS_DISPLAY::printWord(word value, byte base)

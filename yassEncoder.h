@@ -20,14 +20,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include <Arduino.h>
 
 /* modified version without push/pull button for Yass software */
 #define YASS_ENCODER_VERSION "1.01a"
 
-#define YASS_ENCODER_DIRECTION_UP 1
-#define YASS_ENCODER_DIRECTION_DOWN 0
+#define YASS_ENCODER_DIRECTION_UP true
+#define YASS_ENCODER_DIRECTION_DOWN false
 #define YASS_ENCODER_DEBOUCE_DURATION_MSEC 20
 
 class YASS_ENCODER

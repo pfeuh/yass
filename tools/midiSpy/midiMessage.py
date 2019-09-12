@@ -1,6 +1,25 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+ #
+ # file : midiMessage.py
+ # Copyright (c) pfeuh <ze.pfeuh@gmail>
+ # All rights reserved.
+ # 
+ # This program is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ # 
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ # 
+ # You should have received a copy of the GNU General Public License
+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #
+
 from midiConstants import *
 
 class MIDI_MESSAGE():
@@ -64,16 +83,16 @@ class MIDI_MESSAGE():
 if __name__ == "__main__":
     
     for message in [
-        MESSAGE((MIDI_CMD_OFF, 10, 11, 12, 13),),
-        MESSAGE((MIDI_CMD_OFF+15, 10, 11, 12, 13),),
-        MESSAGE((MIDI_CMD_ON, 10, 11, 12, 13),),
-        MESSAGE((MIDI_CMD_CC, 10, 11, 12, 13),),
-        MESSAGE((MIDI_CMD_PC, 10, 11, 12, 13),),
-        MESSAGE((255, 10, 11, 12, 13),),
-        MESSAGE((17, 10, 11, 12, 13),),
-        MESSAGE((MIDI_RT_CLOCK,),),
-        MESSAGE((MIDI_RT_START,),),
-        MESSAGE((MIDI_RT_STOP,),),
-        MESSAGE((MIDI_RT_CONT,),),
+        MIDI_MESSAGE((MIDI_CMD_OFF, 10, 11, 12, 13),),
+        MIDI_MESSAGE((MIDI_CMD_OFF+15, 10, 11, 12, 13),),
+        MIDI_MESSAGE((MIDI_CMD_ON, 10, 11, 12, 13),),
+        MIDI_MESSAGE((MIDI_CMD_CC, 10, 11, 12, 13),),
+        MIDI_MESSAGE((MIDI_CMD_PC, 10, 11, 12, 13),),
+        MIDI_MESSAGE((255, 10, 11, 12, 13),),
+        MIDI_MESSAGE((17, 10, 11, 12, 13),),
+        MIDI_MESSAGE((MIDI_RT_CLOCK,),),
+        MIDI_MESSAGE((MIDI_RT_START,),),
+        MIDI_MESSAGE((MIDI_RT_STOP,),),
+        MIDI_MESSAGE((MIDI_RT_CONT,),),
         ]:
         print message, " - ", message.getBytes()

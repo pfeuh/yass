@@ -286,22 +286,22 @@ const char noteLabelLut[]PROGMEM =
     "C7  " "Db7 " "D7  " "Eb7 " "E7  " "F7  " "Gb7 " "G7  " "Ab7 " "A7  " "Bb7 " "B7  " 
     "C8  " "Db8 " "D8  " "Eb8 " "E8  " "F8  " "Gb8 " "G8  " "Ab8 " "A8  " "Bb8 " "B8  " 
     "C9  " "Db9 " "D9  " "Eb9 " "E9  " "F9  " "Gb9 " "G9  " "TIE " ;
-const char voiceLabelLut[]   PROGMEM = 
-    "PIA1" "PIA2" "PIA3" "PIA4" "PIA5" "PIA6" "PIA7" "PIA8" 
-    "CHP1" "CHP2" "CHP3" "CHP4" "CHP5" "CHP6" "CHP7" "CHP8" 
-    "Org1" "Org2" "Org3" "Org4" "Org5" "Org6" "Org7" "Org8" 
-    "Gui1" "Gui2" "Gui3" "Gui4" "Gui5" "Gui6" "Gui7" "Gui8" 
-    "BAS1" "BAS2" "BAS3" "BAS4" "BAS5" "BAS6" "BAS7" "BAS8" 
-    "Stg1" "Stg2" "Stg3" "Stg4" "Stg5" "Stg6" "Stg7" "Stg8" 
-    "Ens1" "Ens2" "Ens3" "Ens4" "Ens5" "Ens6" "Ens7" "Ens8" 
-    "Brs1" "Brs2" "Brs3" "Brs4" "Brs5" "Brs6" "Brs7" "Brs8" 
-    "Ree1" "Ree2" "Ree3" "Ree4" "Ree5" "Ree6" "Ree7" "Ree8" 
-    "PIP1" "PIP2" "PIP3" "PIP4" "PIP5" "PIP6" "PIP7" "PIP8" 
-    "Lea1" "Lea2" "Lea3" "Lea4" "Lea5" "Lea6" "Lea7" "Lea8" 
-    "Pad1" "Pad2" "Pad3" "Pad4" "Pad5" "Pad6" "Pad7" "Pad8" 
-    "Eff1" "Eff2" "Eff3" "Eff4" "Eff5" "Eff6" "Eff7" "Eff8" 
-    "Eth1" "Eth2" "Eth3" "Eth4" "Eth5" "Eth6" "Eth7" "Eth8" 
-    "Prc1" "Prc2" "Prc3" "Prc4" "Prc5" "Prc6" "Prc7" "Prc8" 
-    "SEF1" "SEF2" "SEF3" "SEF4" "SEF5" "SEF6" "SEF7" "SEF8" ;
+//~ const char voiceLabelLut[]   PROGMEM = 
+    //~ "PIA1" "PIA2" "PIA3" "PIA4" "PIA5" "PIA6" "PIA7" "PIA8" 
+    //~ "CHP1" "CHP2" "CHP3" "CHP4" "CHP5" "CHP6" "CHP7" "CHP8" 
+    //~ "Org1" "Org2" "Org3" "Org4" "Org5" "Org6" "Org7" "Org8" 
+    //~ "Gui1" "Gui2" "Gui3" "Gui4" "Gui5" "Gui6" "Gui7" "Gui8" 
+    //~ "BAS1" "BAS2" "BAS3" "BAS4" "BAS5" "BAS6" "BAS7" "BAS8" 
+    //~ "Stg1" "Stg2" "Stg3" "Stg4" "Stg5" "Stg6" "Stg7" "Stg8" 
+    //~ "Ens1" "Ens2" "Ens3" "Ens4" "Ens5" "Ens6" "Ens7" "Ens8" 
+    //~ "Brs1" "Brs2" "Brs3" "Brs4" "Brs5" "Brs6" "Brs7" "Brs8" 
+    //~ "Ree1" "Ree2" "Ree3" "Ree4" "Ree5" "Ree6" "Ree7" "Ree8" 
+    //~ "PIP1" "PIP2" "PIP3" "PIP4" "PIP5" "PIP6" "PIP7" "PIP8" 
+    //~ "Lea1" "Lea2" "Lea3" "Lea4" "Lea5" "Lea6" "Lea7" "Lea8" 
+    //~ "Pad1" "Pad2" "Pad3" "Pad4" "Pad5" "Pad6" "Pad7" "Pad8" 
+    //~ "Eff1" "Eff2" "Eff3" "Eff4" "Eff5" "Eff6" "Eff7" "Eff8" 
+    //~ "Eth1" "Eth2" "Eth3" "Eth4" "Eth5" "Eth6" "Eth7" "Eth8" 
+    //~ "Prc1" "Prc2" "Prc3" "Prc4" "Prc5" "Prc6" "Prc7" "Prc8" 
+    //~ "SEF1" "SEF2" "SEF3" "SEF4" "SEF5" "SEF6" "SEF7" "SEF8" ;
     
 #endif

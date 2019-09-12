@@ -78,6 +78,17 @@ void swap(byte* source, byte* target, word nb_bytes)
 /* Factorisation of some code parts */
 /************************************/
 
+void startDotIn()
+{
+    display.writeDot(1, MIDI_IN_DOT);
+    dotInMonostable.start();
+}
+
+void dotInMonostableCallback()
+{
+    display.writeDot(0, MIDI_IN_DOT);
+}
+
 void freezeDisplay(word msec_value)
 {
     // useful for some boot splash screens
@@ -325,7 +336,7 @@ void displayMidiOut()
 void displayProgNum()
 {
     if(globConf.getUseProgNum())
-        display.printLut(voiceLabelLut, globConf.getProgNum(), NB_DIGITS);
+        display.printWord(globConf.getProgNum()+1, DEFAULT_BASE);
     else
         display.printLut(genericLut, LUT_INDEX_NONE, NB_DIGITS);
 }
@@ -838,7 +849,6 @@ void setEditState(byte state)
             editor.setState(EDIT_STATE_GLOB_SAVE, &editNoCode);
             displayCallback = &displaySaveGlo;
             break;
-
         case EDIT_STATE_GROOVE:
             editor.setState(EDIT_STATE_GROOVE, &editGroove);
             displayCallback = &displayGroove;
@@ -1181,17 +1191,6 @@ void commandRest()
 /***********************/
 /* end of HMI commands */
 /***********************/
-
-void startDotIn()
-{
-    display.writeDot(1, MIDI_IN_DOT);
-    dotInMonostable.start();
-}
-
-void dotInMonostableCallback()
-{
-    display.writeDot(0, MIDI_IN_DOT);
-}
 
 void playerNoteOn(byte note, byte data)
 {

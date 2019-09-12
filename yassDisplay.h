@@ -31,8 +31,6 @@ class YASS_DISPLAY
         void begin();
         byte getGlyphe(byte glyphe_num);
         void printGlyphe(byte value, byte digit_num);
-        void printHexByte(byte value, byte digit_num);
-        void printHexWord(word value, byte digit_num);
         void printWord(word value, byte base);
         void printSignedWord(word value, byte base);
         void printLut(const char* lut, byte index, byte word_size);
