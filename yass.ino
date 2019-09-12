@@ -888,25 +888,15 @@ void setEditState(byte state)
             displayCallback = &displaySeqSave;
             break;
         default:
-            
-            console.print(F("Unexpected "));   
-        
             editor.setState(EDIT_STATE_NO_CODE, &editNoCode);
             displayCallback = &displayNoCode;
             break;
     }
-
-    console.print(F("state is "));   
-    console.println(editor.getState());
-    
 }
 
 void setEditParam(bool direction)
 {
     byte state = editor.getState();
-
-    console.print(F("Switch from "));   
-    console.print(state);
     
     if(direction == PARAM_INCREASE)
     {
@@ -951,10 +941,6 @@ void setEditParam(bool direction)
         globEditIndex = state;
     else if(seqEditFlag)
         seqEditIndex = state;
-    
-    
-    console.print(F("to "));   
-    console.println(state);
     
     setEditState(state);
 }
@@ -1571,9 +1557,7 @@ void setup()
     sysEx.begin(&globConf, seqs);
     sysEx.setSenderCallback(sendExclusive);
     
-    display.begin();
-    
-    debug.open();
+    display.begin();   
 }
 
 void loop()

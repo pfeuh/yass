@@ -18,16 +18,16 @@ carte realisee chez jlcpcb -> https://jlcpcb.com/
 pour la V2:
 
 Rajouter une diode anti inversion de polarite juste apres le connecteur d'alimentation.
-Rajouter +5V et GND sur la serigraphie a cote du connecteur d'alimentation.
+Rajouter VIN et GND sur la serigraphie a cote du connecteur d'alimentation.
 Faire un connecteur commun pour midi in, midi out, on-off et jack d'alimentation.
 Sérigraphie plus claire des 2 cotes.
 Rajouter points de test clock, latch etc...
 Supprimer et bypasser les 4 transistors du display.
-Rajouter diode anti inversion de polarite.
-Revoir le calcul des resistances de leds, celles des bleues et des jaunes sont trop faibles.
 Aligner les boutons et les leds, MEME SI ON EST HORS DE LA GRILLE!
 Implanter plutot les gros boutons qui ne necessitent pas de piece 3D.
 Utiliser un afficheur 7 segment beaucoup plus courant.
+Rajouter des points de test clairement sérigraphiés sur le dessous
+pour GND 5V VIN RX TX DATA_BIT CLOCK LATCH
 
 leds vertes 1k5
 leds bleues 1k5
