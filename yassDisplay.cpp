@@ -122,7 +122,7 @@ const byte YASS_DISPLAY_FONT[] PROGMEM =
     B00111000,                        // ascii code 0x76 V
     B01110100,                        // ascii code 0x77 W
     B01010010,                        // ascii code 0x78 X
-    B01100110,                        // ascii code 0x59 Y
+    B01101110,                        // ascii code 0x59 Y
     _A | _B | _D | _E | _G,           // ascii code 0x5a Z
     B00111001,                        // ascii code 0x5b [
     B00000000,                        // ascii code 0x5c 

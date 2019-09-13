@@ -49,7 +49,7 @@
 
 // v1.01 adds a writing eprom test (or debug) :)
 
-#define YASS_VERSION "1.01"
+#define YASS_VERSION "1_01"
 
 // must be a static function, not a method
 void YASS_MAINTENANCE_updateData(bool direction);

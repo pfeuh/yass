@@ -565,8 +565,15 @@ void YASS_SEQUENCER::setNextSequenceIndex(byte seq_num)
     {
         nextSeq = &seqs[seq_num];
         nextSeqIndex = seq_num;
-        //~ currentSeq = nextSeq;
-        //~ currentSeqIndex = nextSeqIndex;       
+    }
+}
+
+void YASS_SEQUENCER::setCurrentSequenceIndex(byte seq_num)
+{
+    if(seq_num < nbSeqs)
+    {
+        currentSeq = &seqs[seq_num];
+        currentSeqIndex = seq_num;
     }
 }
 

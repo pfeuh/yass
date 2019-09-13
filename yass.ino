@@ -78,6 +78,11 @@ void swap(byte* source, byte* target, word nb_bytes)
 /* Factorisation of some code parts */
 /************************************/
 
+void allNotesOff()
+{
+    MIDI.sendControlChange(CC_ALL_NOTES_OFF, 0, globConf.getChannelOut());
+}
+
 void startDotIn()
 {
     display.writeDot(1, MIDI_IN_DOT);
@@ -133,6 +138,7 @@ bool functionWaitsValidation()
         case EDIT_STATE_GLOB_DUMP:
         case EDIT_STATE_GLOB_LOAD:
         case EDIT_STATE_GLOB_SAVE:
+        case EDIT_STATE_INIT_SEQ:
         case EDIT_STATE_COPY:
         case EDIT_STATE_SWAP:
         case EDIT_STATE_SEQ_LOAD_FACTORY:
@@ -181,6 +187,7 @@ void execStop()
 {
     player.stopSequencer();
     yassState = stopped;
+    player.setCurrentSequenceIndex(player.getNextSequenceIndex());
     keyBeep();
 }
 
@@ -202,6 +209,7 @@ void receiveNoteOn(byte channel, byte note, byte velocity)
     if(messageReceived(channel))
     {
         startDotIn();
+        note = (note + transposition) & 0x7f;
         switch(getPlayRecordState())
         {
             case PR_STOP:
@@ -226,6 +234,7 @@ void receiveNoteOff(byte channel, byte note, byte velocity)
     if(messageReceived(channel))
     {
         startDotIn();
+        note = (note + transposition) & 0x7f;
         switch(getPlayRecordState())
         {
             case PR_STOP:
@@ -246,7 +255,8 @@ void receiveControlChange(byte channel, byte number, byte value)
     if(messageReceived(channel))
     {
         startDotIn();
-        MIDI.sendNoteOff(number, value, globConf.getChannelOut());
+        //~ MIDI.sendNoteOff(number, value, globConf.getChannelOut());
+        MIDI.sendControlChange(number, value, globConf.getChannelOut());
     }
 }
 
@@ -436,18 +446,23 @@ void displayFixedVelocity()
     display.printWord(player.getCurrentSequence()->getFixedVelocity(), DEFAULT_BASE);
 }
 
-void displaySeqLoadFactory()
+void displayInitSeq()
 {
-    display.printWord(romSequenceIndex, DEFAULT_BASE);
+    display.printLut(grooveLut, initializationIndex, NB_DIGITS);
 }
 
-void displayCopy()
+void displayCopySeq()
 {
     display.printWord(copySeqIndex + 1, DEFAULT_BASE);
 }
 void displaySwap()
 {
     display.printWord(swapSeqIndex + 1, DEFAULT_BASE);
+}
+
+void displaySeqLoadFactory()
+{
+    display.printWord(romSequenceIndex, DEFAULT_BASE);
 }
 
 void displaySeqDump()
@@ -521,13 +536,13 @@ void editNoCode(bool direction)
 
 void editMidiIn(bool direction)
 {
+    allNotesOff();
     if(direction == YASS_ENCODER_DIRECTION_UP)
     {
         if(globConf.getOmni())
         {
             globConf.setOmni(0);
             globConf.setChannelIn(FIRST_MIDI_CHANNEL);
-            
         }
         else
             if(globConf.getChannelIn() <= LAST_MIDI_CHANNEL)
@@ -544,15 +559,18 @@ void editMidiIn(bool direction)
 
 void editMidiOut(bool direction)
 {
+    allNotesOff();
     player.stopCurrentNote();
     if(direction == YASS_ENCODER_DIRECTION_UP)
         globConf.setChannelOut(globConf.getChannelOut() + 1);
     else
         globConf.setChannelOut(globConf.getChannelOut() - 1);
+    allNotesOff();
 }
 
 void editProgNum(bool direction)
 {
+    allNotesOff();
     player.stopCurrentNote();
     byte prog_num = globConf.getProgNum();
     if(direction == YASS_ENCODER_DIRECTION_UP)
@@ -577,6 +595,7 @@ void editProgNum(bool direction)
                 globConf.setUseProgNum(0);
         }
     changeProgramm() ;
+    allNotesOff();
 }
     
 void editArpeggiator(bool direction)
@@ -629,14 +648,17 @@ void editSysEx(bool direction)
 
 void editTransposition(bool direction)
 {
+    allNotesOff();
     if(direction == YASS_ENCODER_DIRECTION_UP)
         transposition++;
     else
         transposition--;
+    allNotesOff();
 }
 
 void editGroove(bool direction)
 {
+    allNotesOff();
     YASS_SEQUENCE* seq = player.getCurrentSequence();
     byte groove = seq->getGroove();
     if(direction == YASS_ENCODER_DIRECTION_UP)
@@ -654,6 +676,7 @@ void editGroove(bool direction)
 
 void editGateMode(bool direction)
 {
+    allNotesOff();
     YASS_SEQUENCE* seq = player.getCurrentSequence();
     byte gate_mode = seq->getGateMode();
     if(direction == YASS_ENCODER_DIRECTION_UP)
@@ -671,6 +694,7 @@ void editGateMode(bool direction)
 
 void editLastStep(bool direction)
 {
+    allNotesOff();
     YASS_SEQUENCE* seq = player.getCurrentSequence();
     byte last_step = seq->getLastStep();
     if(direction == YASS_ENCODER_DIRECTION_UP)
@@ -681,7 +705,24 @@ void editLastStep(bool direction)
     else
         if(last_step)
             seq->setLastStep(seq->getLastStep() - 1);
-    
+}
+
+void editDataMode(bool direction)
+{
+    allNotesOff();
+    YASS_SEQUENCE* seq = player.getCurrentSequence();
+    byte data_mode = seq->getDataMode();
+    if(direction == YASS_ENCODER_DIRECTION_UP)
+    {
+        if(data_mode < YASS_SEQUENCE_DATA_MODE_LAST)
+            data_mode += 1;
+    }
+    else
+    {
+        if(data_mode)
+            data_mode -= 1;
+    }
+    seq->setDataMode(data_mode);
 }
 
 void editCtrlChg(bool direction)
@@ -716,18 +757,20 @@ void editFixedVelocity(bool direction)
 }
     
 
-void editCopySeq(bool direction)
+void editInitSeq(bool direction)
 {
     if(direction == YASS_ENCODER_DIRECTION_UP)
     {
-        if(copySeqIndex < (NB_SEQS - 1))
-            copySeqIndex += 1;
+        if(initializationIndex < YASS_SEQUENCE_LAST_GROOVE)
+            initializationIndex += 1;
     }
     else
-        if(copySeqIndex)
-            copySeqIndex -= 1;
+    {
+        if(initializationIndex)
+            initializationIndex -= 1;
+    }
 }
-    
+
 void editSwapSeq(bool direction)
 {
     if(direction == YASS_ENCODER_DIRECTION_UP)
@@ -740,23 +783,18 @@ void editSwapSeq(bool direction)
             swapSeqIndex -= 1;
 }
     
-void editDataMode(bool direction)
+void editCopySeq(bool direction)
 {
-    YASS_SEQUENCE* seq = player.getCurrentSequence();
-    byte data_mode = seq->getDataMode();
     if(direction == YASS_ENCODER_DIRECTION_UP)
     {
-        if(data_mode < YASS_SEQUENCE_DATA_MODE_LAST)
-            data_mode += 1;
+        if(copySeqIndex < (NB_SEQS - 1))
+            copySeqIndex += 1;
     }
     else
-    {
-        if(data_mode)
-            data_mode -= 1;
-    }
-    seq->setDataMode(data_mode);
+        if(copySeqIndex)
+            copySeqIndex -= 1;
 }
-
+    
 void editLoadFactory(bool direction)
 {
     if(direction == YASS_ENCODER_DIRECTION_UP)
@@ -873,13 +911,17 @@ void setEditState(byte state)
             editor.setState(EDIT_STATE_FIX_VEL, &editFixedVelocity);
             displayCallback = &displayFixedVelocity;
             break;
-        case EDIT_STATE_COPY:
-            editor.setState(EDIT_STATE_COPY, &editCopySeq);
-            displayCallback = &displayCopy;
+        case EDIT_STATE_INIT_SEQ:
+            editor.setState(EDIT_STATE_INIT_SEQ, &editInitSeq);
+            displayCallback = &displayInitSeq;
             break;
         case EDIT_STATE_SWAP:
             editor.setState(EDIT_STATE_SWAP, &editSwapSeq);
             displayCallback = &displaySwap;
+            break;
+        case EDIT_STATE_COPY:
+            editor.setState(EDIT_STATE_COPY, &editCopySeq);
+            displayCallback = &displayCopySeq;
             break;
         case EDIT_STATE_SEQ_LOAD_FACTORY:
             editor.setState(EDIT_STATE_SEQ_LOAD_FACTORY, &editLoadFactory);
@@ -916,7 +958,7 @@ void setEditParam(bool direction)
                 state = EDIT_STATE_FIRST_SEQ;
                 break;
             case EDIT_STATE_FIX_VEL:
-                state = EDIT_STATE_SWAP;
+                state = EDIT_STATE_INIT_SEQ;
                 break;
             case EDIT_STATE_LAST_GLOBAL:
                 state = EDIT_STATE_FIRST_GLOBAL;
@@ -934,7 +976,7 @@ void setEditParam(bool direction)
             case EDIT_STATE_FIRST_SEQ:
                 state = EDIT_STATE_LAST_SEQ;
                 break;
-            case EDIT_STATE_SWAP:
+            case EDIT_STATE_INIT_SEQ:
                 state = EDIT_STATE_FIX_VEL;
                 break;
             case EDIT_STATE_FIRST_GLOBAL:
@@ -994,6 +1036,7 @@ void commandRecord()
     {
         if(functionWaitsValidation())
         {
+            allNotesOff();
             switch(editor.getState())
             {
                 // states for global edition
@@ -1016,6 +1059,10 @@ void commandRecord()
                     storage.saveGlobal();
                     break;
                 // states for current sequence edition
+                case EDIT_STATE_INIT_SEQ:
+                    player.getCurrentSequence()->initialize();
+                    player.getCurrentSequence()->setGroove(initializationIndex);
+                    break;
                 case EDIT_STATE_SWAP:
                     swap(player.getSequence(swapSeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
                     break;
@@ -1043,12 +1090,17 @@ void commandRecord()
         }
         else
         {
-            if(!(globEditFlag | seqEditFlag))
-            {
-                player.startRecordSequencer();
-                setEditState(EDIT_STATE_RECORD);
-                keyBeep();
-            }
+            globEditFlag = false;
+            seqEditFlag = false;
+            player.startRecordSequencer();
+            setEditState(EDIT_STATE_RECORD);
+            keyBeep();
+            //~ if(!(globEditFlag | seqEditFlag))
+            //~ {
+                //~ player.startRecordSequencer();
+                //~ setEditState(EDIT_STATE_RECORD);
+                //~ keyBeep();
+            //~ }
         }
     }
 }
@@ -1057,7 +1109,13 @@ void commandSeqNum(byte seq_num)
 {
     if(!player.isRecording())
     {
-        player.setNextSequenceIndex(seq_num);
+        if(yassState == stopped)
+        {
+            player.setNextSequenceIndex(seq_num);
+            player.setCurrentSequenceIndex(seq_num);
+        }
+        else
+            player.setNextSequenceIndex(seq_num);
         keyBeep();
     }
 }
@@ -1556,7 +1614,13 @@ void setup()
     sysEx.begin(&globConf, seqs);
     sysEx.setSenderCallback(sendExclusive);
     
-    display.begin();   
+    display.begin();
+    // displays application name...    
+    display.printLut(genericLut, LUT_INDEX_APP_NAME, NB_DIGITS);
+    freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
+    // ... and version
+    display.printLut(genericLut, LUT_INDEX_APP_VERSION, NB_DIGITS);
+    freezeDisplay(DISPLAY_FACTORY_SPLASH_DURATION);
 }
 
 void loop()

@@ -36,6 +36,7 @@ class YASS_SEQUENCER
         byte getNbSequences();
         void initSequence(byte seq_num);
         void setNextSequenceIndex(byte seq_num);
+        void setCurrentSequenceIndex(byte seq_num);
         YASS_SEQUENCE* getNextSequence();
         byte getNextSequenceIndex();
         void setNextScale(byte next_scale);
