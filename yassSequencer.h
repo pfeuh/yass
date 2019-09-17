@@ -23,7 +23,8 @@
 #include <Arduino.h>
 #include "yassSequence.h"
 
-#define YASS_SEQUENCER_VERSION "1.00"
+// 2019 09 17 - v1.01 - recording only until last step
+#define YASS_SEQUENCER_VERSION "1.01"
 
 #define YASS_RESOLUTION 24
 #define YASS_SEQUENCER_MIDI_C3 48
