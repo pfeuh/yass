@@ -22,7 +22,8 @@
 
 #include <Arduino.h>
 
-#define YASS_MONOSTABLE_VERSION "1.00"
+// 2019 09 17 - v1.01 - adds method isRunning()
+#define YASS_MONOSTABLE_VERSION "1.01"
 
 class YASS_MONOSTABLE
 {
@@ -33,6 +34,7 @@ class YASS_MONOSTABLE
         void start();
         void stop();
         void sequencer();
+        bool isBusy();
 
     private:
         word duration;
