@@ -788,13 +788,15 @@ void YASS_SEQUENCER::editRecordedData(byte velocity)
 
 void YASS_SEQUENCER::gotoNextRecordStep()
 {
-    recordIndex = (recordIndex + 1) % YASS_SEQUENCE_NB_NOTES;
+    //~ recordIndex = (recordIndex + 1) % YASS_SEQUENCE_NB_NOTES;
+    recordIndex = (recordIndex + 1) % (currentSeq->getLastStep() + 1);
     recordIsStarted = false;
 }
 
 void YASS_SEQUENCER::gotoPreviousRecordStep()
 {
-    recordIndex = (recordIndex - 1) % YASS_SEQUENCE_NB_NOTES;
+    //~ recordIndex = (recordIndex - 1) % YASS_SEQUENCE_NB_NOTES;
+    recordIndex = (recordIndex - 1) % (currentSeq->getLastStep() + 1);
     recordIsStarted = false;
 }
 
