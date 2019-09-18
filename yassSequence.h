@@ -62,7 +62,7 @@ class YASS_SEQUENCE
 {
     public:
         YASS_SEQUENCE();
-        void initialize();
+        void initialize(byte default_note);
         byte getFirstNote();
 
         byte getNote(byte index);

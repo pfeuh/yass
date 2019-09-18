@@ -89,7 +89,8 @@ def drawFrontPannel(sketch):
     for led_num in range(16):
         sketch.addCircle(x, y, r, label="step led %u"%(led_num+1))
         if USE_TEXT:
-            sketch.addText(glob_text[led_num], x + STEP_LED_H_TEXT_OFFSET, y + STEP_LED_V_TEXT_OFFSET, font_size = LED_FONT_SIZE, transform="-90", label="globalText%u"%(led_num+1))
+            sketch.addText(str(led_num+1), x, y + STEP_LED_V_TEXT_OFFSET * 0.75, font_size = LED_FONT_SIZE, label="Led_%u_num"%(led_num+1), anchor="middle")
+            sketch.addText(glob_text[led_num], x + STEP_LED_H_TEXT_OFFSET, y + STEP_LED_V_TEXT_OFFSET * 2.0, font_size = LED_FONT_SIZE, transform="-90", label="globalText%u"%(led_num+1))
             sketch.addText(seq_text[led_num], x + STEP_LED_H_TEXT_OFFSET, y - STEP_LED_V_TEXT_OFFSET, font_size = LED_FONT_SIZE, anchor="end", transform="-90", label="sequenceText%u"%(led_num+1))
         x += STEP_LED_H_INTERVAL
 

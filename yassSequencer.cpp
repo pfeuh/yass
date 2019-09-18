@@ -55,8 +55,9 @@ void YASS_SEQUENCER::startNote()
 {
     currentNote = currentSeq->getNote(index);
     if((currentNote != YASS_SEQUENCE_REST) && (currentNote != YASS_SEQUENCE_TIE))
-        currentNote = (currentNote + scale - currentSeq->getFirstNote()) & 0x7f;
-    if(currentNote)
+        if(!isRecording())
+            currentNote = (currentNote + scale - currentSeq->getFirstNote()) & 0x7f;
+    if(currentNote != YASS_SEQUENCE_REST)
         noteOn(currentNote, currentSeq->getData(index));
 }
 
@@ -543,14 +544,16 @@ void YASS_SEQUENCER::begin(byte nb_seqs, YASS_SEQUENCE* _seqs, byte max_notes)
     nextScale = 0;
     nextSeq = &seqs[0];
     currentSeq = &seqs[0];
-    startCallback = 0;
-    stopCallback = 0;
-    clockCallback = 0;
-    startSequencerCallback = 0;
-    stopSequencerCallback = 0;
-    continueSequencerCallback = 0;
-    scale = YASS_SEQUENCER_MIDI_C3;
-    nextScale = YASS_SEQUENCER_MIDI_C3;
+    startCallback = NULL;
+    stopCallback = NULL;
+    clockCallback = NULL;
+    startSequencerCallback = NULL;
+    stopSequencerCallback = NULL;
+    continueSequencerCallback = NULL;
+    //~ scale = YASS_SEQUENCER_MIDI_C3;
+    //~ nextScale = YASS_SEQUENCER_MIDI_C3;
+    scale = currentSeq->getFirstNote();
+    nextScale = currentSeq->getFirstNote();
     stopSequencer();
 }
 

@@ -78,6 +78,12 @@ void swap(byte* source, byte* target, word nb_bytes)
 /* Factorisation of some code parts */
 /************************************/
 
+void stopEdit()
+{
+    globEditFlag = false;
+    seqEditFlag  = false;
+}
+    
 void allNotesOff()
 {
     MIDI.sendControlChange(CC_ALL_NOTES_OFF, 0, globConf.getChannelOut());
@@ -191,6 +197,17 @@ void execStop()
     keyBeep();
 }
 
+void playRecordedNote()
+{
+    byte note = player.getCurrentSequence()->getNote(player.getRecordIndex());
+    if(!(recordedNoteNoteOff.isBusy()))
+        if(note && (note < LAST_MIDI_NOTE))
+        {
+            MIDI.sendNoteOn(note, DEFAULT_MIDI_VELOCITY, globConf.getChannelOut());
+            recordedNoteNoteOff.start();
+        }
+}
+
 /************************/
 /* MIDI input callbacks */
 /************************/
@@ -299,6 +316,15 @@ void receiveContinue()
         beatCalc.start();
     }
 }
+void sendEndOfRecordedNote()
+{
+    MIDI.sendNoteOff(player.getCurrentSequence()->getNote(player.getRecordIndex()), 0, globConf.getChannelOut());
+    
+    //~ debug.open();
+    //~ console.print(recordedNoteNoteOff.isBusy());
+    //~ console.println(F(" Done!"));
+}
+
 /***********************/
 /* display's callbacks */
 /***********************/
@@ -448,7 +474,9 @@ void displayFixedVelocity()
 
 void displayInitSeq()
 {
-    display.printLut(grooveLut, initializationIndex, NB_DIGITS);
+    //~ display.printLut(grooveLut, initializationIndex, NB_DIGITS);
+    //~ display.printWord(defaultNote, DEFAULT_BASE);
+    display.printLut(noteLabelLut, defaultNote, NB_DIGITS);
 }
 
 void displayCopySeq()
@@ -761,13 +789,13 @@ void editInitSeq(bool direction)
 {
     if(direction == YASS_ENCODER_DIRECTION_UP)
     {
-        if(initializationIndex < YASS_SEQUENCE_LAST_GROOVE)
-            initializationIndex += 1;
+        if(defaultNote < MIDI_TIE)
+            defaultNote += 1;
     }
     else
     {
-        if(initializationIndex)
-            initializationIndex -= 1;
+        if(defaultNote)
+            defaultNote -= 1;
     }
 }
 
@@ -1002,6 +1030,7 @@ void setEditParam(bool direction)
 
 void commandStart()
 {
+    stopEdit();
     switch(yassState)
     {
         case stopped:
@@ -1019,13 +1048,19 @@ void commandStart()
 
 void commandStop()
 {
+    //~ stopEdit();
+    //~ execStop();
+    //~ if(!player.isRecording())
+        //~ setEditState(EDIT_STATE_TEMPO);
+    stopEdit();
+    if(player.isRecording())
+        commandRecord();
     execStop();
-    if(!player.isRecording())
-        setEditState(EDIT_STATE_TEMPO);
 }
 
 void commandRecord()
 {
+    stopEdit();
     if(player.isRecording())
     {
         player.stopRecordSequencer();
@@ -1060,8 +1095,8 @@ void commandRecord()
                     break;
                 // states for current sequence edition
                 case EDIT_STATE_INIT_SEQ:
-                    player.getCurrentSequence()->initialize();
-                    player.getCurrentSequence()->setGroove(initializationIndex);
+                    player.getCurrentSequence()->initialize(defaultNote);
+                    //~ player.getCurrentSequence()->setGroove(initializationIndex);
                     break;
                 case EDIT_STATE_SWAP:
                     swap(player.getSequence(swapSeqIndex)->getDataPointer(), player.getCurrentSequence()->getDataPointer(), YASS_SEQUENCE_DATA_SIZE);
@@ -1090,17 +1125,9 @@ void commandRecord()
         }
         else
         {
-            globEditFlag = false;
-            seqEditFlag = false;
             player.startRecordSequencer();
             setEditState(EDIT_STATE_RECORD);
             keyBeep();
-            //~ if(!(globEditFlag | seqEditFlag))
-            //~ {
-                //~ player.startRecordSequencer();
-                //~ setEditState(EDIT_STATE_RECORD);
-                //~ keyBeep();
-            //~ }
         }
     }
 }
@@ -1207,6 +1234,7 @@ void commandNext()
     else if(player.isRecording())
     {
         player.gotoNextRecordStep();
+        playRecordedNote();
         keyBeep();
     }
 }
@@ -1221,6 +1249,7 @@ void commandPrevious()
     else if(player.isRecording())
     {
         player.gotoPreviousRecordStep();
+        playRecordedNote();
         keyBeep();
     }
 }
@@ -1610,7 +1639,12 @@ void setup()
             storage.loadAll();
             break;
     }
+
+    // callback to stop recorded notes monitoring
+    recordedNoteNoteOff.begin();
+    recordedNoteNoteOff.bind(RECORDED_NOTE_NOTE_OFF_DELAY_MSEC, sendEndOfRecordedNote);
     
+    // system exclusive manager
     sysEx.begin(&globConf, seqs);
     sysEx.setSenderCallback(sendExclusive);
     
@@ -1631,6 +1665,7 @@ void loop()
 #endif
         MIDI.read();
         dotInMonostable.sequencer();
+        recordedNoteNoteOff.sequencer();
         
         ticks.sequencer(); // if a tick occurs, player.tickTask runs one time
 
