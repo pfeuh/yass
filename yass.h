@@ -33,6 +33,7 @@
 #define LAST_MIDI_PROG_NUM 127
 #define FIRST_MIDI_VELOCITY 0
 #define LAST_MIDI_VELOCITY 127
+#define DEFAULT_MIDI_VELOCITY 100
 #define MIDI_REST 0
 #define FIRST_MIDI_NOTE MIDI_REST
 #define MIDI_TIE 128
@@ -102,6 +103,10 @@
 
 // MIDI interface
 midi::MidiInterface<HardwareSerial> MIDI = midi::MidiInterface<HardwareSerial>(Serial);
+
+// delay before noteOff when changing current step with PREV and NEXT
+YASS_MONOSTABLE recordedNoteNoteOff = YASS_MONOSTABLE();
+#define RECORDED_NOTE_NOTE_OFF_DELAY_MSEC 200
 
 // led for midi in
 YASS_MONOSTABLE dotInMonostable = YASS_MONOSTABLE();
@@ -196,7 +201,7 @@ YASS_DISPLAY display = YASS_DISPLAY(NB_DIGITS, displayBuf);
 #define GPO_SEGMENTS_INDEX 4
 #define digit_number_ptr (&gpoData[1])
 #define segments_ptr (&gpoData[GPO_SEGMENTS_INDEX])
-#define DISPLAY_FACTORY_SPLASH_DURATION 2000
+#define DISPLAY_FACTORY_SPLASH_DURATION 1300
 
 // bpm calculator for external clock
 YASS_COMPUTE_BEAT beatCalc = YASS_COMPUTE_BEAT();
@@ -232,7 +237,7 @@ byte copySeqIndex = 0;
 byte swapSeqIndex = 0;
 void (*displayCallback)() = NULL;
 signed char transposition = 0;
-byte initializationIndex = YASS_SEQUENCE_CROCHE;
+byte defaultNote = 64;
 
 #ifdef INCLUDE_MAINTENANCE
 bool serialDebug = false;

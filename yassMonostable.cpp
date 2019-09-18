@@ -42,6 +42,11 @@ void YASS_MONOSTABLE::bind(word delay, void(*_callback)())
     callback = _callback;
 }
 
+bool YASS_MONOSTABLE::isBusy()
+{
+    return running;
+}
+
 void YASS_MONOSTABLE::start()
 {
     milestone = millis() + duration;

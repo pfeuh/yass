@@ -55,10 +55,10 @@
 
 YASS_SEQUENCE::YASS_SEQUENCE()
 {
-    initialize();
+    initialize(YASS_SEQUENCE_DEFAULT_NOTE);
 }
 
-void YASS_SEQUENCE::initialize()
+void YASS_SEQUENCE::initialize(byte default_note)
 {
     groove = YASS_SEQUENCE_DEFAULT_GROOVE;
     gateMode = YASS_SEQUENCE_DEFAULT_GATE_MODE;
@@ -69,7 +69,7 @@ void YASS_SEQUENCE::initialize()
 
     for(byte x = 0; x < YASS_SEQUENCE_NB_NOTES; x++)
     {
-        setNote(x, YASS_SEQUENCE_DEFAULT_NOTE);
+        setNote(x, default_note);
         setData(x, YASS_SEQUENCE_DEFAULT_DATA);
     }
 }

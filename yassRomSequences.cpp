@@ -192,11 +192,13 @@ const byte PROGMEM yassRomSeqs[] =
 
 #define YASS_ROM_SEQUENCES_NB_SEQS ((sizeof(yassRomSeqs)) / YASS_SEQUENCE_DATA_SIZE)
 
+#define YASS_ROM_SEQUENCES_DEFAULT_NOTE 64
+
 void YASS_ROM_SEQUENCES_load(byte rom_seq_num, YASS_SEQUENCE* seq)
 {
     if(rom_seq_num && (rom_seq_num <= YASS_ROM_SEQUENCES_NB_SEQS))
     {
-        seq->initialize();
+        seq->initialize(YASS_ROM_SEQUENCES_DEFAULT_NOTE);
         const byte* rom_ptr = yassRomSeqs + (rom_seq_num - 1) * YASS_SEQUENCE_DATA_SIZE;
         
         for (byte x = 0; x < YASS_SEQUENCE_NB_NOTES; x++)
