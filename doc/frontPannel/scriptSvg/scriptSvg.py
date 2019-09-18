@@ -92,6 +92,13 @@ RECTANGLE = """<rect
        ry="#RY#" />
 """
 
+LINE = """<path
+       style="fill:none;stroke:#000000;stroke-width:0.2973052px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m #X#,#Y# #W#,#H#"
+       id="#ID#"
+       inkscape:connector-curvature="0" />
+"""
+
 TEXT = """<text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:#FONT_SIZE#mm;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:#TEXT_ANCHOR#;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -120,6 +127,7 @@ ELLIPSE = """ <ellipse
 VERBOSE = "-verbose" in sys.argv
 SHOW_CIRCLES = "-circle" in sys.argv
 SHOW_RECTANGLES = "-rectangle" in sys.argv
+SHOW_LINES = "-line" in sys.argv
 SHOW_TEXTS = "-text" in sys.argv
 
 if VERBOSE:
@@ -127,6 +135,7 @@ if VERBOSE:
 
 class SKETCH():
     RECTANGLE_ID = 1
+    LINE_ID = 1
     ELLIPSE_ID = 1
     TEXT_ID = 1
     
@@ -195,11 +204,28 @@ class SKETCH():
         x, y, w, h, radius = self.cvrt(x), self.cvrt(y), self.cvrt(w), self.cvrt(h), self.cvrt(radius)
         x = x - w / 2.0 
         y = 0.0 - y - h / 2.0 
-        #~ x, y = self.translation(x, y)
         x += self.__x_origin
         y += self.__y_origin
         self.__objects[key] = [x, y, w, h, radius]
         if SHOW_RECTANGLES:
+            sys.stdout.write("%s %s\n"%(key, str(self.__objects[key])))
+        return key
+
+    def addLine(self, x1, y1, x2, y2, label=None):
+        key = "line%u"%SKETCH.LINE_ID
+        SKETCH.LINE_ID += 1
+        if label == None:
+            label = key
+        self.__raw_xy[label] = float(x1), float(y1)
+        x1, y1, x2, y2 = self.cvrt(x1), self.cvrt(y1), self.cvrt(x2), self.cvrt(y2)
+        x1 += self.__x_origin
+        y1 += self.__y_origin
+        x2 += self.__x_origin
+        y2 += self.__y_origin - y2
+        self.__objects[key] = [x1, y1, x2-x1, y2-y1]
+        #~ self.__objects[key] = [x1, y1, x2, y2]
+        print ("SHOW_LINES=%u"%SHOW_LINES)
+        if SHOW_LINES:
             sys.stdout.write("%s %s\n"%(key, str(self.__objects[key])))
         return key
 
@@ -247,6 +273,14 @@ class SKETCH():
                 code = code.replace("#RX#", str(object[4]))
                 code = code.replace("#RY#", str(object[4]))
                 objects_code += code
+            elif key.startswith("line"):
+                code = LINE[:]
+                code = code.replace("#ID#", key)
+                code = code.replace("#X#", str(object[0]))
+                code = code.replace("#Y#", str(object[1]))
+                code = code.replace("#W#", str(object[2]))
+                code = code.replace("#H#", str(object[3]))
+                objects_code += code
             elif key.startswith("elli"):
                 code = ELLIPSE[:]
                 code = code.replace("#ID#", key)
@@ -287,30 +321,22 @@ class SKETCH():
 
 if __name__ == "__main__":
 
+    sys.argv = [sys.argv[0], "-line", "-verbose"]
+
+    print(sys.argv)
 
     sketch = SKETCH('img/test.svg', "in")
-    
-    LED_X_OFFSET = -2.975
-    LED_RADIUS = 0.06
-    LED_WIDTH = 0.35
-    LED_HEIGHT = 1.1
-    BUTTON_X_OFFSET = -2.95
-    
+
     # I don't know why drawing it out of the sheet, but I can fix it
     sketch.changeOrigin(6, -7.5)
 
     # let's compute front pannel border
     sketch.addRectangle(0, 0, 7.8, 5.2, 0.15)
 
-    # let's compute step leds
-    x = LED_X_OFFSET 
-    y = -0.025
-    r = LED_RADIUS
-    for led_num in range(16):
-        sketch.addCircle(x, y, r)
-        x += LED_WIDTH
-
-    sketch.addText("This is only a test", 0, 1, font_size=0.08, anchor="middle")
+    y = 1.0
+    for x in (1.0, 2.0, 3.0, 4.0) :
+        sketch.addLine(x, y, x+0.8, y+0.2)
+    #~ sketch.addText("This is only a test", 0, 1, font_size=0.08, anchor="middle")
     
     sketch.save()
     sketch.makeCSV("img/coordinates.csv")
