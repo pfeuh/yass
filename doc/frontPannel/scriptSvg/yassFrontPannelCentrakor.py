@@ -41,9 +41,11 @@ USE_CENTRAKOR_BOX = True
 
 FRONT_PANNEL_WIDTH = 7.8
 FRONT_PANNEL_HEIGHT = 5.2
+FRONT_PANNEL_CORNER_RADIUS = 0.395
+
 TEKO_FRONT_PANNEL_WIDTH = 8.24
 TEKO_FRONT_PANNEL_HEIGHT = 4.94 # 5.12
-FRONT_PANNEL_CORNER_RADIUS = 0.395
+TEKO_FRONT_PANNEL_CORNER_RADIUS = 0.0
 
 CENTRAKOR_FRONT_PANNEL_WIDTH = 8.464
 CENTRAKOR_FRONT_PANNEL_HEIGHT = 5.315
@@ -83,7 +85,7 @@ def addButton(sketch, x, y, text):
 def drawFrontPannel(sketch):
     # let's compute front pannel border
     if USE_TEKO_BOX: 
-        sketch.addRectangle(0, 0, TEKO_FRONT_PANNEL_WIDTH, TEKO_FRONT_PANNEL_HEIGHT, 0, label="tekoFrontPannel")
+        sketch.addRectangle(0, 0, TEKO_FRONT_PANNEL_WIDTH, TEKO_FRONT_PANNEL_HEIGHT, TEKO_FRONT_PANNEL_CORNER_RADIUS, label="tekoFrontPannel")
     elif USE_CENTRAKOR_BOX: 
         sketch.addRectangle(0, 0, CENTRAKOR_FRONT_PANNEL_WIDTH, CENTRAKOR_FRONT_PANNEL_HEIGHT, CENTRAKOR_FRONT_PANNEL_CORNER_RADIUS, label="frontPannel")
     else: 
@@ -131,7 +133,7 @@ def drawFrontPannel(sketch):
             if USE_TEXT:
                 sketch.addText(text, x, y, anchor=anchor, font_size=BUTTON_FONT_SIZE, label="buttonLed%s"%(text))
 
-    # let's add 4 holes to fix board
+    # let's add 4 holes to fix board on front pannel
     if MAKE_BOARD_FIXATION:
         sketch.addCircle(-3.05, 0.80, LED_RADIUS, label="boardFixHole1")
         sketch.addCircle(-3.05, -1.10, LED_RADIUS, label="boardFixHole2")
@@ -142,6 +144,10 @@ def drawFrontPannel(sketch):
     if MAKE_BOARD_FIXATION:
         if USE_TEKO_BOX:
             x, y = 3.9375, 2.265
+        elif USE_CENTRAKOR_BOX:
+            print "USE_CENTRAKOR_BOX"
+            #~ x, y = CENTRAKOR_FRONT_PANNEL_WIDTH / 2.0 - 0.324, CENTRAKOR_FRONT_PANNEL_HEIGHT / 2.0 - 0.324
+            x, y = CENTRAKOR_FRONT_PANNEL_WIDTH / 2.0 - 0.324, CENTRAKOR_FRONT_PANNEL_HEIGHT / 2.0 - 0.324
         else:
             x, y = 3.588, 2.238
         sketch.addCircle(-x, y, LED_RADIUS, label="boxFixHole1")
