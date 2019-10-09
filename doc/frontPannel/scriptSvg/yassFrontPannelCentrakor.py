@@ -146,7 +146,6 @@ def drawFrontPannel(sketch):
             x, y = 3.9375, 2.265
         elif USE_CENTRAKOR_BOX:
             print "USE_CENTRAKOR_BOX"
-            #~ x, y = CENTRAKOR_FRONT_PANNEL_WIDTH / 2.0 - 0.324, CENTRAKOR_FRONT_PANNEL_HEIGHT / 2.0 - 0.324
             x, y = CENTRAKOR_FRONT_PANNEL_WIDTH / 2.0 - 0.324, CENTRAKOR_FRONT_PANNEL_HEIGHT / 2.0 - 0.324
         else:
             x, y = 3.588, 2.238
