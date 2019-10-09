@@ -56,6 +56,10 @@ LCD_4x20_CONNECTOR_HEIGHT = 2.54 * 1.5
 LCD_SCREEN_WIDTH = 76.22
 LCD_SCREEN_HEIGHT = 25.41
 
+ENCODER_RADIUS = 6.85 / 2.0
+ENCODER_FOOT_PRINT_HEIGHT = 12.1
+ENCODER_FOOT_PRINT_WIDTH = 20.0
+
 DRAW_FOOTPRINT = False
 
 def addLCD4x12(sketch, _x, _y):
@@ -98,6 +102,11 @@ def addKeyboard4x4(sketch, _x, _y):
         sketch.addRectangle(_x, _y, KEYBOARD_FRONT_PANNEL_FOOTPRINT_WIDTH, KEYBOARD_FRONT_PANNEL_FOOTPRINT_HEIGHT, label="keyboardFootprint")
         sketch.addRectangle(_x, _y + KEYBOARD_FRONT_PANNEL_FOOTPRINT_HEIGHT /2.0 + KEYBOARD_CONNECTOR_HEIGHT / 2.0, 40.0, KEYBOARD_CONNECTOR_HEIGHT, label="keyboardFootprint")
 
+def addEncoder(sketch, _x, _y):
+    sketch.addCircle(_x, _y, ENCODER_RADIUS, label="EncoderFixHole")
+    if DRAW_FOOTPRINT:
+        sketch.addRectangle(_x, _y, ENCODER_FOOT_PRINT_WIDTH, ENCODER_FOOT_PRINT_HEIGHT, label="encoderFootprint")
+
 def drawFrontPannel(sketch):
     # let's draw front pannel border
     sketch.addRectangle(0, 0, FRONT_PANNEL_WIDTH, FRONT_PANNEL_HEIGHT, FRONT_PANNEL_CORNER_RADIUS, label="frontPannel")
@@ -123,6 +132,7 @@ if __name__ == "__main__":
     drawFrontPannel(sketch)
     addKeyboard4x4(sketch, 57.5, -19.0)
     addLCD4x12(sketch, 10.0 - FRONT_PANNEL_WIDTH / 4.0, 34.0)
+    addEncoder(sketch, 57.5,  34.0)
     
     sketch.save()
     sketch.makeCSV("img/%s_coordinates.csv"%FNAME)
